@@ -3,15 +3,15 @@ package model;
 import java.util.List;
 
 public class GamePlayerCode {
-	private Game currentGame;
+	private Games currentGame;
     private List<Player> players;
     private int[] playerPlacement;
 
-    public Game getCurrentGame() {
+    public Games getCurrentGame() {
 		return currentGame;
 	}
 
-	public void setCurrentGame(Game currentGame) {
+	public void setCurrentGame(Games currentGame) {
 		this.currentGame = currentGame;
 	}
 
@@ -31,7 +31,7 @@ public class GamePlayerCode {
 		this.playerPlacement = playerPlacement;
 	}
 
-	public GamePlayerCode(Game currentGame, List<Player> players, int[] playerPlacement) {
+	public GamePlayerCode(Games currentGame, List<Player> players, int[] playerPlacement) {
 		super();
 		this.currentGame = currentGame;
 		this.players = players;
