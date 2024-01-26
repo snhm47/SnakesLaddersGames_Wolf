@@ -1,6 +1,6 @@
 package model;
 
-public class Game {
+public class Games {
 	private int currentPlayerIndex;
     private int numberOfPlayers;
     private String difficultyLevel;
@@ -30,7 +30,7 @@ public class Game {
 		this.difficultyLevel = difficultyLevel;
 	}
 	
-	public Game(int currentPlayerIndex, int numberOfPlayers, String difficultyLevel) {
+	public Games(int currentPlayerIndex, int numberOfPlayers, String difficultyLevel) {
 		super();
 		this.currentPlayerIndex = currentPlayerIndex;
 		this.numberOfPlayers = numberOfPlayers;
