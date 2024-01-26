@@ -37,10 +37,12 @@ public class Ladders {
 		}
 
 		public void buildLadder() {
+			
 	    }
 
-	    public void movePlayerUp(Player player) {
-	     }
+	    public void movePlayerUp(Player player){
+	    	
+	    }
 
 	    // Notifications
 	    public static final String LADDER_CLIMBED_MESSAGE = "Congratulations! You climbed a ladder and moved forward.";

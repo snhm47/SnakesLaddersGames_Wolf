@@ -50,5 +50,6 @@ public class History {
 
 	// Methods
     public void showData() {
+    	System.out.println("Winner Name: " + winnerName +", Game Date: " + gameDate +", Game Time: " + gameTime + ", Number Of Players: " + numberOfPlayers + ".");
      }
 }

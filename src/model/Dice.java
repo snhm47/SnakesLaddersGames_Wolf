@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Random;
+
 public class Dice {
 	private int number;
 
@@ -11,15 +13,18 @@ public class Dice {
 		this.number = number;
 	}
 
-	public Dice(int number) {
+	public Dice() {
 		super();
-		this.number = number;
 	}
 
-	public void roll() {
+	public int roll() {
+		Random random = new Random();
+		this.number = random.nextInt(10) + 1;
+		return number;
 	}
 
 	public void showTheResult() {
+		System.out.println(DICE_MESSAGES[number-1]);
 	}
 
 	public static final String[] DICE_MESSAGES = { "Do not move forward", "Move forward one square",
