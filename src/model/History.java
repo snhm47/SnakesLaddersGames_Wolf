@@ -48,7 +48,6 @@ public class History {
 		this.numberOfPlayers = numberOfPlayers;
 	}
 
-	// Methods
     public void showData() {
      }
 }

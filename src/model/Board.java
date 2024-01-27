@@ -1,7 +1,6 @@
 package model;
 
 import java.util.List;
-
 public class Board {
 	private String level;
     private int[][] squares;
