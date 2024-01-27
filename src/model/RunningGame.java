@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class RunningGame {
 	private Games currentGame;
     private ArrayList<Player> players;
-    private int[] playerPlacement;
+    private int playerPlacement;
 
     public Games getCurrentGame() {
 		return currentGame;
@@ -23,15 +23,15 @@ public class RunningGame {
 		this.players = players;
 	}
 
-	public int[] getPlayerPlacement() {
+	public int getPlayerPlacement() {
 		return playerPlacement;
 	}
 
-	public void setPlayerPlacement(int[] playerPlacement) {
+	public void setPlayerPlacement(int playerPlacement) {
 		this.playerPlacement = playerPlacement;
 	}
 
-	public RunningGame(Games currentGame, ArrayList<Player> players, int[] playerPlacement) {
+	public RunningGame(Games currentGame, ArrayList<Player> players, int playerPlacement) {
 		super();
 		this.currentGame = currentGame;
 		this.players = players;
