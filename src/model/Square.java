@@ -1,11 +1,15 @@
 package model;
 
 public class Square {
+	private static int num = 0;
 	private SquareType squareType;
+	private int number ;
 
 	public Square(SquareType squareType) {
 		super();
 		this.squareType = squareType;
+		this.setNumber(++num); 
+		
 	}
 
 	// checking the type of the square once the player get on one for the game to know what to do exactly with it
@@ -33,4 +37,17 @@ public class Square {
 		this.squareType = squareType;
 	}
 
+	public int getNumber() {
+		return number;
+	}
+
+	public void setNumber(int number) {
+		this.number = number;
+	}
+
+	@Override
+	public String toString() {
+		return "Square [squareType=" + squareType + ", number=" + number + "]";
+	}
+	
 }

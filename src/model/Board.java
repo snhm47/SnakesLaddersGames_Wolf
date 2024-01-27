@@ -1,13 +1,13 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Random;
 public class Board {
 	private DiffLevel level;
-    private int[][] squares;
+    private Square[][] squares;
     private ArrayList<Snakes> snakes;
     private ArrayList<Ladders> ladders;
     private ArrayList<Question> questions;
-    private ArrayList<Player> players;
 
 
     public DiffLevel getLevel() {
@@ -18,11 +18,11 @@ public class Board {
 		this.level = level;
 	}
 
-	public int[][] getSquares() {
+	public Square[][] getSquares() {
 		return squares;
 	}
 
-	public void setSquares(int[][] squares) {
+	public void setSquares(Square[][] squares) {
 		this.squares = squares;
 	}
 
@@ -50,19 +50,105 @@ public class Board {
 		this.questions = questions;
 	}
 
-	public Board(DiffLevel level, int[][] squares, ArrayList<Snakes> snakes, ArrayList<Ladders> ladders, ArrayList<Question> questions,ArrayList<Player> players) {
+	public Board(DiffLevel level, Square[][] squares, ArrayList<Snakes> snakes, ArrayList<Ladders> ladders, ArrayList<Question> questions,ArrayList<Player> players) {
 		super();
 		this.level = level;
 		this.squares = squares;
 		this.snakes = snakes;
 		this.ladders = ladders;
 		this.questions = questions;
-		this.players = players;
 	}
 
-	public void initializeBoard(int size) {  }
+	public void initializeBoard() {
+		int size = 0 ;
+		if(String.valueOf(level).equals(String.valueOf(DiffLevel.easy))) {
+			size = 7;
+			System.out.println(size);
+		}else if(String.valueOf(level).equals(String.valueOf(DiffLevel.medium))) {
+			size = 10;
+			System.out.println(size);
+		}else if(String.valueOf(level).equals(String.valueOf(DiffLevel.hard))) {
+			size = 13;
+			System.out.println(size);
+		}
+		squares = new Square[size][size];
+		Random random = new Random();
+		SquareType st = null ;
+		int stRand = 0;
+	    for (int i = size-1; i >= 0; i--) {
+	        if ((i % 2 == 0)&&(size != 10 )) {
+	            for (int j = 0; j < size; j++) {
+	            	stRand = random.nextInt(3)+1;
+	            	if(stRand == 1) {
+	            		st = SquareType.REGULAR;
+	            	}else if(stRand == 2) {
+	            		st = SquareType.QUESTION;
+	            	}else if(stRand == 3) {
+	            		st = SquareType.SURPRISE;
+	            	}
+	                squares[i][j] = new Square(st);
+	            }
+	        } else if((i % 2 != 0)&&(size != 10 )) {
+	            for (int j = size - 1; j >= 0; j--) {
+	            	stRand = random.nextInt(3)+1;
+	            	if(stRand == 1) {
+	            		st = SquareType.REGULAR;
+	            	}else if(stRand == 2) {
+	            		st = SquareType.QUESTION;
+	            	}else if(stRand == 3) {
+	            		st = SquareType.SURPRISE;
+	            	}
+	                squares[i][j] = new Square(st);
+	            }
+	        }else if((i % 2 == 0)&&(size == 10 )) {
+	        	for (int j = size - 1; j >= 0; j--) {
+	        		stRand = random.nextInt(3)+1;
+	            	if(stRand == 1) {
+	            		st = SquareType.REGULAR;
+	            	}else if(stRand == 2) {
+	            		st = SquareType.QUESTION;
+	            	}else if(stRand == 3) {
+	            		st = SquareType.SURPRISE;
+	            	}
+	                squares[i][j] = new Square(st);
+	            }
+	        }else if((i % 2 != 0)&&(size == 10 )) {
+	        	for (int j = 0; j < size; j++) {
+	        		stRand = random.nextInt(3)+1;
+	            	if(stRand == 1) {
+	            		st = SquareType.REGULAR;
+	            	}else if(stRand == 2) {
+	            		st = SquareType.QUESTION;
+	            	}else if(stRand == 3) {
+	            		st = SquareType.SURPRISE;
+	            	}
+	                squares[i][j] = new Square(st);
+	            }
+	        }
+	    }
+	}
 
-    public void placeRandomSnakesAndLadders() { }
+    public void placeRandomSnakesAndLadders() {
+//    	int size = 0 ;
+//    	Random random = new Random();
+//    	int startCoor = 0 ;
+//    	int endCoor = 0 ;
+//		if(String.valueOf(level).equals(String.valueOf(DiffLevel.easy))) {
+//			size = 7;
+//			for(int i = 0 ; i <= 4 ; i++) {
+//				startCoor = random.nextInt(size)+1 ; 
+//				endCoor = random.nextInt(size)+1 ; 
+//			}
+//			System.out.println(size);
+//		}else if(String.valueOf(level).equals(String.valueOf(DiffLevel.medium))) {
+//			size = 10;
+//			System.out.println(size);
+//		}else if(String.valueOf(level).equals(String.valueOf(DiffLevel.hard))) {
+//			size = 13;
+//			System.out.println(size);
+//		}
+//		
+    }
 
     public void displayBoard() { }
 

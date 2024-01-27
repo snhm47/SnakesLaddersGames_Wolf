@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Question {
 	 private int number;
 	    private String text;
-	    private String difficulty;
+	    private DiffLevel difficulty;
 	    private ArrayList<String> answers;
 	    private String correctAnswer;
 	    
@@ -25,11 +25,11 @@ public class Question {
 			this.text = text;
 		}
 
-		public String getDifficulty() {
+		public DiffLevel getDifficulty() {
 			return difficulty;
 		}
 
-		public void setDifficulty(String difficulty) {
+		public void setDifficulty(DiffLevel difficulty) {
 			this.difficulty = difficulty;
 		}
 
@@ -49,7 +49,7 @@ public class Question {
 			this.correctAnswer = correctAnswer;
 		}
 
-		public Question(int number, String text, String difficulty, ArrayList<String> answers, String correctAnswer) {
+		public Question(int number, String text, DiffLevel difficulty, ArrayList<String> answers, String correctAnswer) {
 			super();
 			this.number = number;
 			this.text = text;
