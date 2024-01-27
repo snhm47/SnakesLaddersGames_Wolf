@@ -50,13 +50,14 @@ public class Board {
 		this.questions = questions;
 	}
 
-	public Board(DiffLevel level, int[][] squares, ArrayList<Snakes> snakes, ArrayList<Ladders> ladders, ArrayList<Question> questions) {
+	public Board(DiffLevel level, int[][] squares, ArrayList<Snakes> snakes, ArrayList<Ladders> ladders, ArrayList<Question> questions,ArrayList<Player> players) {
 		super();
 		this.level = level;
 		this.squares = squares;
 		this.snakes = snakes;
 		this.ladders = ladders;
 		this.questions = questions;
+		this.players = players;
 	}
 
 	public void initializeBoard(int size) {  }
