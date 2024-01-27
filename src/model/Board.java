@@ -1,7 +1,6 @@
 package model;
 
 import java.util.ArrayList;
-
 public class Board {
 	private Level level;
     private int[][] squares;
