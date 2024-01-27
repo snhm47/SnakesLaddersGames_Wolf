@@ -2,18 +2,18 @@ package model;
 
 import java.util.ArrayList;
 public class Board {
-	private Level level;
+	private DiffLevel level;
     private int[][] squares;
     private ArrayList<Snakes> snakes;
     private ArrayList<Ladders> ladders;
     private ArrayList<Question> questions;
 
 
-    public Level getLevel() {
+    public DiffLevel getLevel() {
 		return level;
 	}
 
-	public void setLevel(Level level) {
+	public void setLevel(DiffLevel level) {
 		this.level = level;
 	}
 
@@ -49,7 +49,7 @@ public class Board {
 		this.questions = questions;
 	}
 
-	public Board(Level level, int[][] squares, ArrayList<Snakes> snakes, ArrayList<Ladders> ladders, ArrayList<Question> questions) {
+	public Board(DiffLevel level, int[][] squares, ArrayList<Snakes> snakes, ArrayList<Ladders> ladders, ArrayList<Question> questions) {
 		super();
 		this.level = level;
 		this.squares = squares;

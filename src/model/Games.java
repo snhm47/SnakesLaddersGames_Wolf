@@ -3,7 +3,7 @@ package model;
 public class Games {
 	private int currentPlayerIndex;
     private int numberOfPlayers;
-    private Level difficultyLevel;
+    private DiffLevel difficultyLevel;
     
     
     public int getCurrentPlayerIndex() {
@@ -22,15 +22,15 @@ public class Games {
 		this.numberOfPlayers = numberOfPlayers;
 	}
 
-	public Level getDifficultyLevel() {
+	public DiffLevel getDifficultyLevel() {
 		return difficultyLevel;
 	}
 
-	public void setDifficultyLevel(Level difficultyLevel) {
+	public void setDifficultyLevel(DiffLevel difficultyLevel) {
 		this.difficultyLevel = difficultyLevel;
 	}
 	
-	public Games(int currentPlayerIndex, int numberOfPlayers, Level difficultyLevel) {
+	public Games(int currentPlayerIndex, int numberOfPlayers, DiffLevel difficultyLevel) {
 		super();
 		this.currentPlayerIndex = currentPlayerIndex;
 		this.numberOfPlayers = numberOfPlayers;

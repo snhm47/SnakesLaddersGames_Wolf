@@ -28,12 +28,14 @@ public class Dice {
 		this.ID = ++auto;
 	}
 
+	// Random number
 	public int roll() {
 		Random random = new Random();
 		this.number = random.nextInt(10) + 1;
 		return number;
 	}
 
+	// Display an appropriate message
 	public void showTheResult() {
 		System.out.println(DICE_MESSAGES[number-1]);
 	}
