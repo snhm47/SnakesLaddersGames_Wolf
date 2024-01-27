@@ -1,10 +1,10 @@
 package model;
 
-import java.util.List;
+import java.util.ArrayList;
 
-public class GamePlayerCode {
+public class RunningGame {
 	private Games currentGame;
-    private List<Player> players;
+    private ArrayList<Player> players;
     private int[] playerPlacement;
 
     public Games getCurrentGame() {
@@ -15,11 +15,11 @@ public class GamePlayerCode {
 		this.currentGame = currentGame;
 	}
 
-	public List<Player> getPlayers() {
+	public ArrayList<Player> getPlayers() {
 		return players;
 	}
 
-	public void setPlayers(List<Player> players) {
+	public void setPlayers(ArrayList<Player> players) {
 		this.players = players;
 	}
 
@@ -31,7 +31,7 @@ public class GamePlayerCode {
 		this.playerPlacement = playerPlacement;
 	}
 
-	public GamePlayerCode(Games currentGame, List<Player> players, int[] playerPlacement) {
+	public RunningGame(Games currentGame, ArrayList<Player> players, int[] playerPlacement) {
 		super();
 		this.currentGame = currentGame;
 		this.players = players;

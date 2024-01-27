@@ -3,7 +3,17 @@ package model;
 import java.util.Random;
 
 public class Dice {
+	private static int auto = 0;
+	private int ID;
 	private int number;
+	
+	public int getID() {
+		return ID;
+	}
+
+	public void setID(int iD) {
+		ID = iD;
+	}
 
 	public int getNumber() {
 		return number;
@@ -15,6 +25,7 @@ public class Dice {
 
 	public Dice() {
 		super();
+		this.ID = ++auto;
 	}
 
 	public int roll() {
@@ -26,6 +37,7 @@ public class Dice {
 	public void showTheResult() {
 		System.out.println(DICE_MESSAGES[number-1]);
 	}
+
 
 	public static final String[] DICE_MESSAGES = { "Do not move forward", "Move forward one square",
 			"Move forward two squares", "Move forward three squares", "Move forward four squares",

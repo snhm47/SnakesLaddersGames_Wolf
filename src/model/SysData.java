@@ -1,8 +1,9 @@
 package model;
 
 public class SysData {
-	 private Games games;
+	 	private Games games;
 	    private Question questions;
+	    
 
 	    // Methods
 	    public void loadData(String filePath) {

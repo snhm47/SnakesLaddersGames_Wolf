@@ -1,20 +1,20 @@
 package model;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class Board {
-	private String level;
+	private Level level;
     private int[][] squares;
-    private List<Snakes> snakes;
-    private List<Ladders> ladders;
-    private List<Question> questions;
+    private ArrayList<Snakes> snakes;
+    private ArrayList<Ladders> ladders;
+    private ArrayList<Question> questions;
 
 
-    public String getLevel() {
+    public Level getLevel() {
 		return level;
 	}
 
-	public void setLevel(String level) {
+	public void setLevel(Level level) {
 		this.level = level;
 	}
 
@@ -26,31 +26,31 @@ public class Board {
 		this.squares = squares;
 	}
 
-	public List<Snakes> getSnakes() {
+	public ArrayList<Snakes> getSnakes() {
 		return snakes;
 	}
 
-	public void setSnakes(List<Snakes> snakes) {
+	public void setSnakes(ArrayList<Snakes> snakes) {
 		this.snakes = snakes;
 	}
 
-	public List<Ladders> getLadders() {
+	public ArrayList<Ladders> getLadders() {
 		return ladders;
 	}
 
-	public void setLadders(List<Ladders> ladders) {
+	public void setLadders(ArrayList<Ladders> ladders) {
 		this.ladders = ladders;
 	}
 
-	public List<Question> getQuestions() {
+	public ArrayList<Question> getQuestions() {
 		return questions;
 	}
 
-	public void setQuestions(List<Question> questions) {
+	public void setQuestions(ArrayList<Question> questions) {
 		this.questions = questions;
 	}
 
-	public Board(String level, int[][] squares, List<Snakes> snakes, List<Ladders> ladders, List<Question> questions) {
+	public Board(Level level, int[][] squares, ArrayList<Snakes> snakes, ArrayList<Ladders> ladders, ArrayList<Question> questions) {
 		super();
 		this.level = level;
 		this.squares = squares;
