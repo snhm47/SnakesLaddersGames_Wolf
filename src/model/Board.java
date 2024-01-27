@@ -7,6 +7,7 @@ public class Board {
     private ArrayList<Snakes> snakes;
     private ArrayList<Ladders> ladders;
     private ArrayList<Question> questions;
+    private ArrayList<Player> players;
 
 
     public DiffLevel getLevel() {
