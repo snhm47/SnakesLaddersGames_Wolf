@@ -32,16 +32,17 @@ public class Ladders {
 		public Ladders(LadderType ladderType, int startLadder, int endLadder) {
 			super();
 			this.ladderType = ladderType;
-			this.startLadder = startLadder;
-			this.endLadder = endLadder;
+			buildLadder(startLadder, endLadder);
 		}
 
-		public void buildLadder() {
-			
+		// build ladder method
+		public void buildLadder(int startLadder, int endLadder) {
+			this.startLadder = startLadder;
+			this.endLadder = endLadder;
 	    }
 
 	    public void movePlayerUp(Player player){
-	    	
+	    	System.out.println(LADDER_CLIMBED_MESSAGE);
 	    }
 
 	    // Notifications
