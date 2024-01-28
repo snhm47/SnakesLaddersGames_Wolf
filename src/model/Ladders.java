@@ -41,7 +41,7 @@ public class Ladders {
 			this.endLadder = endLadder;
 	    }
 
-	    public void movePlayerUp(Player player){
+	    public void movePlayerUp(){
 	    	System.out.println(LADDER_CLIMBED_MESSAGE);
 	    }
 
