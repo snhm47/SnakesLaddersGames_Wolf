@@ -1,0 +1,335 @@
+{
+    "questions": [
+      {
+        "question": "What is the primary goal of SRUM?",
+        "answers": [
+          "To unify software development teams",
+          "To gather and document software requirements",
+          "To implement agile development methodologies",
+          "To perform software testing"
+        ],
+        "correct_ans": "2",
+        "difficulty": "1"
+      },
+      {
+        "question": "What is the purpose of a Use Case in the context of SRUM and SRS?",
+        "answers": [
+          "To describe how the system will be implemented",
+          "To specify the interactions between the system and external entities",
+          "To outline the high-level design of the software",
+          "To document the source code of the software"
+        ],
+        "correct_ans": "2",
+        "difficulty": "2"
+      },
+      {
+        "question": "In SRUM, what is the role of the Product Owner in the requirements gathering process?",
+        "answers": [
+          "Develop the source code",
+          "Define and prioritize user stories",
+          "Conduct system testing",
+          "Write the Software Requirements Specification (SRS)"
+        ],
+        "correct_ans": "2",
+        "difficulty": "3"
+      },
+      {
+        "question": "Which phase of software development is typically associated with the creation of the SRS document?",
+        "answers": [
+          "Design phase",
+          "Testing phase",
+          "Requirements phase",
+          "Implementation phase"
+        ],
+        "correct_ans": "3",
+        "difficulty": "2"
+      },
+      {
+        "question": "What is the purpose of the Traceability Matrix in the context of SRUM and SRS?",
+        "answers": [
+          "To manage software development teams",
+          "To track changes in the source code",
+          "To trace requirements back to their source and forward to their implementation",
+          "To document user acceptance testing results"
+        ],
+        "correct_ans": "3",
+        "difficulty": "2"
+      },
+      {
+        "question": "In SRUM, what is the significance of the Sprint Review meeting in relation to requirements?",
+        "answers": [
+          "To gather and document initial requirements",
+          "To review and update the Software Requirements Specification (SRS)",
+          "To prioritize user stories for the next sprint",
+          "To perform system testing"
+        ],
+        "correct_ans": "2",
+        "difficulty": "3"
+      },
+      {
+        "question": "What information is typically included in the Non-Functional Requirements section of the SRS document?",
+        "answers": [
+          "User stories and use cases",
+          "System architecture diagrams",
+          "Performance, security, and reliability requirements",
+          "Test cases and test scripts"
+        ],
+        "correct_ans": "3",
+        "difficulty": "2"
+      },
+      {
+        "question": "How does SRUM address changing requirements during the development process?",
+        "answers": [
+          "By strictly adhering to the initial requirements",
+          "By delaying the implementation of any changes until the next project cycle",
+          "By embracing changes and adapting quickly through iterative development",
+          "By rejecting any changes after the project has started"
+        ],
+        "correct_ans": "3",
+        "difficulty": "1"
+      },
+      {
+        "question": "What is the primary purpose of gathering requirements in the context of software development?",
+        "answers": [
+          "To define the database schema",
+          "To document user stories",
+          "To identify stakeholder needs and constraints",
+          "To design the graphical user interface (GUI)"
+        ],
+        "correct_ans": "3",
+        "difficulty": "1"
+      },
+      {
+        "question": "In the MVC pattern, what does the Model represent?",
+        "answers": [
+          "User interface components",
+          "Application logic and data",
+          "Presentation layer",
+          "User interactions"
+        ],
+        "correct_ans": "2",
+        "difficulty": "1"
+      },
+      {
+        "question": "Which component in MVC is responsible for handling user input and updating the Model accordingly?",
+        "answers": [
+          "Model",
+          "View",
+          "Controller",
+          "Database"
+        ],
+        "correct_ans": "3",
+        "difficulty": "1"
+      },
+      {
+        "question": "How does the MVC pattern help in achieving software design flexibility and maintainability?",
+        "answers": [
+          "By tightly coupling the Model, View, and Controller",
+          "By eliminating the need for requirements gathering",
+          "By separating concerns and responsibilities into distinct components",
+          "By ignoring software testing practices"
+        ],
+        "correct_ans": "3",
+        "difficulty": "3"
+      },
+      {
+        "question": "What is the role of the View in the MVC pattern?",
+        "answers": [
+          "To handle user input and update the Model",
+          "To manage application data and logic",
+          "To present information to the user and receive user input",
+          "To control the flow of the application"
+        ],
+        "correct_ans": "3",
+        "difficulty": "2"
+      },
+      {
+        "question": "How does the Controller communicate with both the Model and the View in the MVC pattern?",
+        "answers": [
+          "Through direct method calls",
+          "By using a shared database",
+          "Via asynchronous messaging",
+          "By bypassing the View entirely"
+        ],
+        "correct_ans": "1",
+        "difficulty": "2"
+      },
+      {
+        "question": "What is the benefit of having a clear separation of concerns in the MVC pattern during the requirements analysis phase?",
+        "answers": [
+          "It simplifies database design",
+          "It allows for easier testing and maintenance",
+          "It eliminates the need for user interfaces",
+          "It speeds up the development process"
+        ],
+        "correct_ans": "2",
+        "difficulty": "2"
+      },
+      {
+        "question": "During requirements gathering, which aspect does the Model primarily focus on in the MVC pattern?",
+        "answers": [
+          "User interface design",
+          "Data storage and manipulation",
+          "User interactions and workflows",
+          "Presentation aesthetics"
+        ],
+        "correct_ans": "2",
+        "difficulty": "1"
+      },
+      {
+        "question": "How does MVC contribute to the scalability of software systems based on changing requirements?",
+        "answers": [
+          "By limiting the number of requirements that can be accommodated",
+          "By making it difficult to adapt to changing requirements",
+          "By allowing for easier modification of individual components without affecting others",
+          "By discouraging any changes after the initial development phase"
+        ],
+        "correct_ans": "3",
+        "difficulty": "2"
+      },
+      {
+        "question": "In the context of MVC, what does the term 'loose coupling' refer to?",
+        "answers": [
+          "Tightly integrating the Model, View, and Controller",
+          "Minimizing communication between components",
+          "Separating concerns and reducing dependencies between components",
+          "Ignoring requirements for a modular design"
+        ],
+        "correct_ans": "3",
+        "difficulty": "3"
+      },
+      {
+        "question": "What is the primary purpose of version control in software development?",
+        "answers": [
+          "To track and manage changes in source code",
+          "To write documentation",
+          "To execute automated tests",
+          "To design user interfaces"
+        ],
+        "correct_ans": "1",
+        "difficulty": "2"
+      },
+      {
+        "question": "In Git, what is the purpose of the 'commit' operation?",
+        "answers": [
+          "To add new files to the repository",
+          "To update the working directory with the latest changes",
+          "To record changes to the repository's history",
+          "To merge branches"
+        ],
+        "correct_ans": "3",
+        "difficulty": "1"
+      },
+      {
+        "question": "What does the term 'branching' refer to in the context of Git?",
+        "answers": [
+          "Creating a new project",
+          "Copying the entire repository",
+          "Creating a separate line of development",
+          "Deleting a file from the repository"
+        ],
+        "correct_ans": "3",
+        "difficulty": "3"
+      },
+      {
+        "question": "What is the purpose of a Git 'merge' operation?",
+        "answers": [
+          "To create a new branch",
+          "To discard changes in the working directory",
+          "To combine changes from different branches",
+          "To revert to a previous commit"
+        ],
+        "correct_ans": "3",
+        "difficulty": "2"
+      },
+      {
+        "question": "In Git, what is the role of a 'pull request' (PR) in the collaborative development process?",
+        "answers": [
+          "To request changes in the repository",
+          "To request a code review for proposed changes",
+          "To revert a commit",
+          "To submit changes directly to the master branch"
+        ],
+        "correct_ans": "2",
+        "difficulty": "2"
+      },
+      {
+        "question": "What is the purpose of the Git command 'git clone'?",
+        "answers": [
+          "To create a new branch",
+          "To copy an existing repository to a new location",
+          "To merge branches",
+          "To delete a branch"
+        ],
+        "correct_ans": "2",
+        "difficulty": "2"
+      },
+      {
+        "question": "Why is code review an important practice in software development?",
+        "answers": [
+          "To write new code",
+          "To identify and fix bugs",
+          "To replace version control systems",
+          "To generate project documentation"
+        ],
+        "correct_ans": "2",
+        "difficulty": "3"
+      },
+      {
+        "question": "What is the primary goal of a code review process?",
+        "answers": [
+          "To find blame for issues in the code",
+          "To slow down the development process",
+          "To improve code quality and maintainability",
+          "To skip the testing phase"
+        ],
+        "correct_ans": "3",
+        "difficulty": "3"
+      },
+      {
+        "question": "In a code review, what should reviewers focus on when examining the code changes?",
+        "answers": [
+          "The author's coding style preferences",
+          "Identifying personal opinions on the changes",
+          "The functionality, readability, and adherence to coding standards",
+          "Ignoring potential improvements"
+        ],
+        "correct_ans": "3",
+        "difficulty": "3"
+      },
+      {
+        "question": "What is a common practice before submitting code for review?",
+        "answers": [
+          "Ignoring test cases",
+          "Submitting incomplete code",
+          "Running automated tests",
+          "Avoiding documentation"
+        ],
+        "correct_ans": "3",
+        "difficulty": "1"
+      },
+      {
+        "question": "In a code review, what does the term 'LGTM' stand for?",
+        "answers": [
+          "Let's Go To Master",
+          "Looks Good To Me",
+          "Let's Get Things Merged",
+          "Long Gone The Mistakes"
+        ],
+        "correct_ans": "2",
+        "difficulty": "1"
+      },
+      {
+        "question": "What is the purpose of providing constructive feedback during a code review?",
+        "answers": [
+          "To discourage collaboration",
+          "To criticize the author's work",
+          "To help improve the code and the author's skills",
+          "To promote a blame culture"
+        ],
+        "correct_ans": "3",
+        "difficulty": "1"
+      }
+    ]
+  }
+  
