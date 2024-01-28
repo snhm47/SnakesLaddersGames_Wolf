@@ -1,11 +1,35 @@
-package model;
+package Controller;
+
+import model.Games;
+import model.Question;
 
 public class SysData {
 	 	private Games games;
 	    private Question questions;
 	    
+	    public Games getGames() {
+			return games;
+		}
 
-	    // Methods
+		public void setGames(Games games) {
+			this.games = games;
+		}
+
+		public Question getQuestions() {
+			return questions;
+		}
+
+		public void setQuestions(Question questions) {
+			this.questions = questions;
+		}
+		
+		public SysData(Games games, Question questions) {
+			super();
+			this.games = games;
+			this.questions = questions;
+		}
+
+		// Methods
 	    public void loadData(String filePath) {
 	    }
 
