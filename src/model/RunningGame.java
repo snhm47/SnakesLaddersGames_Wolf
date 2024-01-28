@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 public class RunningGame {
 	private Games currentGame;
-    private ArrayList<Player> players;
+    private ArrayList<Player> Players;
     private HashMap<Player, Integer> playerPlacement;
 
     public Games getCurrentGame() {
@@ -17,11 +17,11 @@ public class RunningGame {
 	}
 
 	public ArrayList<Player> getPlayers() {
-		return players;
+		return Players;
 	}
 
 	public void setPlayers(ArrayList<Player> players) {
-		this.players = players;
+		this.Players = players;
 	}
 
 	public HashMap<Player, Integer> getPlayerPlacement() {
@@ -35,7 +35,7 @@ public class RunningGame {
 	public RunningGame(Games currentGame, ArrayList<Player> players, HashMap<Player, Integer> playerPlacement) {
 		super();
 		this.currentGame = currentGame;
-		this.players = players;
+		this.Players = players;
 		this.playerPlacement = playerPlacement;
 	}
 

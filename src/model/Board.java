@@ -7,9 +7,9 @@ public class Board {
 	private DiffLevel level;
     private Square[][] squares;
     private HashMap<Integer,Square> sq;
-    private ArrayList<Snakes> snakes;
-    private ArrayList<Ladders> ladders;
-    private ArrayList<Question> questions;
+    private ArrayList<Snakes> Snakes;
+    private ArrayList<Ladders> Ladders;
+    private ArrayList<Question> Questions;
 
 
     public DiffLevel getLevel() {
@@ -29,27 +29,27 @@ public class Board {
 	}
 
 	public ArrayList<Snakes> getSnakes() {
-		return snakes;
+		return Snakes;
 	}
 
 	public void setSnakes(ArrayList<Snakes> snakes) {
-		this.snakes = snakes;
+		this.Snakes = snakes;
 	}
 
 	public ArrayList<Ladders> getLadders() {
-		return ladders;
+		return Ladders;
 	}
 
 	public void setLadders(ArrayList<Ladders> ladders) {
-		this.ladders = ladders;
+		this.Ladders = ladders;
 	}
 
 	public ArrayList<Question> getQuestions() {
-		return questions;
+		return Questions;
 	}
 
 	public void setQuestions(ArrayList<Question> questions) {
-		this.questions = questions;
+		this.Questions = questions;
 	}
     public HashMap<Integer, Square> getSq() {
 		return sq;
@@ -64,9 +64,9 @@ public class Board {
 		this.level = level;
 		this.squares = squares;
 		this.sq = new HashMap<Integer ,Square>();;
-		this.snakes = snakes;
-		this.ladders = ladders;
-		this.questions = questions;
+		this.Snakes = snakes;
+		this.Ladders = ladders;
+		this.Questions = questions;
 	}
 
 	public void initializeBoard() {
@@ -163,7 +163,7 @@ public class Board {
 	        }
 	    }
 	    placeRandomSnakesAndLadders();
-	    for(Snakes s : snakes) {
+	    for(Snakes s : Snakes) {
 	    	sq.get(s.getStartSnake()).setOccupi(true);
 	    	sq.get(s.getEndSnake()).setOccupi(true);
 	    }
@@ -198,7 +198,7 @@ public class Board {
             	   c = Color.RED;
                }
                Snakes s = new Snakes(c, startSnake + (startlevel*size), endSnake + ((startlevel+i+1)*size));
-               snakes.add(s);
+               Snakes.add(s);
                
                do {
                    startLadder = random.nextInt(size - 1) + 1;

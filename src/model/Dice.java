@@ -5,7 +5,7 @@ import java.util.Random;
 public class Dice {
 	private static int auto = 0;
 	private int ID;
-	private int number;
+	private int Number;
 	
 	public int getID() {
 		return ID;
@@ -16,11 +16,11 @@ public class Dice {
 	}
 
 	public int getNumber() {
-		return number;
+		return Number;
 	}
 
 	public void setNumber(int number) {
-		this.number = number;
+		this.Number = number;
 	}
 
 	public Dice() {
@@ -31,13 +31,13 @@ public class Dice {
 	// Random number
 	public int roll() {
 		Random random = new Random();
-		this.number = random.nextInt(10) + 1;
-		return number;
+		this.Number = random.nextInt(10) + 1;
+		return Number;
 	}
 
 	// Display an appropriate message
 	public void showTheResult() {
-		System.out.println(DICE_MESSAGES[number-1]);
+		System.out.println(DICE_MESSAGES[Number-1]);
 	}
 
 

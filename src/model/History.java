@@ -7,7 +7,7 @@ public class History {
 	private Date gameDate;
 	private int gameTime;
 	private int numberOfPlayers;
-	private String difficulty;
+	private String Difficulty;
 
 	public String getWinnerName() {
 		return winnerName;
@@ -42,11 +42,11 @@ public class History {
 	}
 
 	public String getDifficulty() {
-		return difficulty;
+		return Difficulty;
 	}
 
 	public void setDifficulty(String difficulty) {
-		this.difficulty = difficulty;
+		this.Difficulty = difficulty;
 	}
 
 	public History(String winnerName, Date gameDate, int gameTime, int numberOfPlayers, String difficulty) {
@@ -54,7 +54,7 @@ public class History {
 		this.gameDate = gameDate;
 		this.gameTime = gameTime;
 		this.numberOfPlayers = numberOfPlayers;
-		this.difficulty = difficulty;
+		this.Difficulty = difficulty;
 	}
 
 //display game time and number of players
@@ -64,7 +64,7 @@ public class History {
 		System.out.println("Game Date: " + gameDate);
 		System.out.println("Game Time: " + gameTime + " seconds");
 		System.out.println("Number Of Players: " + numberOfPlayers);
-		System.out.println("Difficulty: " + difficulty);
+		System.out.println("Difficulty: " + Difficulty);
 		System.out.println("Game Time: " + gameTime + " seconds");
 		System.out.println("Number Of Players: " + numberOfPlayers);
 
