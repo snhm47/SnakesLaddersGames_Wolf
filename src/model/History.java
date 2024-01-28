@@ -4,11 +4,12 @@ import java.sql.Date;
 
 public class History {
 	private String winnerName;
-    private Date gameDate;
-    private int gameTime;
-    private int numberOfPlayers;
-    
-    public String getWinnerName() {
+	private Date gameDate;
+	private int gameTime;
+	private int numberOfPlayers;
+	private String difficulty;
+
+	public String getWinnerName() {
 		return winnerName;
 	}
 
@@ -40,15 +41,32 @@ public class History {
 		this.numberOfPlayers = numberOfPlayers;
 	}
 
-	public History(String winnerName, Date gameDate, int gameTime, int numberOfPlayers) {
-		super();
+	public String getDifficulty() {
+		return difficulty;
+	}
+
+	public void setDifficulty(String difficulty) {
+		this.difficulty = difficulty;
+	}
+
+	public History(String winnerName, Date gameDate, int gameTime, int numberOfPlayers, String difficulty) {
 		this.winnerName = winnerName;
 		this.gameDate = gameDate;
 		this.gameTime = gameTime;
 		this.numberOfPlayers = numberOfPlayers;
+		this.difficulty = difficulty;
 	}
 
-    public void showData() {
-    	System.out.println("Winner Name: " + winnerName +", Game Date: " + gameDate +", Game Time: " + gameTime + ", Number Of Players: " + numberOfPlayers + ".");
-     }
+//display game time and number of players
+	public void showData() {
+		System.out.println("Game Details:");
+		System.out.println("Winner Name: " + winnerName);
+		System.out.println("Game Date: " + gameDate);
+		System.out.println("Game Time: " + gameTime + " seconds");
+		System.out.println("Number Of Players: " + numberOfPlayers);
+		System.out.println("Difficulty: " + difficulty);
+		System.out.println("Game Time: " + gameTime + " seconds");
+		System.out.println("Number Of Players: " + numberOfPlayers);
+
+	}
 }
