@@ -1,11 +1,12 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class RunningGame {
 	private Games currentGame;
     private ArrayList<Player> players;
-    private int playerPlacement;
+    private HashMap<Player, Integer> playerPlacement;
 
     public Games getCurrentGame() {
 		return currentGame;
@@ -23,15 +24,15 @@ public class RunningGame {
 		this.players = players;
 	}
 
-	public int getPlayerPlacement() {
+	public HashMap<Player, Integer> getPlayerPlacement() {
 		return playerPlacement;
 	}
 
-	public void setPlayerPlacement(int playerPlacement) {
+	public void setPlayerPlacement(HashMap<Player, Integer> playerPlacement) {
 		this.playerPlacement = playerPlacement;
 	}
 
-	public RunningGame(Games currentGame, ArrayList<Player> players, int playerPlacement) {
+	public RunningGame(Games currentGame, ArrayList<Player> players, HashMap<Player, Integer> playerPlacement) {
 		super();
 		this.currentGame = currentGame;
 		this.players = players;

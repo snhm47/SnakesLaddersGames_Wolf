@@ -4,12 +4,13 @@ public class Square {
 	private static int num = 0;
 	private SquareType squareType;
 	private int number ;
+	private Boolean Occupi;
 
 	public Square(SquareType squareType) {
 		super();
 		this.squareType = squareType;
 		this.setNumber(++num); 
-		
+		this.setOccupi(false);
 	}
 
 	// checking the type of the square once the player get on one for the game to know what to do exactly with it
@@ -45,9 +46,18 @@ public class Square {
 		this.number = number;
 	}
 
+
 	@Override
 	public String toString() {
-		return "Square [squareType=" + squareType + ", number=" + number + "]";
+		return "Square [squareType=" + squareType + ", number=" + number + ", Occupi=" + Occupi + "]";
+	}
+
+	public Boolean getOccupi() {
+		return Occupi;
+	}
+
+	public void setOccupi(Boolean occupi) {
+		Occupi = occupi;
 	}
 	
 }

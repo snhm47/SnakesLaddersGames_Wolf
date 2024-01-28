@@ -3,10 +3,10 @@ package model;
 
 public class Player {
 	private String nickName;
-	private String colorPlayer;
+	private Color colorPlayer;
 	private int winCount;
 
-	public Player(String nickName, String colorPlayer, int winCount) {
+	public Player(String nickName, Color colorPlayer, int winCount) {
 		super();
 		this.nickName = nickName;
 		this.colorPlayer = colorPlayer;
@@ -25,7 +25,7 @@ public class Player {
 	}
 
 	// color type might be changed later once we apply GUI
-	public boolean checkColorExist(String color) {
+	public boolean checkColorExist(Color color) {
 
 		if (this.colorPlayer.equals(color)) {
 			System.out.println(COLOR_SUCCESSFULLY_RECEIVED_MESSAGE);
@@ -44,11 +44,11 @@ public class Player {
 		this.nickName = nickName;
 	}
 
-	public String getColorPlayer() {
+	public Color getColorPlayer() {
 		return colorPlayer;
 	}
 
-	public void setColorPlayer(String colorPlayer) {
+	public void setColorPlayer(Color colorPlayer) {
 		this.colorPlayer = colorPlayer;
 	}
 
