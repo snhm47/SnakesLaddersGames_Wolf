@@ -62,15 +62,15 @@ public class Question {
 
 	// Methods
 	// Method to add the 4 answers option for a question
-	public void addAnswers(String[] possibleAnswers) {
-		if (possibleAnswers.length == 4) 
-			{answers = new ArrayList<>();
-			for (String answer : possibleAnswers) 
-				answers.add(answer);}
-		else 
-			System.out.println("Error: You must add 4 possible answers to each question.");
-		
-	}
+//	public void addAnswers(String[] possibleAnswers) {
+//		if (possibleAnswers.length == 4) 
+//			{answers = new ArrayList<>();
+//			for (String answer : possibleAnswers) 
+//				answers.add(answer);}
+//		else 
+//			System.out.println("Error: You must add 4 possible answers to each question.");
+//		
+//	}
 
 	// Method to check if the question is in the data warehouse
 	public boolean checkQuestion(ArrayList<Question> questionDatabase) {
