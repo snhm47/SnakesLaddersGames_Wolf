@@ -3,11 +3,11 @@ package model;
 import java.util.Random;
 
 public class Snakes {
-	private SnakeType snakeType;
+	private Color snakeType;
 	private int startSnake;
 	private int endSnake;
 
-	public Snakes(SnakeType snakeType, int startSnake, int endSnake) {
+	public Snakes(Color snakeType, int startSnake, int endSnake) {
 		super();
 		this.snakeType = snakeType;
 		this.startSnake = startSnake;
@@ -19,7 +19,7 @@ public class Snakes {
 		Random random = new Random();
 
 		// Get a random type from the SnakeType enum
-		SnakeType randomType = SnakeType.values()[random.nextInt(SnakeType.values().length)];
+		Color randomType = Color.values()[random.nextInt(Color.values().length)];
 
 		// NOTE :
 		// WE SHOULD CREATE A FUNCTION IN THE GAME CLASS that has the following :
@@ -45,21 +45,26 @@ public class Snakes {
 		return playerPosition == snake.getStartSnake();
 	}
 
-	public void movePlayerBack(RunningGame player, Snakes snake) {
+	public void movePlayerBack(RunningGame rg , Player player, Snakes snake) {
 		// Check if the player is on the head of the snake
-		if (checkPlayerSnake(player.getPlayerPlacement(), snake)) {
+		if (checkPlayerSnake(rg.getPlayerPlacement().get(player), snake)) {
 			// Move the player back to the end of the snake
-			player.setPlayerPlacement(snake.getEndSnake());
+			rg.getPlayerPlacement().put(player , snake.endSnake);
 			System.out.println("Player moved back to the  snake tail!");
 		}
 	}
 
-	public SnakeType getSnakeType() {
+	public Color getSnakeType() {
 		return snakeType;
 	}
 
-	public void setSnakeType(SnakeType snakeType) {
+	public void setSnakeType(Color snakeType) {
 		this.snakeType = snakeType;
+	}
+
+	@Override
+	public String toString() {
+		return "Snakes [snakeType=" + snakeType + ", startSnake=" + startSnake + ", endSnake=" + endSnake + "]";
 	}
 
 	public int getStartSnake() {
