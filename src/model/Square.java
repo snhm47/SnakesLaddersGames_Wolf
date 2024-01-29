@@ -49,7 +49,7 @@ public class Square {
 
 	@Override
 	public String toString() {
-		return "Square [squareType=" + squareType + ", number=" + Number + ", Occupi=" + Occupied + "]";
+		return "Square [squareType=" + squareType + ", number=" + number + ", Occupi=" + occupied + "]";
 	}
 
 	public Boolean getOccupi() {
@@ -57,7 +57,7 @@ public class Square {
 	}
 
 	public void setOccupi(Boolean occupied) {
-		occupied = occupied;
+		this.occupied = occupied;
 	}
 	
 }
