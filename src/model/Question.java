@@ -5,42 +5,42 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Question {
-	private int Number;
-	private String Text;
-	private DiffLevel Difficulty;
-	private ArrayList<String> Answers;
+	private int number;
+	private String text;
+	private DiffLevel difficulty;
+	private ArrayList<String> answers;
 	private String correctAnswer;
 
 	public int getNumber() {
-		return Number;
+		return number;
 	}
 
 	public void setNumber(int number) {
-		this.Number = number;
+		this.number = number;
 	}
 
 	public String getText() {
-		return Text;
+		return text;
 	}
 
 	public void setText(String text) {
-		this.Text = text;
+		this.text = text;
 	}
 
 	public DiffLevel getDifficulty() {
-		return Difficulty;
+		return difficulty;
 	}
 
 	public void setDifficulty(DiffLevel difficulty) {
-		this.Difficulty = difficulty;
+		this.difficulty = difficulty;
 	}
 
 	public ArrayList<String> getAnswers() {
-		return Answers;
+		return answers;
 	}
 
 	public void setAnswers(ArrayList<String> answers) {
-		this.Answers = answers;
+		this.answers = answers;
 	}
 
 	public String getCorrectAnswer() {
@@ -53,10 +53,10 @@ public class Question {
 
 	public Question(int number, String text, DiffLevel difficulty, ArrayList<String> answers, String correctAnswer) {
 		super();
-		this.Number = number;
-		this.Text = text;
-		this.Difficulty = difficulty;
-		this.Answers = answers;
+		this.number = number;
+		this.text = text;
+		this.difficulty = difficulty;
+		this.answers = answers;
 		this.correctAnswer = correctAnswer;
 	}
 
@@ -75,7 +75,7 @@ public class Question {
 	// Method to check if the question is in the data warehouse
 	public boolean checkQuestion(ArrayList<Question> questionDatabase) {
 		for (Question question : questionDatabase) {
-			if (this.Text.equalsIgnoreCase(question.getText())) {
+			if (this.text.equalsIgnoreCase(question.getText())) {
 				System.out.println("Qustion found!");
 				return true;
 			}
@@ -90,7 +90,7 @@ public class Question {
 	public void addQuestionAndAnswers(ArrayList<Question> questionDatabase, String[] possibleAnswers) {
 	    if (possibleAnswers.length == 4) {
 	        if (!checkQuestion(questionDatabase)) {
-	            this.Answers = new ArrayList<>(Arrays.asList(possibleAnswers));
+	            this.answers = new ArrayList<>(Arrays.asList(possibleAnswers));
 	            questionDatabase.add(this);
 	            System.out.println("Question successfuly added");
 	        } else {
@@ -120,7 +120,7 @@ public class Question {
 	    for (Question question : questionDatabase) {
 	        if (question.equals(this)) {
 	            questionDatabase.remove(this);
-	            this.Answers = null;
+	            this.answers = null;
 	            System.out.println("Question successfuly removed");
 	            return;
 	        }

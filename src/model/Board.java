@@ -7,9 +7,9 @@ public class Board {
 	private DiffLevel level;
     private Square[][] squares;
     private HashMap<Integer,Square> sq;
-    private ArrayList<Snakes> Snakes;
-    private ArrayList<Ladders> Ladders;
-    private ArrayList<Question> Questions;
+    private ArrayList<Snakes> snakes;
+    private ArrayList<Ladders> ladders;
+    private ArrayList<Question> questions;
 
 
     public DiffLevel getLevel() {
@@ -28,28 +28,28 @@ public class Board {
 		this.squares = squares;
 	}
 
-	public ArrayList<Snakes> getSnakes() {
-		return Snakes;
+	public ArrayList<Snakes> getsnakes() {
+		return snakes;
 	}
 
-	public void setSnakes(ArrayList<Snakes> snakes) {
-		this.Snakes = snakes;
+	public void setsnakes(ArrayList<Snakes> snakes) {
+		this.snakes = snakes;
 	}
 
-	public ArrayList<Ladders> getLadders() {
-		return Ladders;
+	public ArrayList<Ladders> getladders() {
+		return ladders;
 	}
 
-	public void setLadders(ArrayList<Ladders> ladders) {
-		this.Ladders = ladders;
+	public void setladders(ArrayList<Ladders> ladders) {
+		this.ladders = ladders;
 	}
 
-	public ArrayList<Question> getQuestions() {
-		return Questions;
+	public ArrayList<Question> getquestions() {
+		return questions;
 	}
 
-	public void setQuestions(ArrayList<Question> questions) {
-		this.Questions = questions;
+	public void setquestions(ArrayList<Question> questions) {
+		this.questions = questions;
 	}
     public HashMap<Integer, Square> getSq() {
 		return sq;
@@ -64,9 +64,9 @@ public class Board {
 		this.level = level;
 		this.squares = squares;
 		this.sq = new HashMap<Integer ,Square>();;
-		this.Snakes = snakes;
-		this.Ladders = ladders;
-		this.Questions = questions;
+		this.snakes = snakes;
+		this.ladders = ladders;
+		this.questions = questions;
 	}
 
 	public void initializeBoard() {
@@ -162,14 +162,14 @@ public class Board {
 	            }
 	        }
 	    }
-	    placeRandomSnakesAndLadders();
-	    for(Snakes s : Snakes) {
+	    placeRandomsnakesAndladders();
+	    for(Snakes s : snakes) {
 	    	sq.get(s.getStartSnake()).setOccupi(true);
 	    	sq.get(s.getEndSnake()).setOccupi(true);
 	    }
 	}
 
-    public void placeRandomSnakesAndLadders() {
+    public void placeRandomsnakesAndladders() {
     	int size = 0;
     	int startSnake = 0;
         int endSnake = 0;
@@ -198,7 +198,7 @@ public class Board {
             	   c = Color.RED;
                }
                Snakes s = new Snakes(c, startSnake + (startlevel*size), endSnake + ((startlevel+i+1)*size));
-               Snakes.add(s);
+               snakes.add(s);
                
                do {
                    startLadder = random.nextInt(size - 1) + 1;
@@ -219,13 +219,13 @@ public class Board {
         }
 		
     }
-//    private void placeSnakesAndLadders(int numSnakesAndLadders, int size, Random random) {
+//    private void placesnakesAndladders(int numsnakesAndladders, int size, Random random) {
 //    	 int startSnake = 0;
 //         int endSnake = 0;
 //         int startLadder = 0;
 //         int endLadder = 0;
 //         int startlevel = 0;
-//        for (int i = 0; i < numSnakesAndLadders; i++) {
+//        for (int i = 0; i < numsnakesAndladders; i++) {
 //            // Ensure snakes and ladders don't start or end in the same square
 //            do {
 //                startSnake = random.nextInt(size - 1) + 1;
@@ -264,8 +264,8 @@ public class Board {
 //            }
 //
 //            // TODO: Create Snake and Ladder objects and add them to the respective ArrayLists
-//            // Example: snakes.add(new Snakes(startSnake, endSnake));
-//            // Example: ladders.add(new Ladders(startLadder, endLadder));
+//            // Example: snakes.add(new snakes(startSnake, endSnake));
+//            // Example: ladders.add(new ladders(startLadder, endLadder));
 //        }
 //    }
 

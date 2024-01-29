@@ -3,8 +3,8 @@ package model;
 public class Square {
 	private static int num = 0;
 	private SquareType squareType;
-	private int Number ;
-	private Boolean Occupied;
+	private int number ;
+	private Boolean occupied;
 
 	public Square(SquareType squareType) {
 		super();
@@ -39,11 +39,11 @@ public class Square {
 	}
 
 	public int getNumber() {
-		return Number;
+		return number;
 	}
 
 	public void setNumber(int number) {
-		this.Number = number;
+		this.number = number;
 	}
 
 
@@ -53,11 +53,11 @@ public class Square {
 	}
 
 	public Boolean getOccupi() {
-		return Occupied;
+		return occupied;
 	}
 
 	public void setOccupi(Boolean occupied) {
-		Occupied = occupied;
+		occupied = occupied;
 	}
 	
 }

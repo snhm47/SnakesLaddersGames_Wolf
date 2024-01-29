@@ -4,40 +4,40 @@ import java.util.Random;
 
 public class Dice {
 	private static int auto = 0;
-	private int ID;
-	private int Number;
+	private int Id;
+	private int number;
 	
 	public int getID() {
-		return ID;
+		return Id;
 	}
 
 	public void setID(int iD) {
-		ID = iD;
+		Id = iD;
 	}
 
 	public int getNumber() {
-		return Number;
+		return number;
 	}
 
 	public void setNumber(int number) {
-		this.Number = number;
+		this.number = number;
 	}
 
 	public Dice() {
 		super();
-		this.ID = ++auto;
+		this.Id = ++auto;
 	}
 
 	// Random number
 	public int roll() {
 		Random random = new Random();
-		this.Number = random.nextInt(10) + 1;
-		return Number;
+		this.number = random.nextInt(10) + 1;
+		return number;
 	}
 
 	// Display an appropriate message
 	public void showTheResult() {
-		System.out.println(DICE_MESSAGES[Number-1]);
+		System.out.println(DICE_MESSAGES[number-1]);
 	}
 
 
