@@ -28,7 +28,7 @@ public class Dice {
 		this.Id = ++auto;
 	}
 
-	// Random number
+	// return random number
 	public int roll() {
 		Random random = new Random();
 		this.number = random.nextInt(10) + 1;
