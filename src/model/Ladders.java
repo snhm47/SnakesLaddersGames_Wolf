@@ -41,8 +41,12 @@ public class Ladders {
 			this.endLadder = endLadder;
 	    }
 
-	    public void movePlayerUp(){
+		// Raises the player according to the ladder type
+	    public void movePlayerUp(RunningGame runningGame,Player player){
+	    	if(runningGame.getPlayerPlacement().get(player) == startLadder) {
+	    		runningGame.getPlayerPlacement().put(player, endLadder);
 	    	System.out.println(LADDER_CLIMBED_MESSAGE);
+	    	}
 	    }
 
 	    // Notifications
