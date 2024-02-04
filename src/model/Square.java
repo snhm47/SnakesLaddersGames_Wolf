@@ -1,5 +1,7 @@
 package model;
 
+import Utils.SquareType;
+
 public class Square {
 	private static int num = 0;
 	private SquareType squareType;

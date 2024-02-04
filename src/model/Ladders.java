@@ -1,5 +1,7 @@
 package model;
 
+import Utils.LadderType;
+
 public class Ladders {
 	 private LadderType ladderType;
 	    private int startLadder;

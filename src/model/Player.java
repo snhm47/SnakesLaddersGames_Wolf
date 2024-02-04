@@ -1,5 +1,6 @@
 package model;
 
+import Utils.Color;
 
 public class Player {
 	private String nickName;

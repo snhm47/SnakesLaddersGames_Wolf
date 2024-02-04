@@ -3,6 +3,11 @@ package model;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
+
+import Utils.Color;
+import Utils.DiffLevel;
+import Utils.LadderType;
+import Utils.SquareType;
 public class Board {
 	private DiffLevel level;
     private Square[][] squares;

@@ -2,6 +2,8 @@ package model;
 
 import java.util.Random;
 
+import Utils.Color;
+
 public class Snakes {
 	private Color snakeType;
 	private int startSnake;

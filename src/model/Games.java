@@ -1,5 +1,6 @@
 package model;
 
+import Utils.DiffLevel;
 
 public class Games {
 	private int currentPlayerIndex;

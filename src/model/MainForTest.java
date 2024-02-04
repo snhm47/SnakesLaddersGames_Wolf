@@ -1,5 +1,7 @@
 package model;
 
+import Utils.DiffLevel;
+
 public class MainForTest {
 
 	public static void main(String[] args) {
