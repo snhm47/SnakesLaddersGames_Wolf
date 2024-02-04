@@ -48,8 +48,18 @@ public class Ladders {
 	    	System.out.println(LADDER_CLIMBED_MESSAGE);
 	    	}
 	    }
+	    
+	    
 
-	    // Notifications
+	    @Override
+		public String toString() {
+			return "Ladders [ladderType=" + ladderType + ", startLadder=" + startLadder + ", endLadder=" + endLadder
+					+ "]";
+		}
+
+
+
+		// Notifications
 	    public static final String LADDER_CLIMBED_MESSAGE = "Congratulations! You climbed a ladder and moved forward.";
 
 }

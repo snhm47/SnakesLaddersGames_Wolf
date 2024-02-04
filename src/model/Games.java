@@ -1,6 +1,5 @@
 package model;
 
-import java.util.function.Function;
 
 public class Games {
 	private int currentPlayerIndex;
