@@ -13,6 +13,10 @@ import javax.swing.JButton;
 
 public class CreateGame extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
 	/**
