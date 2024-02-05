@@ -2,8 +2,6 @@ package model;
 
 import java.util.Random;
 
-import Utils.DiffLevel;
-
 public class Dice {
 	private static int auto = 0;
 	private int Id;
