@@ -2,8 +2,6 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-
 import Utils.DiffLevel;
 
 public class Question {
@@ -131,15 +129,19 @@ public class Question {
 	}
 
 	// Method to edit an existing question in the database
-//	public void editQuestion(ArrayList<Question> questionDatabase, String newText, String[] newAnswers,
-//			String newCorrectAnswer) {
-//		if (checkQuestion(questionDatabase)) {
-//			this.setText(newText);
-//			this.setAnswers(new ArrayList<>(List.of);
-//			this.setCorrectAnswer(newCorrectAnswer);
-//			System.out.println("Question updated successfully");
-//		}
-//
-//	}
+	public void editQuestion(ArrayList<Question> questionDatabase, String newText, String[] newAnswers,
+			String newCorrectAnswer) {
+		if (checkQuestion(questionDatabase)) {
+			this.setText(newText);
+			ArrayList<String>answers = new ArrayList<String>();
+			for(String an : newAnswers) {
+				answers.add(an);
+			}
+			this.setAnswers(answers);
+			this.setCorrectAnswer(newCorrectAnswer);
+			System.out.println("Question updated successfully");
+		}
+
+	}
 
 }
