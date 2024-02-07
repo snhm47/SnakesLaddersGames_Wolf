@@ -131,15 +131,15 @@ public class Question {
 	}
 
 	// Method to edit an existing question in the database
-	public void editQuestion(ArrayList<Question> questionDatabase, String newText, String[] newAnswers,
-			String newCorrectAnswer) {
-		if (checkQuestion(questionDatabase)) {
-			this.setText(newText);
-			this.setAnswers(new ArrayList<>(List.of(newAnswers)));
-			this.setCorrectAnswer(newCorrectAnswer);
-			System.out.println("Question updated successfully");
-		}
-
-	}
+//	public void editQuestion(ArrayList<Question> questionDatabase, String newText, String[] newAnswers,
+//			String newCorrectAnswer) {
+//		if (checkQuestion(questionDatabase)) {
+//			this.setText(newText);
+//			this.setAnswers(new ArrayList<>(List.of);
+//			this.setCorrectAnswer(newCorrectAnswer);
+//			System.out.println("Question updated successfully");
+//		}
+//
+//	}
 
 }
