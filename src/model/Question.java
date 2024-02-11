@@ -2,13 +2,15 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+
 import Utils.DiffLevel;
 
 public class Question {
+	private static int count =0; // to defines the number of the question and runs automatically
 	private int number;
 	private String text;
-	private DiffLevel difficulty;
 	private ArrayList<String> answers;
+	private DiffLevel difficulty;
 	private String correctAnswer;
 
 	public int getNumber() {
@@ -38,10 +40,14 @@ public class Question {
 	public ArrayList<String> getAnswers() {
 		return answers;
 	}
-
+	
 	public void setAnswers(ArrayList<String> answers) {
-		this.answers = answers;
+		for(String s:answers) {
+			this.answers.add(s);
+		}
 	}
+
+
 
 	public String getCorrectAnswer() {
 		return correctAnswer;
@@ -51,12 +57,13 @@ public class Question {
 		this.correctAnswer = correctAnswer;
 	}
 
-	public Question(int number, String text, DiffLevel difficulty, ArrayList<String> answers, String correctAnswer) {
+	public Question(String text,  ArrayList<String> answers, String correctAnswer, DiffLevel difficulty) {
 		super();
-		this.number = number;
+		count++;
+		this.number=count;
 		this.text = text;
 		this.difficulty = difficulty;
-		this.answers = answers;
+		setAnswers(answers);
 		this.correctAnswer = correctAnswer;
 	}
 

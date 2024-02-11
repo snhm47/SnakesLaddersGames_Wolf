@@ -1,34 +1,33 @@
 package Controller;
 
-import model.Games;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import model.Question;
 
+
 public class SysData {
-	 	private Games games;
-	    private Question questions;
+	    private ArrayList<Question> questions;
 	    
-	    public Games getGames() {
-			return games;
+
+		
+		
+		public SysData() throws IOException {
+			this.questions = new ArrayList<>();
+			ImportQuestion();
 		}
 
-		public void setGames(Games games) {
-			this.games = games;
-		}
-
-		public Question getQuestions() {
-			return questions;
-		}
-
-		public void setQuestions(Question questions) {
-			this.questions = questions;
+		public void ImportQuestion() throws IOException {
+			String jsonString=new String(Files.readAllBytes(Paths.get("WolfQuestionsDB.json")));
+			// Convert the string to a JSONArray
+			
+			
 		}
 		
-		public SysData(Games games, Question questions) {
-			super();
-			this.games = games;
-			this.questions = questions;
+		public ArrayList<Question> getQuestions() {
+			return questions;
 		}
-
 		// Methods
 	    public void loadData(String filePath) {
 	    }
@@ -37,7 +36,7 @@ public class SysData {
 	    }
 
 	    public void loadQuestions(String filePath) {
-	     }
+	    }
 
 	    public static final String DATA_LOADED_SUCCESSFULLY = "Data loaded successfully!";
 	    public static final String DATA_SAVED_SUCCESSFULLY = "Data saved successfully!";
