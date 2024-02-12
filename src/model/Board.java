@@ -64,15 +64,12 @@ public class Board {
 		this.sq = sq;
 	}
 
-	public Board(DiffLevel level, Square[][] squares,HashMap<Integer, Square> sq , ArrayList<Snakes> snakes, ArrayList<Ladders> ladders, ArrayList<Question> questions,ArrayList<Player> players) {
+	public Board(DiffLevel level) {
 		super();
 		this.level = level;
-		this.squares = squares;
 		this.sq = new HashMap<Integer ,Square>();;
 		this.snakes = new ArrayList<Snakes>();
-		this.ladders = new ArrayList<Ladders>();
-		this.questions = questions;
-	}
+		this.ladders = new ArrayList<Ladders>();	}
 
 	public void initializeBoard() {
 		int size = 0 ;
