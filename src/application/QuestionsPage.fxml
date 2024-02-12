@@ -11,20 +11,24 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="372.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fitHeight="393.0" fitWidth="633.0" layoutX="-26.0" layoutY="-8.0" pickOnBounds="true" preserveRatio="true">
+       <ImageView fitHeight="480.0" fitWidth="704.0" layoutX="-64.0" layoutY="-20.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Downloads/WhatsApp%20Image%202024-02-11%20at%2021.53.38.jpeg" />
+            <Image url="@JungleBGBayan.jpg" />
          </image>
       </ImageView>
-      <ImageView fitHeight="40.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView accessibleRole="BUTTON" fitHeight="38.0" fitWidth="41.0" layoutX="23.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Downloads/WhatsApp%20Image%202024-02-11%20at%2021.55.11.jpeg" />
+            <Image url="@HomeButton.png" />
          </image>
+      
       </ImageView>
-      <Label graphicTextGap="11.0" layoutX="217.0" layoutY="70.0" text="Questions Page" textAlignment="CENTER" textOverrun="CENTER_WORD_ELLIPSIS">
+      <Label layoutX="231.0" layoutY="16.0" text="Questions" textFill="#5141dd">
          <font>
-            <Font size="24.0" />
+            <Font name="Arial Bold" size="40.0" />
          </font>
+         <effect>
+            <Bloom />
+         </effect>
       </Label>
       <TableView layoutX="200.0" layoutY="105.0" prefHeight="200.0" prefWidth="200.0">
         <columns>
