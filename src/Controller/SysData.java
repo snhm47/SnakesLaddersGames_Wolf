@@ -1,29 +1,55 @@
 package Controller;
-
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Arrays;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import Utils.DiffLevel;
 import model.Question;
+
 
 
 public class SysData {
 	    private ArrayList<Question> questions;
 	    
-
 		
-		
-		public SysData() throws IOException {
+		public SysData() {
 			this.questions = new ArrayList<>();
-			ImportQuestion();
+			loadQuestions();
 		}
 
-		public void ImportQuestion() throws IOException {
-			String jsonString=new String(Files.readAllBytes(Paths.get("WolfQuestionsDB.json")));
-			// Convert the string to a JSONArray
-			
-			
+		// Import Question From JSON
+		public void loadQuestions(){
+			try {
+	            
+	            FileReader reader = new FileReader("WolfQuestionsDB.json");
+	            JSONArray questionsArray = new JSONArray(reader);
+	            for (int i = 0; i < questionsArray.length() ; i++) {
+	                JSONObject questionObject = questionsArray.getJSONObject(i);
+	                DiffLevel df;
+	                if(questionObject.getString("difficulty").equals("1")) {
+	                	df=DiffLevel.easy;
+	                }else if(questionObject.getString("difficulty").equals("2")){
+	                	df=DiffLevel.medium;
+	                }else {
+	                	df=DiffLevel.hard;
+	                }
+	                ArrayList<String> arrayList = new ArrayList<>(Arrays.asList(questionObject.getString("answer").split(",")));
+	                Question question = new Question(
+	                        questionObject.getString("question"),
+	                        arrayList,
+	                        questionObject.getString("correct_ans"),
+	                        df);
+	                questions.add(question);
+	            }
+	            reader.close();
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
 		}
+		
 		
 		public ArrayList<Question> getQuestions() {
 			return questions;

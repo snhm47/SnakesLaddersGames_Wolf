@@ -1,11 +1,16 @@
 package model;
 
+import Controller.SysData;
 import Utils.DiffLevel;
 
 public class MainForTest {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+	/*	
+	    SysData sys=new SysData();
+		System.out.println(sys.getQuestions()); 
+	*/	
 		Board b = new Board(DiffLevel.easy);
  
 		b.initializeBoard();
