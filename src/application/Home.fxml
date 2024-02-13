@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.canvas.*?>
 <?import javafx.scene.web.*?>
@@ -9,8 +11,68 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.HomeController">
+<AnchorPane prefHeight="503.0" prefWidth="854.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.HomeController">
    <children>
-      <Button fx:id="startgameBTN" layoutX="-4.0" mnemonicParsing="false" onAction="#onClick" prefHeight="141.0" prefWidth="267.0" text="start easy game" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <AnchorPane prefHeight="503.0" prefWidth="382.0" style="-fx-background-color: #0C39FF;">
+         <children>
+            <Label alignment="CENTER" layoutX="40.0" layoutY="79.0" prefHeight="43.0" prefWidth="314.0" text="Snakes and Ladders" textFill="WHITE">
+                    <font>
+                        <Font name="Segoe UI" size="36.0" />
+                    </font>
+                </Label>
+            <Button fx:id="newgamebtn" onAction="#onClick" layoutX="82.0" layoutY="192.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="199.0" text="New Game" />
+            <Button fx:id="questionsbtn" layoutX="82.0" layoutY="366.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="199.0" text="Questions" />
+            <Button fx:id="historybtn"  layoutX="82.0" layoutY="282.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="199.0" text="Games History" />
+         </children>
+      </AnchorPane>
+      <Pane layoutX="381.0" layoutY="100.0" prefHeight="330.0" prefWidth="545.0" AnchorPane.bottomAnchor="73.0" AnchorPane.topAnchor="100.0">
+         <children>
+            <Label layoutX="6.0" layoutY="6.0" text="Add Players:">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+            <TextField fx:id="playernametxtbx" layoutX="172.0" layoutY="1.0" prefHeight="51.0" prefWidth="225.0" promptText="Player Name">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </TextField>
+            <Button fx:id="addplayerbtn" layoutX="407.0" layoutY="-1.0" mnemonicParsing="false" onAction="#AddPlayer" text="Add">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Button>
+            <Label fx:id="player1lbl" layoutX="93.0" layoutY="95.0" text="Player1">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Label>
+            <Label fx:id="player2lbl" layoutX="258.0" layoutY="96.0" text="Player2">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Label>
+            <Label fx:id="player4lbl" layoutX="258.0" layoutY="148.0" text="Player4">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Label>
+            <Label fx:id="player3lbl" layoutX="95.0" layoutY="148.0" text="Player3">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Label>
+            <ChoiceBox fx:id="difficultycheckbox" layoutX="183.0" layoutY="235.0" prefHeight="51.0" prefWidth="225.0">
+                <String fx:value="easy"/>
+                <String fx:value="medium"/>
+                <String fx:value="hard"/>
+            
+            </ChoiceBox>
+            <Label layoutX="34.0" layoutY="235.0" text="Difficulty:">
+               <font>
+                  <Font size="34.0" />
+               </font>
+            </Label>
+         </children></Pane>
    </children>
 </AnchorPane>
