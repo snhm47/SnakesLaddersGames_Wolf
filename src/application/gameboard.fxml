@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.web.*?>
 <?import javafx.scene.*?>
@@ -11,11 +12,11 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8"  xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.HomeController">
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.HomeController">
    <children>
       <HBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <VBox alignment="CENTER" style="-fx-background-color: #303030;" HBox.Hgrow="ALWAYS">
+            <VBox alignment="CENTER" style="-fx-background-color: #303030; -fx-max-width: 150;" HBox.Hgrow="ALWAYS">
                <children>
                   <Label text="Current Player:" textFill="WHITE">
                      <font>
@@ -27,8 +28,11 @@
                   <ListView fx:id="namesList" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #DE3E4D;" />
                </children>
             </VBox>
-            <VBox fx:id="vBoxBoard" alignment="CENTER" HBox.Hgrow="ALWAYS"/>
-            <VBox alignment="CENTER" style="-fx-background-color: #303030;" HBox.Hgrow="ALWAYS">
+            <VBox fx:id="vBoxBoard" alignment="CENTER" HBox.Hgrow="ALWAYS">
+               <children>
+                  <StackPane fx:id="spBox" prefHeight="326.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+               </children></VBox>
+            <VBox alignment="CENTER" style="-fx-background-color: #303030; -fx-max-width: 150;" HBox.Hgrow="ALWAYS">
                <children>
                   <Label fx:id="timerlbl" alignment="CENTER" contentDisplay="CENTER" text="00:00" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
                      <font>
