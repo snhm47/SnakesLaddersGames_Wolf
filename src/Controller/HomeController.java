@@ -3,23 +3,29 @@ import model.*;
 import java.io.IOException;
 
 import java.util.ArrayList;
-
+import java.util.HashMap;
 
 import Utils.DiffLevel;
-
+import Utils.LadderType;
+import Utils.SquareType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 
 import javafx.scene.Scene;
+import javafx.scene.SnapshotParameters;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Box;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
@@ -35,6 +41,9 @@ public class HomeController {
 	static Scene scene;
 	@FXML
 	private Pane cellPane21;
+	
+	@FXML
+	private StackPane spBox;
 	
 	@FXML
 	private ChoiceBox<String> difficultycheckbox;
@@ -196,6 +205,7 @@ public class HomeController {
         }
 
 		b.initializeBoard();
+		HashMap<Integer, VBox>boxes = new HashMap<Integer, VBox>();
         for (int row = 0; row < diffnumber; row++) {
             for (int column = 0; column < diffnumber; column++) {
             	
@@ -209,8 +219,19 @@ public class HomeController {
                 else
                 	box.setStyle("-fx-background-color: white");
                 box.setPrefSize(100,100);
-                Label num = new Label(""+b.getSquares()[row][column].getNumber());
-                box.getChildren().add(num);
+//                Label num = new Label(""+b.getSquares()[row][column].getNumber());
+                if(b.getSquares()[row][column].getSquareType().equals(SquareType.REGULAR)) {
+                	Label num = new Label(""+b.getSquares()[row][column].getNumber());
+                	box.getChildren().add(num);
+                }else if(b.getSquares()[row][column].getSquareType().equals(SquareType.QUESTION)) {
+                	Label num = new Label(""+b.getSquares()[row][column].getNumber()+'?');
+                	box.getChildren().add(num);
+                }else {
+                	Label num = new Label(""+b.getSquares()[row][column].getNumber()+"*");
+                	box.getChildren().add(num);
+
+                }
+//                box.getChildren().add(num);
                 if(b.getSquares()[row][column].getNumber()==1) {
                 	for(int i=0;i<players.size();i++) {
                 	Circle player = new Circle();
@@ -233,14 +254,14 @@ public class HomeController {
                 	}
                 }
                 grid.add(box, column, row, 1, 1);
-                
-                
+                boxes.put(b.getSquares()[row][column].getNumber(), box);
             }
         }
         //difficulty=difficultycheckbox.getSelectionModel().getSelectedItem().toLowerCase();
         // Add grid to vBoxBoard or handle null case with more informative feedback
-        vBoxBoard=(VBox)gameStage.getScene().lookup("#vBoxBoard");
-        if(vBoxBoard==null)
+        //vBoxBoard=(VBox)gameStage.getScene().lookup("#vBoxBoard");
+        spBox=(StackPane)gameStage.getScene().lookup("#spBox");
+        if(spBox==null)
         {
         	Alert alert = new Alert(AlertType.ERROR);
 	        alert.setTitle("Error");
@@ -248,8 +269,84 @@ public class HomeController {
 	        alert.showAndWait();
         }
         else {
-        	vBoxBoard.getChildren().clear();
-        	vBoxBoard.getChildren().add(grid);
+        	//vBoxBoard.getChildren().clear();
+        	//vBoxBoard.getChildren().add(grid);
+        	spBox.getChildren().add(grid);
+        	Image img = new Image(getClass().getResourceAsStream("../Image/ladder.png"));
+//        	Image img1 = new Image(getClass().getResourceAsStream("../Image/Snake.png"));
+
+//        	ImageView imgv = new ImageView(img);
+//        	ImageView imgv1 = new ImageView(img1);
+
+//        	for( Ladders l : b.getladders()) {
+//        		ImageView imgv = new ImageView(img);
+//        		int srow = GridPane.getRowIndex(boxes.get(l.getStartLadder()));
+//        		int scul = GridPane.getColumnIndex(boxes.get(l.getStartLadder()));
+//        		int erow = GridPane.getRowIndex(boxes.get(l.getEndLadder()));
+//        		int ecul = GridPane.getColumnIndex(boxes.get(l.getEndLadder()));
+//        		
+//        		if(diffnumber == 7 ) {
+//            		imgv.setScaleX(0.5);
+//            		imgv.setTranslateX(imgv.getTranslateX()+50);
+//            		if(l.getLadderType().equals(LadderType.TYPE_1)) {
+//            			if((scul - ecul) == 6) {
+//            				
+//            			}
+//            			imgv.setScaleY(0.5);
+//            			imgv.setTranslateY(imgv.getTranslateY()-100);
+//            		}else if(l.getLadderType().equals(LadderType.TYPE_2)) {
+//            			imgv.setScaleY(1);
+//            		}else if(l.getLadderType().equals(LadderType.TYPE_3)) {
+//            			imgv.setScaleY(1.5);
+//            		}else {
+//            			imgv.setScaleY(2);
+//            		}
+//        			
+//        		}
+//        		grid.add(imgv, scul, srow);
+//        		
+//        	}
+        	ImageView iv = new ImageView(img);
+        	iv.setScaleX(0.5);
+        	grid.add(iv, 3, 1);
+        	iv.setRotate(-55);
+//        	iv.setScaleY(0.5);
+        	iv.setTranslateY(iv.getTranslateY()-100);
+        	iv.setTranslateX(iv.getTranslateX()-70);
+//        	ImageView imgv2 = new ImageView(img);
+//        	ImageView imgv3 = new ImageView(img);
+//        	ImageView imgv4 = new ImageView(img);
+//
+//        	imgv.setRotate(45);
+//        	imgv.setScaleX(0.5);
+//        	imgv2.setTranslateX(imgv2.getTranslateX()+50);
+//        	imgv2.setTranslateY(imgv2.getTranslateY()-50);
+//        	imgv2.setScaleX(0.5);
+//        	imgv2.setScaleY(0.5);
+//        	imgv3.setScaleX(0.5);
+//        	imgv3.setTranslateX(imgv3.getTranslateX()+170);
+//        	imgv3.setTranslateY(imgv3.getTranslateX()-250);
+//
+//        	imgv3.setRotate(30);
+//        	imgv3.setScaleY(1.5);
+//        	
+//        	
+//        	imgv4.setScaleY(2.2);
+//        	imgv4.setScaleX(0.5);
+//        	imgv4.setRotate(-50);
+//        	imgv4.setTranslateX(imgv4.getTranslateX()-230);
+//        	imgv.setTranslateX(imgv.getTranslateX()-50);
+//        	grid.add(imgv, 1, 5);
+//        	grid.add(imgv2, 2, 2);
+//        	grid.add(imgv3, 4, 3);
+//        	grid.add(imgv4, 3, 3);
+
+
+
+
+//        	spBox.getChildren().add(imgv2);
+//        	//imgv.setFitWidth(diffnumber);
+        	
         	
         }
 //        ((Label)gameStage.getScene().lookup("#timerlbl")).setText(String.valueOf(stopwatch.getElapsedTimeSecs()));
