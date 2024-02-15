@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import Controller.SysData;
 import Utils.DiffLevel;
 
@@ -7,10 +8,13 @@ public class MainForTest {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-	/*	
-	    SysData sys=new SysData();
-		System.out.println(sys.getQuestions()); 
-	*/	
+		
+		SysData sysData = new SysData();
+        ArrayList<Question> questions = sysData.getQuestions();
+        for (Question question : questions) {
+            System.out.println(question.getText());
+        }
+        /*
 		Board b = new Board(DiffLevel.easy);
  
 		b.initializeBoard();
@@ -28,5 +32,6 @@ public class MainForTest {
 //		System.out.println();
 //		System.out.println(7/5);
 	}
-
+*/
+}
 }
