@@ -1,119 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
-	minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
-	prefWidth="600.0" xmlns="http://javafx.com/javafx/8"
-	xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="Controller.AddQuestionController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" >
 	<children>
-		<ImageView fitHeight="416.0" fitWidth="615.0" layoutX="-3.0"
-			layoutY="-2.0" opacity="0.79" pickOnBounds="true">
+		<ImageView fitHeight="480.0" fitWidth="704.0" layoutX="-64.0" layoutY="-20.0" pickOnBounds="true" preserveRatio="true">
 			<image>
-				<Image url="@../Image/JungleBGBayan.jpg" />
+				<Image url="@JungleBGBayan.jpg" />
 			</image>
 		</ImageView>
-		<Label layoutX="204.0" layoutY="26.0" text="Add Question"
-			textFill="#5141dd">
+		<ImageView accessibleRole="BUTTON" fitHeight="38.0" fitWidth="41.0" layoutX="23.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+			<image>
+				<Image url="@HomeButton.png" />
+			</image>
+		</ImageView>
+		<Label layoutX="231.0" layoutY="16.0" text="Add Question" textFill="#5141dd">
 			<font>
 				<Font name="Arial Bold" size="40.0" />
 			</font>
-
+			<effect>
+				<Bloom />
+			</effect>
 		</Label>
-		<Label graphicTextGap="11.0" layoutX="50.0" layoutY="185.0"
-			text="Answers:" textFill="#ea0b0b" textOverrun="CENTER_WORD_ELLIPSIS">
+		<TextArea layoutX="188.0" layoutY="120.0" prefHeight="38.0" prefWidth="274.0" />
+		<Label graphicTextGap="11.0" layoutX="110.0" layoutY="175.0" text="Answers:" textOverrun="CENTER_WORD_ELLIPSIS">
 			<font>
-				<Font name="System Bold" size="17.0" />
-			</font>
-		</Label>
-		<Label graphicTextGap="11.0" layoutX="52.0" layoutY="223.0"
-			text="Difficultly: " textFill="#fa0000"
-			textOverrun="CENTER_WORD_ELLIPSIS">
-			<font>
-				<Font name="System Bold" size="16.0" />
+				<Font size="16.0" />
 			</font>
 		</Label>
-		<Button layoutX="506.0" layoutY="330.0" mnemonicParsing="false"
-			onAction="#resetAddQs" text="Cancle" />
-		<Button layoutX="446.0" layoutY="330.0" mnemonicParsing="false"
-			text="Add" />
-		<Label graphicTextGap="11.0" layoutX="52.0" layoutY="135.0"
-			text="Question:" textFill="#ea0b0b"
-			textOverrun="CENTER_WORD_ELLIPSIS">
+		<TextArea layoutX="188.0" layoutY="168.0" prefHeight="39.0" prefWidth="54.0" />
+		<TextArea layoutX="261.0" layoutY="168.0" prefHeight="39.0" prefWidth="54.0" />
+		<TextArea layoutX="334.0" layoutY="168.0" prefHeight="39.0" prefWidth="54.0" />
+		<TextArea layoutX="409.0" layoutY="168.0" prefHeight="39.0" prefWidth="54.0" />
+		<Label graphicTextGap="11.0" layoutX="110.0" layoutY="215.0" text="Difficultly: " textOverrun="CENTER_WORD_ELLIPSIS">
 			<font>
-				<Font name="System Bold" size="17.0" />
+				<Font size="16.0" />
 			</font>
 		</Label>
-		<ImageView fitHeight="33.0" fitWidth="38.0" layoutX="38.0"
-			layoutY="24.0" onMouseClicked="#returnToMainPage" pickOnBounds="true"
-			preserveRatio="true">
-			<image>
-				<Image url="@../Image/homebtnIcon.png" />
-			</image>
-		</ImageView>
-		<ImageView fitHeight="33.0" fitWidth="38.0" layoutX="87.0"
-			layoutY="24.0" onMouseClicked="#switchToQuestionPage"
-			pickOnBounds="true" preserveRatio="true">
-			<image>
-				<Image url="@../Image/returnIcon.png" />
-			</image>
-		</ImageView>
-		<RadioButton fx:id="rbuttoneasy" layoutX="143.0"
-			layoutY="228.0" mnemonicParsing="false" onAction="#getLevel"
-			text="Easy">
-			<toggleGroup>
-				<ToggleGroup fx:id="rbuttons" />
-			</toggleGroup>
-			<font>
-				<Font name="System Bold" size="12.0" />
-			</font>
-		</RadioButton>
-		<RadioButton fx:id="rbuttonMedium" layoutX="203.0"
-			layoutY="227.0" mnemonicParsing="false" onAction="#getLevel"
-			text="Medium" toggleGroup="$rbuttons">
-			<font>
-				<Font name="System Bold" size="12.0" />
-			</font>
-		</RadioButton>
-		<RadioButton fx:id="rbuttonHard" layoutX="279.0"
-			layoutY="227.0" mnemonicParsing="false" onAction="#getLevel"
-			text="Hard" toggleGroup="$rbuttons">
-			<font>
-				<Font name="System Bold" size="12.0" />
-			</font>
-		</RadioButton>
-		<Label graphicTextGap="11.0" layoutX="35.0" layoutY="258.0"
-			text="Choose the right answer:" textFill="RED"
-			textOverrun="CENTER_WORD_ELLIPSIS">
-			<font>
-				<Font name="System Bold" size="16.0" />
-			</font>
-		</Label>
-		<ChoiceBox fx:id="answersList" layoutX="228.0"
-			layoutY="258.0" prefWidth="150.0" />
-		<TextField fx:id="t1" layoutX="129.0" layoutY="186.0"
-			prefHeight="26.0" prefWidth="74.0" />
-		<TextField fx:id="t2" layoutX="230.0" layoutY="185.0"
-			prefHeight="26.0" prefWidth="74.0" />
-		<TextField fx:id="t3" layoutX="327.0" layoutY="186.0"
-			prefHeight="26.0" prefWidth="74.0" />
-		<TextField fx:id="t4" layoutX="416.0" layoutY="186.0"
-			prefHeight="26.0" prefWidth="74.0" />
-		<Button layoutX="513.0" layoutY="211.0" mnemonicParsing="false"
-			onAction="#addAnswer" text="Save" />
-		<Button layoutX="416.0" layoutY="271.0" mnemonicParsing="false"
-			text="save correct answer" />
-		<TextField fx:id="qTf" layoutX="136.0" layoutY="135.0"
-			prefHeight="26.0" prefWidth="361.0" />
+		<CheckBox layoutX="188.0" layoutY="219.0" mnemonicParsing="false" text="Easy" />
+		<CheckBox layoutX="261.0" layoutY="219.0" mnemonicParsing="false" text="Medium" />
+		<CheckBox layoutX="355.0" layoutY="219.0" mnemonicParsing="false" text="Hard" />
+		<Button layoutX="496.0" layoutY="283.0" mnemonicParsing="false" text="Cancle" />
+		<Button layoutX="436.0" layoutY="283.0" mnemonicParsing="false" text="Add" />
 	</children>
-</AnchorPane>
+</Pane>

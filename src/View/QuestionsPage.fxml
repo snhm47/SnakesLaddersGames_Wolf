@@ -16,7 +16,7 @@
 	xmlns:fx="http://javafx.com/fxml/1"
 	fx:controller="Controller.HomeController">
 	<children>
-		<ImageView fitHeight="400.0" fitWidth="600.0" opacity="0.87"
+		<ImageView fitHeight="400.0" fitWidth="600.0"
 			pickOnBounds="true">
 			<image>
 				<Image url="@../Image/JungleBGBayan.jpg" />
@@ -28,15 +28,14 @@
 				<Font size="25.0" />
 			</font>
 		</Text>
-		<TableView layoutX="69.0" layoutY="138.0" prefHeight="200.0"
-			prefWidth="500.0">
+		<TableView layoutX="14.0" layoutY="136.0" prefHeight="200.0"
+			prefWidth="538.0">
 			<columns>
-				<TableColumn prefWidth="280.79998779296875"
-					text="Question" />
-				<TableColumn minWidth="0.0" prefWidth="128.0"
-					text="difficulty Level" />
-				<TableColumn minWidth="0.0" prefWidth="91.2000732421875"
-					text="edit/delete" />
+				<TableColumn prefWidth="75.0" text="Question" />
+				<TableColumn prefWidth="75.0" text="answer1" />
+				<TableColumn prefWidth="75.0" text="answer2" />
+				<TableColumn prefWidth="75.0" text="answer3" />
+				<TableColumn prefWidth="75.0" text="answer4" />
 			</columns>
 		</TableView>
 		<ImageView fitHeight="33.0" fitWidth="38.0" layoutX="28.0"
@@ -54,8 +53,14 @@
 		</Text>
 		<TextField layoutX="120.0" layoutY="77.0" prefHeight="26.0"
 			prefWidth="199.0" />
+		<ImageView fitHeight="17.0" fitWidth="22.0" layoutX="289.0"
+			layoutY="82.0" pickOnBounds="true" preserveRatio="true">
+			<image>
+				<Image url="@searchIcon.png" />
+			</image>
+		</ImageView>
 		<Button layoutX="334.0" layoutY="78.0" mnemonicParsing="false"
-			text="Search">
+			text="Enter">
 			<font>
 				<Font size="14.0" />
 			</font>

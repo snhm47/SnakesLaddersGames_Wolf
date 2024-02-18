@@ -12,55 +12,38 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8"
-	xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="Controller.HomeController">
-	<children>
-		<HBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-			AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-			<children>
-				<VBox alignment="CENTER"
-					style="-fx-background-color: #303030; -fx-max-width: 150;"
-					HBox.Hgrow="ALWAYS">
-					<children>
-						<Label text="Current Player:" textFill="WHITE">
-							<font>
-								<Font name="David Bold" size="24.0" />
-							</font>
-						</Label>
-						<Rectangle fx:id="diceRec" arcHeight="5.0"
-							arcWidth="5.0" fill="#0084ff" height="200.0" stroke="BLACK"
-							strokeType="INSIDE" width="200.0" />
-						<Label fx:id="currentPlayerLabel" text="Label"
-							textFill="WHITE" />
-						<ListView fx:id="namesList" prefHeight="200.0"
-							prefWidth="200.0" style="-fx-background-color: #DE3E4D;" />
-					</children>
-				</VBox>
-				<VBox fx:id="vBoxBoard" alignment="CENTER" HBox.Hgrow="ALWAYS">
-					<children>
-						<StackPane fx:id="spBox" prefHeight="326.0"
-							prefWidth="200.0" VBox.vgrow="ALWAYS" />
-					</children>
-				</VBox>
-				<VBox alignment="CENTER"
-					style="-fx-background-color: #303030; -fx-max-width: 150;"
-					HBox.Hgrow="ALWAYS">
-					<children>
-						<Label fx:id="timerlbl" alignment="CENTER"
-							contentDisplay="CENTER" text="00:00" textAlignment="CENTER"
-							textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
-							<font>
-								<Font name="Segoe UI Black" size="46.0" />
-							</font>
-						</Label>
-						<Rectangle fx:id="diceRec" arcHeight="5.0"
-							arcWidth="5.0" fill="#0084ff" height="200.0" stroke="BLACK"
-							strokeType="INSIDE" width="200.0" />
-						<Button mnemonicParsing="false" text="Roll" />
-					</children>
-				</VBox>
-			</children>
-		</HBox>
-	</children>
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.HomeController">
+   <children>
+      <HBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox alignment="CENTER" style="-fx-background-color: #303030; -fx-max-width: 150;" HBox.Hgrow="ALWAYS">
+               <children>
+                  <Label text="Current Player:" textFill="WHITE">
+                     <font>
+                        <Font name="David Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Rectangle fx:id="diceRec" arcHeight="5.0" arcWidth="5.0" fill="#0084ff" height="200.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+                  <Label fx:id="currentPlayerLabel" text="Label" textFill="WHITE" />
+                  <ListView fx:id="namesList" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #DE3E4D;" />
+               </children>
+            </VBox>
+            <VBox fx:id="vBoxBoard" alignment="CENTER" HBox.Hgrow="ALWAYS">
+               <children>
+                  <StackPane fx:id="spBox" prefHeight="326.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+               </children></VBox>
+            <VBox alignment="CENTER" style="-fx-background-color: #303030; -fx-max-width: 150;" HBox.Hgrow="ALWAYS">
+               <children>
+                  <Label fx:id="timerlbl" alignment="CENTER" contentDisplay="CENTER" text="00:00" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
+                     <font>
+                        <Font name="Segoe UI Black" size="46.0" />
+                     </font>
+                  </Label>
+                  <Rectangle fx:id="diceRec" arcHeight="5.0" arcWidth="5.0" fill="#0084ff" height="200.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+                  <Button mnemonicParsing="false" text="Roll" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
 </AnchorPane>

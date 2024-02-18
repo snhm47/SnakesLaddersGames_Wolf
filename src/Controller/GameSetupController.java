@@ -181,9 +181,6 @@ public class GameSetupController implements Initializable {
 					addPlayerbtn.setDisable(true); // Disable adding more players after reaching confirmed count
 					PlayerTf.setDisable(true);
 				}
-				
-	            PlayerTf.setText("");
-
 			} else {
 				Alert alert = new Alert(Alert.AlertType.WARNING);
 				alert.setContentText("Each player must have a unique name.");
