@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
+	minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+	prefWidth="600.0" xmlns="http://javafx.com/javafx/8"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="Controller.HomeController">
+	<children>
+		<ImageView fitHeight="400.0" fitWidth="600.0"
+			pickOnBounds="true">
+			<image>
+				<Image url="@../Image/JungleBGBayan.jpg" />
+			</image>
+		</ImageView>
+		<Text fill="RED" layoutX="214.0" layoutY="41.0"
+			strokeType="OUTSIDE" strokeWidth="0.0" text="Questions Page">
+			<font>
+				<Font size="25.0" />
+			</font>
+		</Text>
+		<TableView layoutX="14.0" layoutY="136.0" prefHeight="200.0"
+			prefWidth="538.0">
+			<columns>
+				<TableColumn prefWidth="75.0" text="Question" />
+				<TableColumn prefWidth="75.0" text="answer1" />
+				<TableColumn prefWidth="75.0" text="answer2" />
+				<TableColumn prefWidth="75.0" text="answer3" />
+				<TableColumn prefWidth="75.0" text="answer4" />
+			</columns>
+		</TableView>
+		<ImageView fitHeight="33.0" fitWidth="38.0" layoutX="28.0"
+			layoutY="14.0" onMouseClicked="#returnToMainPage" pickOnBounds="true"
+			preserveRatio="true">
+			<image>
+				<Image url="@../Image/homebtnIcon.png" />
+			</image>
+		</ImageView>
+		<Text fill="RED" layoutX="50.0" layoutY="98.0"
+			strokeType="OUTSIDE" strokeWidth="0.0" text="Search">
+			<font>
+				<Font size="19.0" />
+			</font>
+		</Text>
+		<TextField layoutX="120.0" layoutY="77.0" prefHeight="26.0"
+			prefWidth="199.0" />
+		<ImageView fitHeight="17.0" fitWidth="22.0" layoutX="289.0"
+			layoutY="82.0" pickOnBounds="true" preserveRatio="true">
+			<image>
+				<Image url="@searchIcon.png" />
+			</image>
+		</ImageView>
+		<Button layoutX="334.0" layoutY="78.0" mnemonicParsing="false"
+			text="Enter">
+			<font>
+				<Font size="14.0" />
+			</font>
+		</Button>
+		<Button layoutX="437.0" layoutY="350.0" mnemonicParsing="false"
+			onAction="#switchToAddQ" text="Add Question">
+			<font>
+				<Font size="16.0" />
+			</font>
+		</Button>
+	</children>
+</AnchorPane>

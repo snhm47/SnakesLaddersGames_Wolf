@@ -8,18 +8,20 @@ public class MainForTest {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		
-		SysData sysData = new SysData();
-        ArrayList<Question> questions = sysData.getQuestions();
-        for (Question question : questions) {
-            System.out.println(question.getText());
-        }
-        /*
-		Board b = new Board(DiffLevel.easy);
+//		
+//		SysData sysData = new SysData();
+//        ArrayList<Question> questions = sysData.getQuestions();
+//        for (Question question : questions) {
+//            System.out.println(question.getText());
+//        }
+
+//		Board b = new Board(DiffLevel.easy);
+
+		Board b = new Board(DiffLevel.hard);
  
 		b.initializeBoard();
-		for(int i = 0 ; i<7 ; i++) {
-			for(int j = 0 ; j<7 ; j++) {
+		for(int i = 0 ; i<13 ; i++) {
+			for(int j = 0 ; j<13 ; j++) {
 				System.out.print("  "+b.getSquares()[i][j].getNumber()+" "+b.getSquares()[i][j].getSquareType());
 			}
 			System.out.println();
@@ -32,6 +34,6 @@ public class MainForTest {
 //		System.out.println();
 //		System.out.println(7/5);
 	}
-*/
+
 }
-}
+

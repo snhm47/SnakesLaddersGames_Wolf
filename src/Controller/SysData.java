@@ -105,26 +105,26 @@ public class SysData {
 	            e.printStackTrace();
 	        }
 	    }
-		 // add Question to WolfQuestionsDB.json file
-		 public void addQuestionToJsonFile(Question qu) {
-			 try {
-		          
-		            Gson gson = new Gson();
-		            FileReader fileReader = new FileReader("src/WolfQuestionsDB.json");
-		            Type questionListType = new TypeToken<ArrayList<Question>>() {}.getType();
-		            ArrayList<Question> questionList = gson.fromJson(fileReader, questionListType);
-		            fileReader.close();
-		            
-		            questionList.add(qu);
-
-		            FileWriter fileWriter = new FileWriter("src/WolfQuestionsDB.json");
-		            gson.toJson(questionList, fileWriter);
-		            fileWriter.close();
-		        } catch (Exception e) {
-		            e.printStackTrace();
-		        }
-			  
-		 }
+//		 // add Question to WolfQuestionsDB.json file
+//		 public void addQuestionToJsonFile(Question qu) {
+//			 try {
+//		          
+//		            Gson gson = new Gson();
+//		            FileReader fileReader = new FileReader("src/WolfQuestionsDB.json");
+//		            Type questionListType = new TypeToken<ArrayList<Question>>() {}.getType();
+//		            ArrayList<Question> questionList = gson.fromJson(fileReader, questionListType);
+//		            fileReader.close();
+//		            
+//		            questionList.add(qu);
+//
+//		            FileWriter fileWriter = new FileWriter("src/WolfQuestionsDB.json");
+//		            gson.toJson(questionList, fileWriter);
+//		            fileWriter.close();
+//		        } catch (Exception e) {
+//		            e.printStackTrace();
+//		        }
+//			  
+//		 }
 		 
 		 public void deleteQuestionToJsonFile(Question qu) {
 			 

@@ -140,25 +140,24 @@ public class Board {
 
     public void placeRandomsnakesAndLaddrs() {
     	int size = 0;
+    	int startSn = 0;
     	int startSnake = 0;
-        int endSnake = 0;
+    	int endSnake = 0;
+//        int endSn = 0;
         int startlevel = 0;
+        int startla = 0;
         int startLadder = 0;
         int endLadder = 0;
 		ArrayList<Integer>ends = new ArrayList<Integer>();
 		ArrayList<Integer>starts = new ArrayList<Integer>();
 		ArrayList<Integer>startl = new ArrayList<Integer>();
+		ArrayList<Integer>endl = new ArrayList<Integer>();
         Random random = new Random();
         if (String.valueOf(level).equals(String.valueOf(DiffLevel.easy))) {
             size = 7;   
            for (int i = 0; i < 4; i++) {
                // Ensure snakes and ladders don't start or end in the same square
-        	   do {
-	               startSnake = random.nextInt(size) + 1;
-	               endSnake = random.nextInt(size);           
-               	   startlevel = random.nextInt(size - i) + 1 ;
-               }while((startlevel+i+1 > size) || (endSnake+1 + ((startlevel+i+1)*size) >= size*size) || starts.contains(startSnake + (startlevel*size)) || (ends.contains(endSnake+1 + ((startlevel+i+1)*size))));
-               Color c = null;
+        	   Color c = null;
                if (i == 0 ) { 
             	   c = Color.YELLOW;
                }else if(i == 1) {
@@ -168,19 +167,51 @@ public class Board {
                }else {
             	   c = Color.RED;
                }
-               Snakes s = new Snakes(c, startSnake + (startlevel*size), endSnake+1 + ((startlevel+i+1)*size));
+        	   do {
+	               startSn = random.nextInt(size);          
+//                 startlevel = random.nextInt(size - i) + 1 ;
+                   startlevel = random.nextInt(size - (i+1)) ;
+          			if(startSn > size-1) {
+           				continue;
+           			}
+           			if(startlevel+i+1 > size-1) {
+           				continue;
+           			}
+           			if(c.equals(Color.RED)) {
+           				startSn = 0;
+           				endSnake = squares[6][startSn].getNumber();
+           			}else {
+                        endSnake = squares[startlevel+i+1][startSn].getNumber();
+
+           			}
+//               }while((startlevel+i+1 > size) || (endSnake+1 + ((startlevel+i+1)*size) >= size*size) || starts.contains(startSnake + (startlevel*size)) || (ends.contains(endSnake+1 + ((startlevel+i+1)*size))));
+//              System.out.println(startSnake + " " + endSnake + " " + startlevel);
+//              System.out.println(squares[startlevel][startSn].getNumber());
+//              System.out.println(squares[startlevel+i+1][startSn].getNumber());
+                   startSnake = squares[startlevel][startSn].getNumber();
+        	   }while((startSnake == size*size) ||(startl.contains(endSnake)) || (startlevel+i+1 > size-1) || (ends.contains(endSnake)) || (ends.contains(startSnake)) || (starts.contains(startSnake)) || (starts.contains(endSnake)));
+
+               Snakes s = new Snakes(c, startSnake, endSnake);
                snakes.add(s);
-               ends.add(endSnake+1 + ((startlevel+i+1)*size));
-               starts.add(startSnake + (startlevel*size));
-               
+               ends.add(endSnake);
+               starts.add(startSnake);
+ 
            }
            for(int i = 0 ; i < 4 ; i++) {
        		do {
-       			startLadder = random.nextInt(size);
-       			endLadder = random.nextInt(size);
-       			startlevel = random.nextInt(size-i)+1;
-       		}while((startlevel+i+1 > size) || (endLadder+1 + ((startlevel+i+1)*size) >= size*size) || starts.contains(startLadder + (startlevel*size)) || (ends.contains(endLadder+1 + ((startlevel+i+1)*size))) || (startl.contains(startLadder + (startlevel*size))));
+       			startla = random.nextInt(size);
+       			startlevel = random.nextInt(size - (i+1)) ;	
+       			if(startla > size-1) {
+       				continue;
+       			}
+       			if(startlevel+i+1 > size-1) {
+       				continue;
+       			}
+       			startLadder = squares[startlevel+i+1][startla].getNumber();
+       			endLadder = squares[startlevel][startla].getNumber();
+       		}while((startLadder == 1) || (endLadder == size*size) ||(endl.contains(endLadder)) || (ends.contains(endLadder)) || (startlevel+i+1 > size-1) || (startl.contains(startLadder)) || (startl.contains(endLadder)) || (endl.contains(startLadder)) || (endl.contains(startSnake)));
        		
+       		System.out.println(startLadder + " " + endLadder);
        		LadderType lt = null ;
        		if(i == 0) {
        			lt = LadderType.TYPE_1;
@@ -191,20 +222,16 @@ public class Board {
        		}else {
        			lt = LadderType.TYPE_4;
        		}
-       		Ladders l = new Ladders(lt, startLadder + (startlevel*size), endLadder+1+((startlevel+1+i)*size));
+       		Ladders l = new Ladders(lt, startLadder, endLadder);
        		ladders.add(l);
-       		startl.add(startLadder + (startlevel*size));
+       		startl.add(startLadder);
+       		endl.add(endLadder);
        	}
         } else if (String.valueOf(level).equals(String.valueOf(DiffLevel.medium))) {
             size = 10;
             for (int i = 0; i < 6; i++) {
                 // Ensure snakes and ladders don't start or end in the same square
-         	   do {
- 	               startSnake = random.nextInt(size) + 1;
- 	               endSnake = random.nextInt(size);           
-                	   startlevel = random.nextInt(size - i) + 1 ;
-                }while((startlevel+i+1 > size) || (endSnake+1 + ((startlevel+i+1)*size) >= size*size) || starts.contains(startSnake + (startlevel*size)) || (ends.contains(endSnake+1 + ((startlevel+i+1)*size))));
-                Color c = null;
+            	Color c = null;
                 if (i == 0 || i == 1 ) { 
              	   c = Color.YELLOW;
                 }else if(i == 2 || i == 3) {
@@ -214,18 +241,53 @@ public class Board {
                 }else {
              	   c = Color.RED;
                 }
-                Snakes s = new Snakes(c, startSnake + (startlevel*size), endSnake+1 + ((startlevel+i+1)*size));
+         	   do {
+	               startSn = random.nextInt(size) ;          
+//                 startlevel = random.nextInt(size - i) + 1 ;
+                   startlevel = random.nextInt(size - (i+1)) ;
+         			if(startSn > size-1) {
+           				continue;
+           			}
+           			if(startlevel+i+1 > size-1) {
+           				continue;
+           			}
+//               }while((startlevel+i+1 > size) || (endSnake+1 + ((startlevel+i+1)*size) >= size*size) || starts.contains(startSnake + (startlevel*size)) || (ends.contains(endSnake+1 + ((startlevel+i+1)*size))));
+//              System.out.println(startSnake + " " + endSnake + " " + startlevel);
+//              System.out.println(squares[startlevel][startSn].getNumber());
+//              System.out.println(squares[startlevel+i+1][startSn].getNumber());
+           			if(c.equals(Color.YELLOW)) {
+           				endSnake = squares[startlevel+1][startSn].getNumber();
+           			}else if(c.equals(Color.GREEN)) {
+           				endSnake = squares[startlevel+2][startSn].getNumber();
+           			}else if(c.equals(Color.BLUE)) {
+           				endSnake = squares[startlevel+3][startSn].getNumber();
+           			}else {
+           				startSn = 0;
+           				endSnake = squares[9][startSn].getNumber();
+           			}
+           			startSnake = squares[startlevel][startSn].getNumber();
+        	   }while((startSnake == size*size) ||(startlevel+i+1 > size-1) || (ends.contains(endSnake)) || (ends.contains(startSnake)) || (starts.contains(startSnake)) || (starts.contains(endSnake)));
+
+                Snakes s = new Snakes(c, startSnake, endSnake);
                 snakes.add(s);
-                ends.add(endSnake+1 + ((startlevel+i+1)*size));
-                starts.add(startSnake + (startlevel*size));
+                ends.add(endSnake);
+                starts.add(startSnake);
             }
             for(int i = 0 ; i < 6 ; i++) {
            		do {
-           			startLadder = random.nextInt(size);
-           			endLadder = random.nextInt(size);
-           			startlevel = random.nextInt(size-i)+1;
-           		}while((startlevel+i+1 > size) || (endLadder+1 + ((startlevel+i+1)*size) >= size*size) || starts.contains(startLadder + (startlevel*size)) || (ends.contains(endLadder+1 + ((startlevel+i+1)*size))) || (startl.contains(startLadder + (startlevel*size))));
-           		
+           			startla = random.nextInt(size);
+           			startlevel = random.nextInt(size - (i+1)) ;	
+           			if(startla > size-1) {
+           				continue;
+           			}
+           			if(startlevel+i+1 > size-1) {
+           				continue;
+           			}
+           			
+           			startLadder = squares[startlevel+i+1][startla].getNumber();
+           			endLadder = squares[startlevel][startla].getNumber();
+           		}while((startLadder == 1) ||(endLadder == size*size) ||(endl.contains(endLadder)) || (ends.contains(endLadder)) || (startlevel+i+1 > size-1) || (startl.contains(startLadder)) || (startl.contains(endLadder)) || (endl.contains(startLadder)) || (endl.contains(startSnake)));
+           			
            		LadderType lt = null ;
            		if(i == 0) {
            			lt = LadderType.TYPE_1;
@@ -240,40 +302,75 @@ public class Board {
            		}else if(i==5) {
            			lt = LadderType.TYPE_6;
            		}
-           		Ladders l = new Ladders(lt, startLadder + (startlevel*size), endLadder+1+((startlevel+1+i)*size));
+           		Ladders l = new Ladders(lt, startLadder, endLadder);
            		ladders.add(l);
-           		startl.add(startLadder + (startlevel*size));
+           		startl.add(startLadder);
+           		endl.add(endLadder);
             }
         } else if (String.valueOf(level).equals(String.valueOf(DiffLevel.hard))) {
             size = 13;
             for (int i = 0; i < 8; i++) {
                 // Ensure snakes and ladders don't start or end in the same square
-         	   do {
- 	               startSnake = random.nextInt(size) + 1;
- 	               endSnake = random.nextInt(size);           
-                	   startlevel = random.nextInt(size - i) + 1 ;
-                }while((startlevel+i+1 > size) || (endSnake+1 + ((startlevel+i+1)*size) >= size*size) || starts.contains(startSnake + (startlevel*size)) || (ends.contains(endSnake+1 + ((startlevel+i+1)*size))));
-                Color c = null;
+            	Color c = null;
                 if (i == 0 || i == 1 ) { 
              	   c = Color.YELLOW;
                 }else if(i == 2 || i == 3) {
              	   c = Color.GREEN;
                 }else if(i == 4 || i == 5) {
              	   c = Color.BLUE;
-                }else {
+                }else if(i == 6 || i == 7){
              	   c = Color.RED;
                 }
-                Snakes s = new Snakes(c, startSnake + (startlevel*size), endSnake+1 + ((startlevel+i+1)*size));
+         	   do {
+	               startSn = random.nextInt(size);          
+//                 startlevel = random.nextInt(size - i) + 1 ;
+                   startlevel = random.nextInt(size - (i+1)) ;
+         			if(startSn > size-1) {
+           				continue;
+           			}
+           			if(startlevel+i+1 > size-1) {
+           				continue;
+           				
+           			}
+//           			if(c.equals(Color.RED)) {
+//           				startSn = 0;
+//           				endSnake = squares[12][startSn].getNumber();
+//           			}else if((i==1) || (i==3) || (i==5) )  {
+//           				endSnake = squares[startlevel+i][startSn].getNumber();
+//           			}else {
+//      	                endSnake = squares[startlevel+i+1][startSn].getNumber();
+//           			}
+           			if(c.equals(Color.YELLOW)) {
+           				endSnake = squares[startlevel+1][startSn].getNumber();
+           			}else if(c.equals(Color.GREEN)) {
+           				endSnake = squares[startlevel+2][startSn].getNumber();
+           			}else if(c.equals(Color.BLUE)) {
+           				endSnake = squares[startlevel+3][startSn].getNumber();
+           			}else {
+           				startSn = 0;
+           				endSnake = squares[12][startSn].getNumber();
+           			}
+           			startSnake = squares[startlevel][startSn].getNumber();
+        	   }while((startSnake == size*size) || (startlevel+i+1 > size-1) || (ends.contains(startSnake)) || (starts.contains(startSnake)) || (starts.contains(endSnake)));
+
+                Snakes s = new Snakes(c, startSnake, endSnake);
                 snakes.add(s);
-                ends.add(endSnake+1 + ((startlevel+i+1)*size));
-                starts.add(startSnake + (startlevel*size));
+                ends.add(endSnake);
+                starts.add(startSnake);
             }
             for(int i = 0 ; i < 8 ; i++) {
            		do {
-           			startLadder = random.nextInt(size);
-           			endLadder = random.nextInt(size);
-           			startlevel = random.nextInt(size-i)+1;
-           		}while((startlevel+i+1 > size) || (endLadder+1 + ((startlevel+i+1)*size) >= size*size) || starts.contains(startLadder + (startlevel*size)) || (ends.contains(endLadder+1 + ((startlevel+i+1)*size))) || (startl.contains(startLadder + (startlevel*size))));
+           			startla = random.nextInt(size);
+           			startlevel = random.nextInt(size - (i+1)) ;	
+           			if(startla > size-1) {
+           				continue;
+           			}
+           			if(startlevel+i+1 > size-1) {
+           				continue;
+           			}
+           			startLadder = squares[startlevel+i+1][startla].getNumber();
+           			endLadder = squares[startlevel][startla].getNumber();
+           		}while((startLadder == 1) ||(endLadder == size*size) ||(endl.contains(endLadder)) || (ends.contains(endLadder)) || (startlevel+i+1 > size-1) || (startl.contains(startLadder)) || (startl.contains(endLadder)) || (starts.contains(startLadder)) || (endl.contains(startLadder)) || (endl.contains(startSnake)));
            		
            		LadderType lt = null ;
            		if(i == 0) {
@@ -293,20 +390,21 @@ public class Board {
            		}else {
            			lt = LadderType.TYPE_8;
            		}
-           		Ladders l = new Ladders(lt, startLadder + (startlevel*size), endLadder+1+((startlevel+1+i)*size));
+           		Ladders l = new Ladders(lt, startLadder, endLadder);
            		ladders.add(l);
-           		startl.add(startLadder + (startlevel*size));
+           		startl.add(startLadder);
+           		endl.add(endLadder);
             }
         }
         
-	    for(Snakes s : snakes) {
-	    	sq.get(s.getStartSnake()).setOccupi(true);
-	    	sq.get(s.getEndSnake()).setOccupi(true);
-	    }
-	    for(Ladders l : ladders) {
-	    	sq.get(l.getStartLadder()).setOccupi(true);
-	    	sq.get(l.getEndLadder()).setOccupi(true);
-	    }
+//	    for(Snakes s : snakes) {
+//	    	sq.get(s.getStartSnake()).setOccupi(true);
+//	    	sq.get(s.getEndSnake()).setOccupi(true);
+//	    }
+//	    for(Ladders l : ladders) {
+//	    	sq.get(l.getStartLadder()).setOccupi(true);
+//	    	sq.get(l.getEndLadder()).setOccupi(true);
+//	    }
     }
 //    public void placeRandomladder() {
 //    	int size = 0;

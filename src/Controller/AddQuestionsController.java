@@ -98,7 +98,7 @@ public class AddQuestionsController {
 			}
 	    	Question newQuestion =new Question(questionTextArea.getText(), answers, correctComboBox.getValue() , df);
 	    	SysData sys = new SysData();
-	    	sys.addQuestionToJsonFile(newQuestion);
+//	    	sys.addQuestionToJsonFile(newQuestion);
 	    	}else {
 	    		Alert alert = new Alert(AlertType.NONE);
 	 	        alert.setTitle("Error");
