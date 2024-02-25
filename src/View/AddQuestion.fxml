@@ -20,7 +20,7 @@
 		<ImageView fitHeight="416.0" fitWidth="615.0" layoutX="-3.0"
 			layoutY="-2.0" opacity="0.79" pickOnBounds="true">
 			<image>
-				<Image url="@../Image/JungleBGBayan.jpg" />
+				<Image url="@/Image/JungleBGBayan.jpg" />
 			</image>
 		</ImageView>
 		<Label layoutX="204.0" layoutY="26.0" text="Add Question"
@@ -58,14 +58,14 @@
 			layoutY="24.0" onMouseClicked="#returnToMainPage" pickOnBounds="true"
 			preserveRatio="true">
 			<image>
-				<Image url="@../Image/homebtnIcon.png" />
+				<Image url="@/Image/homebtnIcon.png" />
 			</image>
 		</ImageView>
 		<ImageView fitHeight="33.0" fitWidth="38.0" layoutX="87.0"
 			layoutY="24.0" onMouseClicked="#switchToQuestionPage"
 			pickOnBounds="true" preserveRatio="true">
 			<image>
-				<Image url="@../Image/returnIcon.png" />
+				<Image url="@/Image/returnIcon.png" />
 			</image>
 		</ImageView>
 		<RadioButton fx:id="rbuttoneasy" layoutX="143.0"

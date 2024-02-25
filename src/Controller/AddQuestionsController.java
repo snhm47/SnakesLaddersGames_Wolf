@@ -49,7 +49,7 @@ public class AddQuestionsController implements Initializable{
 	
 	@FXML
 	public void returnToMainPage(MouseEvent event) throws IOException {
-		root = FXMLLoader.load(getClass().getResource("../View/StartMenu.fxml"));
+		root = FXMLLoader.load(getClass().getResource("/View/StartMenu.fxml"));
 		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
@@ -70,7 +70,7 @@ public class AddQuestionsController implements Initializable{
 	
 	@FXML
 	public void switchToQuestionPage(MouseEvent event) throws IOException {
-		root = FXMLLoader.load(getClass().getResource("../View/QuestionsPage.fxml"));
+		root = FXMLLoader.load(getClass().getResource("/View/QuestionsPage.fxml"));
 		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);

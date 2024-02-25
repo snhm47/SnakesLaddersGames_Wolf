@@ -19,7 +19,7 @@
 		<ImageView fitHeight="400.0" fitWidth="600.0" opacity="0.87"
 			pickOnBounds="true">
 			<image>
-				<Image url="@../Image/JungleBGBayan.jpg" />
+				<Image url="@/Image/JungleBGBayan.jpg" />
 			</image>
 		</ImageView>
 		<Text fill="RED" layoutX="214.0" layoutY="41.0"
@@ -43,7 +43,7 @@
 			layoutY="14.0" onMouseClicked="#returnToMainPage" pickOnBounds="true"
 			preserveRatio="true">
 			<image>
-				<Image url="@../Image/homebtnIcon.png" />
+				<Image url="@/Image/homebtnIcon.png" />
 			</image>
 		</ImageView>
 		<Text fill="RED" layoutX="50.0" layoutY="98.0"
