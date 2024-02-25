@@ -1,0 +1,32 @@
+{
+  "gamesHistory" : [
+  {
+    "winnerName": "Bayan",
+    "gameDate": "2024-01-15",
+    "gameTime": 45,
+    "numberOfPlayers": 4,
+    "difficulty": "Easy"
+  },
+  {
+    "winnerName": "Edwar",
+    "gameDate": "2024-02-01",
+    "gameTime": 90,
+    "numberOfPlayers": 3,
+    "difficulty": "Medium"
+  },
+  {
+    "winnerName": "Hala",
+    "gameDate": "2024-02-10",
+    "gameTime": 120,
+    "numberOfPlayers": 2,
+    "difficulty": "Hard"
+  },
+  {
+    "winnerName": "Salah",
+    "gameDate": "2024-02-05",
+    "gameTime": 30,
+    "numberOfPlayers": 4,
+    "difficulty": "Extreme"
+  }
+]
+}
