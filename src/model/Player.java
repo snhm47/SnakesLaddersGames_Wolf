@@ -1,17 +1,32 @@
 package model;
 
+import java.util.ArrayList;
+
 import Utils.Color;
 
 public class Player {
 	private String nickName;
 	private Color colorPlayer;
 	private int winCount;
+	private int Place ;
+	
+	private ArrayList<PlayerMoveObserver> playersObserve;
 
 	public Player(String nickName, Color colorPlayer, int winCount) {
 		super();
 		this.nickName = nickName;
 		this.colorPlayer = colorPlayer;
 		this.winCount = winCount;
+		this.Place = 1;
+		this.playersObserve = new ArrayList<PlayerMoveObserver>();
+	}
+
+	public int getPlace() {
+		return Place;
+	}
+
+	public void setPlace(int place) {
+		Place = place;
 	}
 
 	public boolean checkNameExist(String name) {
@@ -59,6 +74,23 @@ public class Player {
 
 	public void setWinCount(int winCount) {
 		this.winCount = winCount;
+	}
+	
+	
+	//observer Design pattern
+	
+	public void addObserver(PlayerMoveObserver observer) {
+        playersObserve.add(observer);
+    }
+	
+	public void removeObserver(PlayerMoveObserver observer) {
+        playersObserve.remove(observer);
+    }
+	
+	 public void notifyPlayerMoved(Player player, int from, int to) {
+	     for(PlayerMoveObserver obs : playersObserve) {
+	    	 obs.onPlayerMovement(player, from, to);
+	     }
 	}
 
 	// Notifications
