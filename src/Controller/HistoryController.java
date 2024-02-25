@@ -1,99 +1,86 @@
 package Controller;
 
-
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
+import javafx.fxml.FXMLLoader;
 import model.History;
-
-//import org.json.JSONArray;
-//import org.json.JSONObject;
-
-import java.io.BufferedReader;
+import javafx.collections.ObservableList;
+import javafx.collections.FXCollections;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-//import org.json.JSONArray;
-//import org.json.JSONException;
-//import org.json.JSONObject;
-
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import java.sql.Date;
 
 public class HistoryController {
 
-	private Stage stage;
-	private Scene scene;
-	private Parent root;
+    @FXML
+    private TableView<History> tableView;
 
-	@FXML
-	private TableView<History> tableView;
+    @FXML
+    private void initialize() {
+        // Define columns
+        TableColumn<History, String> winnerColumn = new TableColumn<>("Winner");
+        winnerColumn.setCellValueFactory(new PropertyValueFactory<>("winnerName"));
+        winnerColumn.setPrefWidth(150); // Set preferred width for the Winner column
 
-	@FXML
-	private TableColumn<History, String> winnerColumn;
+        TableColumn<History, Date> dateColumn = new TableColumn<>("Game Date");
+        dateColumn.setCellValueFactory(new PropertyValueFactory<>("gameDate"));
+        dateColumn.setPrefWidth(150); // Set preferred width for the Game Date column
 
-	@FXML
-	private TableColumn<History, String> dateColumn;
+        TableColumn<History, Integer> playersColumn = new TableColumn<>("Players");
+        playersColumn.setCellValueFactory(new PropertyValueFactory<>("numberOfPlayers"));
+        playersColumn.setPrefWidth(100); // Set preferred width for the Players column
 
-	@FXML
-	private TableColumn<History, Integer> playersColumn;
+        TableColumn<History, String> difficultyColumn = new TableColumn<>("Difficulty");
+        difficultyColumn.setCellValueFactory(new PropertyValueFactory<>("difficulty"));
+        difficultyColumn.setPrefWidth(100); // Set preferred width for the Difficulty column
 
-	@FXML
-	private TableColumn<History, String> difficultyColumn;
+        // Add columns to table view
+        tableView.getColumns().addAll(winnerColumn, dateColumn, playersColumn, difficultyColumn);
 
-	// edwar
-	// return to Main Page
-	@FXML
-	public void returnToMainPage(MouseEvent event) throws IOException {
-		root = FXMLLoader.load(getClass().getResource("../View/StartMenu.fxml"));
-		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		scene = new Scene(root);
-		stage.setScene(scene);
-		stage.show();
-	}
-//
-//	public static List<History> readHistory(String filePath) {
-//		try {
-//			String content = new String(Files.readAllBytes(Paths.get(filePath)));
-//			JSONArray jsonArray = new JSONArray(content);
-//			List<History> historyList = new ArrayList<>();
-//			for (int i = 0; i < jsonArray.length(); i++) {
-//				JSONObject jsonObject = jsonArray.getJSONObject(i);
-//				String winnerName = jsonObject.getString("winnerName");
-//				String gameDate = jsonObject.getString("gameDate");
-//				// int gameTime = jsonObject.getInt("gameTime");
-//				int numberOfPlayers = jsonObject.getInt("numberOfPlayers");
-//				String difficulty = jsonObject.getString("difficulty");
-//				History history = new History(winnerName, gameDate, numberOfPlayers, difficulty);
-//				historyList.add(history);
-//			}
-//			return historyList;
-//		} catch (IOException | JSONException e) {
-//			e.printStackTrace();
-//			return null;
-//		}
-//	}
-//
-//	public void initialize() {
-//		winnerColumn.setCellValueFactory(new PropertyValueFactory<>("winnerName"));
-//		dateColumn.setCellValueFactory(new PropertyValueFactory<>("gameDate"));
-//		playersColumn.setCellValueFactory(new PropertyValueFactory<>("numberOfPlayers"));
-//		difficultyColumn.setCellValueFactory(new PropertyValueFactory<>("difficulty"));
-//
-//		// Assuming you have a method readHistory(String filePath) in HistoryReader
-//		// class
-//		List<History> historyList = HistoryController.readHistory("../HistoryJson.json");
-//		tableView.getItems().addAll(historyList);
-//	}
+        // Populate table view with data
+        try {
+            // Parse JSON file
+            JSONParser parser = new JSONParser();
+            Object obj = parser.parse(new FileReader("HistoryJson.json"));
+            JSONObject jsonObject = (JSONObject) obj;
+            JSONArray gamesHistory = (JSONArray) jsonObject.get("gamesHistory");
 
+            // Convert JSON data to ObservableList<History>
+            ObservableList<History> data = FXCollections.observableArrayList();
+            for (Object game : gamesHistory) {
+                JSONObject gameObj = (JSONObject) game;
+                String winnerName = (String) gameObj.get("winnerName");
+                Date gameDate = Date.valueOf((String) gameObj.get("gameDate"));
+                long numberOfPlayers = (long) gameObj.get("numberOfPlayers");
+                String difficulty = (String) gameObj.get("difficulty");
+
+                data.add(new History(winnerName, gameDate, 0, (int) numberOfPlayers, difficulty)); // Assuming you're not storing gameTime in JSON
+            }
+
+            // Set data to table view
+            tableView.setItems(data);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    @FXML
+    public void returnToMainPage(MouseEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("../View/StartMenu.fxml"));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
 }
