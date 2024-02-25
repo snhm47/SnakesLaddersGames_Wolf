@@ -329,7 +329,107 @@
         ],
         "correct_ans": "3",
         "difficulty": "1"
-      }
+      },
+      {
+        	"question": "What is the main benefit of using user stories in Agile development?",
+        	"answers": [
+        		"They help in understanding the user's perspective.",
+                "They eliminate the need for testing.",
+                "They are solely for the developer's reference.",
+                "They are used for architectural design."
+            ],
+            "correct_ans": "1",
+            "difficulty": "1"
+        },
+        {
+            "question": "What is the purpose of sprint retrospectives in Agile?",
+            "answers": [
+                "To assign blame for any failures during the sprint.",
+                "To evaluate the team's performance and identify areas for improvement.",
+                "To provide feedback on the product to stakeholders.",
+                "To decide which features will be included in the next sprint."
+            ],
+            "correct_ans": "2",
+            "difficulty": "1"
+        },
+        {
+            "question": "How does Agile ensure quality through testing?",
+            "answers": [
+                "By testing only after the product is fully developed.",
+                "By relying solely on manual testing.",
+                "By integrating testing throughout development.",
+                "By skipping testing for faster development."
+            ],
+            "correct_ans": "3",
+            "difficulty": "1"
+        },
+        {
+            "question": "What is the role of the architect in an Agile team?",
+            "answers": [
+                "To provide guidance and support in making architectural decisions.",
+                "To dictate all architectural choices without input from the team.",
+                "To focus solely on coding and implementation.",
+                "To prioritize speed over quality in architectural design."
+            ],
+            "correct_ans": "1",
+            "difficulty": "2"
+        },
+        {
+            "question": "How does Agile approach software maintenance differently?",
+            "answers": [
+                
+                "By delaying maintenance until after product release.",
+                "By outsourcing maintenance completely.",
+                "By ignoring maintenance.",
+                "By integrating maintenance tasks into regular development cycles."
+            ],
+            "correct_ans": "4",
+            "difficulty": "2"
+        },
+        {
+            "question": "What is the purpose of test-driven development (TDD) in Agile?",
+            "answers": [
+                "To ensure that code meets the specified requirements through automated tests.",
+                "To delay testing until after the product is developed.",
+                "To increase development speed by skipping testing.",
+                "To assign blame for bugs to individual developers."
+            ],
+            "correct_ans": "1",
+            "difficulty": "2"
+        },
+        {
+            "question": "How does Agile support emergent architecture?",
+            "answers": [
+                "By strictly following a predefined architecture.",
+                "By outsourcing architectural decisions.",
+                "By ignoring architecture until project completion.",
+                "By allowing architecture to evolve based on user feedback."
+            ],
+            "correct_ans": "4",
+            "difficulty": "3"
+        },
+        {
+            "question": "What techniques are used in Agile for managing software maintenance?",
+            "answers": [
+                "Ignoring maintenance until critical.",
+                "Occasional large-scale refactoring.",
+                "Continuous integration and automated testing.",
+                "Waiting for customer complaints."
+            ],
+            "correct_ans": "3",
+            "difficulty": "3"
+        },
+        {
+            "question": "How does Agile handle changes in requirements?",
+            "answers": [
+                "By strictly adhering to the initial requirements.",
+                "By adapting to changes throughout the development process.",
+                "By delaying changes until the next project cycle.",
+                "By blaming stakeholders for late changes."
+            ],
+            "correct_ans": "2",
+            "difficulty": "3"
+        }
     ]
   }
   

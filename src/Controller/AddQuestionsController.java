@@ -1,134 +1,111 @@
 package Controller;
 
-import java.util.ArrayList;
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-import Utils.DiffLevel;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
-import model.Question;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
-public class AddQuestionsController {
-	 @FXML
-	    private Label AddQuestionLabel;
+public class AddQuestionsController implements Initializable{
+	
+	private Stage stage;
+	private Scene scene;
+	private Parent root;
+	
+	@FXML
+	private RadioButton rbuttoneasy, rbuttonMedium, rbuttonHard;
+	
+	@FXML
+	private TextField t1,t2,t3,t4,qTf;
+	
+	@FXML
+	private ChoiceBox<String> answersList;
+	
+   // edwar
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+	    String[] answers = {t1.getText(), t2.getText(), t3.getText(), t4.getText()};
+	    answersList.getItems().addAll(answers);
+	    answersList.setOnAction(this::getRightAnswer);
+	}
 
-	    @FXML
-	    private Pane AddQuestionPane;
+	
+	//edwar
+	public void getRightAnswer(ActionEvent event) {
+		String rightAnswer = answersList.getValue();
+		//return rightAnswer;	
+	}
+	
+	@FXML
+	public void returnToMainPage(MouseEvent event) throws IOException {
+		root = FXMLLoader.load(getClass().getResource("../View/StartMenu.fxml"));
+		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
+	}
 
-	    @FXML
-	    private Label Answer1Label;
+	@FXML
+	public void getLevel(ActionEvent event) {
 
-	    @FXML
-	    private Label Answer2Label;
+		if (rbuttoneasy.isSelected())
+			System.out.println("easy");
+		else if (rbuttonMedium.isSelected())
+			System.out.println("medium");
+		else
+			System.out.println("hard");
+	}
 
-	    @FXML
-	    private Label Answer3Label;
+	
+	@FXML
+	public void switchToQuestionPage(MouseEvent event) throws IOException {
+		root = FXMLLoader.load(getClass().getResource("../View/QuestionsPage.fxml"));
+		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
+	}
+	
+	@FXML
+    private void addAnswer(ActionEvent event) {
+        String answer1 = t1.getText().trim();
+        String answer2 = t2.getText().trim();
+        String answer3 = t3.getText().trim();
+        String answer4 = t4.getText().trim();
 
-	    @FXML
-	    private Label Answer4Label;
+        // Clear existing items in the choice box
+        answersList.getItems().clear();
 
-	    @FXML
-	    private Label DifficultlyLabel;
+        // Add answers to the choice box
+        answersList.getItems().addAll(answer1, answer2, answer3, answer4);
+    }
+	
+    @FXML
+    private void resetAddQs(ActionEvent event) {
+        // Clear all text fields
+    	qTf.clear();
+        t1.clear();
+        t2.clear();
+        t3.clear();
+        t4.clear();
+        
+		rbuttoneasy.setSelected(false);
+		rbuttonMedium.setSelected(false);
+		rbuttonHard.setSelected(false);
 
-	    @FXML
-	    private ImageView HomeImage;
-
-	    @FXML
-	    private Label QuestionTextArea;
-
-	    @FXML
-	    private Label TheCorrectAnswerLabel;
-
-	    @FXML
-	    private Button addButton;
-
-	    @FXML
-	    private TextArea answer1TextArea;
-
-	    @FXML
-	    private TextArea answer2TextArea;
-
-	    @FXML
-	    private TextArea answer3TextArea;
-
-	    @FXML
-	    private TextArea answer4TextArea;
-
-	    @FXML
-	    private Button cancelButton;
-
-	    @FXML
-	    private ComboBox<String> correctComboBox;
-
-	    @FXML
-	    private ComboBox<String> difficultlyComboBox;
-
-	    @FXML
-	    private TextArea questionTextArea;
-	    
-	    @FXML
-	    void initialize() {
-	    	correctComboBox.setItems(FXCollections.observableArrayList("1","2","3"));	
-	    	difficultlyComboBox.setItems(FXCollections.observableArrayList("easy","medium","hard"));	
-
-	    }
-
-	    @FXML
-	    void AddButton(ActionEvent event) {
-	    	if(checkEmpty()) {
-	    	ArrayList<String> answers = new ArrayList<String>();
-	    	answers.add(answer1TextArea.getText());
-	    	answers.add(answer2TextArea.getText());
-	    	answers.add(answer3TextArea.getText());
-	    	answers.add(answer4TextArea.getText());
-	    	DiffLevel df =DiffLevel.easy;
-	    	if(difficultlyComboBox.getValue().equals("medium")) {
-				df = DiffLevel.medium ;
-			}
-			if(difficultlyComboBox.getValue().equals("hard")) {
-				df = DiffLevel.hard ;
-			}
-	    	Question newQuestion =new Question(questionTextArea.getText(), answers, correctComboBox.getValue() , df);
-	    	SysData sys = new SysData();
-//	    	sys.addQuestionToJsonFile(newQuestion);
-	    	}else {
-	    		Alert alert = new Alert(AlertType.NONE);
-	 	        alert.setTitle("Error");
-	 	        alert.setContentText("There is one or more blank TextArea");
-	 	        alert.showAndWait();
-	    	}
-
-	    }
-	    // help method that return true if all the TextArea and ComboBox not empty
-	    boolean checkEmpty() {
-	    	if(answer1TextArea.getText().isEmpty())
-	    		return false;
-	    	if(answer2TextArea.getText().isEmpty())
-	    		return false;
-	    	if(answer3TextArea.getText().isEmpty())
-	    		return false;
-	    	if(answer4TextArea.getText().isEmpty())
-	    		return false;
-	    	if(questionTextArea.getText().isEmpty())
-	    		return false;
-	    	if(correctComboBox.getValue().equals(null))
-	    		return false;
-	    	if(difficultlyComboBox.getValue().equals(null))
-	    		return false;
-	    	
-	    	return true;
-	    }
-
-	    @FXML
-	    void CancelButton(ActionEvent event) {
-	    	
-	    }
+        // Clear choice box
+        answersList.getItems().clear();
+    
+    }
 }

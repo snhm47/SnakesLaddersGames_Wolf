@@ -40,7 +40,7 @@ public class HomeController {//implements Initializable
 	//once the Launch button pressed it goes to the gamesetup page
 	@FXML
 	public void switchToGameSetup(ActionEvent event) throws IOException {
-		root = FXMLLoader.load(getClass().getResource("../View/Home2.fxml"));
+		root = FXMLLoader.load(getClass().getResource("/View/Home2.fxml"));
 		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
@@ -52,7 +52,7 @@ public class HomeController {//implements Initializable
 	//to go to add question page
 	@FXML
 	public void switchToAddQ(ActionEvent event) throws IOException {
-		root = FXMLLoader.load(getClass().getResource("../View/AddQuestion.fxml"));
+		root = FXMLLoader.load(getClass().getResource("/View/AddQuestion.fxml"));
 		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
@@ -64,7 +64,7 @@ public class HomeController {//implements Initializable
 	//once pressed on the history icon it goes to the history page
 	@FXML
 	public void switchToHistoryPage(MouseEvent event) throws IOException {
-		root = FXMLLoader.load(getClass().getResource("../View/HistoryScreen.fxml"));
+		root = FXMLLoader.load(getClass().getResource("/View/HistoryScreen.fxml"));
 		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
@@ -76,7 +76,7 @@ public class HomeController {//implements Initializable
 	//once pressed on the Question icon it goes to the Question page
 	@FXML
 	public void switchToQuestionPage(MouseEvent event) throws IOException {
-		root = FXMLLoader.load(getClass().getResource("../View/QuestionsPage.fxml"));
+		root = FXMLLoader.load(getClass().getResource("/View/QuestionsPage.fxml"));
 		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
@@ -86,7 +86,7 @@ public class HomeController {//implements Initializable
 	//return to Main Page
 	@FXML
 	public void returnToMainPage(MouseEvent event) throws IOException {
-		root = FXMLLoader.load(getClass().getResource("../View/StartMenu.fxml"));
+		root = FXMLLoader.load(getClass().getResource("/View/StartMenu.fxml"));
 		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);

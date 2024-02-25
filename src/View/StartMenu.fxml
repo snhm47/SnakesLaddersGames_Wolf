@@ -15,20 +15,20 @@
 		<ImageView fitHeight="400.0" fitWidth="606.0" layoutX="-3.0"
 			opacity="0.85" pickOnBounds="true">
 			<image>
-				<Image url="@../Image/startmenubg.jpeg" />
+				<Image url="@/Image/startmenubg.jpeg" />
 			</image>
 		</ImageView>
 		<ImageView fitHeight="99.0" fitWidth="221.0" layoutX="225.0"
 			layoutY="14.0" pickOnBounds="true" preserveRatio="true">
 			<image>
-				<Image url="@../Image/gameLogo.png" />
+				<Image url="@/Image/gameLogo.png" />
 			</image>
 		</ImageView>
 		<ImageView fitHeight="37.0" fitWidth="37.0" layoutX="52.0"
 			layoutY="27.0" onMouseClicked="#switchToHistoryPage"
 			pickOnBounds="true" preserveRatio="true">
 			<image>
-				<Image url="@../Image/history.png" />
+				<Image url="@/Image/history.png" />
 			</image>
 		</ImageView>
 		<Button fx:id="startbtn" layoutX="246.0" layoutY="291.0"
@@ -41,7 +41,7 @@
 			layoutY="27.0" onMouseClicked="#switchToQuestionPage"
 			pickOnBounds="true" preserveRatio="true">
 			<image>
-				<Image url="@../Image/editQ.png" />
+				<Image url="@/Image/editQ.png" />
 			</image>
 		</ImageView>
 	</children>

@@ -232,7 +232,7 @@ public class GameSetupController implements Initializable {
 	    try {
 	        // Load FXML scene (improve error handling with more specific exceptions)
 	        FXMLLoader fxmlLoader = new FXMLLoader();
-	        fxmlLoader.setLocation(getClass().getResource("../View/gameboard.fxml"));
+	        fxmlLoader.setLocation(getClass().getResource("/View/gameboard.fxml"));
 	        Scene gameboardScene = new Scene(fxmlLoader.load(), 600, 400);
 
 	        // Create new stage and configure (use descriptive variable names)
@@ -384,7 +384,7 @@ public class GameSetupController implements Initializable {
         	//vBoxBoard.getChildren().clear();
         	//vBoxBoard.getChildren().add(grid);
         	spBox.getChildren().add(grid);
-        	Image img = new Image(getClass().getResourceAsStream("../Image/ladder.png"));
+        	Image img = new Image(getClass().getResourceAsStream("/Image/ladder.png"));
 
 
         	for(Ladders l : b.getladders()) {
@@ -552,13 +552,13 @@ public class GameSetupController implements Initializable {
         	for(Snakes s : b.getsnakes()) {
         		Image imgs = null ;
         		if(s.getSnakeType().equals(Utils.Color.RED)) {
-        			imgs = new Image(getClass().getResourceAsStream("../Image/RedSnake.png"));
+        			imgs = new Image(getClass().getResourceAsStream("/Image/RedSnake.png"));
         		}else if(s.getSnakeType().equals(Utils.Color.YELLOW)) {
-        			imgs = new Image(getClass().getResourceAsStream("../Image/YellowSnake.png"));
+        			imgs = new Image(getClass().getResourceAsStream("/Image/YellowSnake.png"));
         		}else if(s.getSnakeType().equals(Utils.Color.BLUE)){
-        			imgs = new Image(getClass().getResourceAsStream("../Image/BlueSnake.png"));
+        			imgs = new Image(getClass().getResourceAsStream("/Image/BlueSnake.png"));
         		}else {
-        			imgs = new Image(getClass().getResourceAsStream("../Image/GreenSnake.png"));
+        			imgs = new Image(getClass().getResourceAsStream("/Image/GreenSnake.png"));
         		}
         		
         		
@@ -831,7 +831,7 @@ public class GameSetupController implements Initializable {
 	
 	@FXML
 	public void returnToMainPage(MouseEvent event) throws IOException {
-		root = FXMLLoader.load(getClass().getResource("../View/StartMenu.fxml"));
+		root = FXMLLoader.load(getClass().getResource("/View/StartMenu.fxml"));
 		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
