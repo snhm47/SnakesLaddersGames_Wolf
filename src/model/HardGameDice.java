@@ -15,7 +15,7 @@ public class HardGameDice extends Dice {
 			System.out.println("Move forward " + diceRoll + " square");
 		else {
 			if (diceRoll % 4 == 0)
-				System.out.println("Answer a difficult question.");
+				System.out.println("Answer a hard question.");
 			else if (diceRoll % 2 == 0)
 				System.out.println("Answer an easy question.");
 			else
@@ -28,7 +28,7 @@ public class HardGameDice extends Dice {
 		// TODO Auto-generated method stub
 		int number;
 		Random random = new Random();
-		number = random.nextInt(11) + 1;
+		number = random.nextInt(11);
 		return number;
 	}
 }

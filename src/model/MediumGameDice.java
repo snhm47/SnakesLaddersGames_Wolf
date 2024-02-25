@@ -26,7 +26,7 @@ public class MediumGameDice extends Dice {
 		// TODO Auto-generated method stub
 		int number;
 		Random random = new Random();
-		number = random.nextInt(9) + 1;
+		number = random.nextInt(10);
 		return number;
 	}
 }
