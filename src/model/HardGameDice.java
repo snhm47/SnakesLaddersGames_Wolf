@@ -1,12 +1,14 @@
 package model;
 
+import java.util.Random;
+
 public class HardGameDice extends Dice {
 	public HardGameDice() {
 		super();
 	}
 
 	public void showTheResult() {
-		int diceRoll = roll();
+		int diceRoll = this.roll();
 		System.out.println("Dice roll: " + diceRoll);
 
 		if (diceRoll <= 6)
@@ -19,5 +21,14 @@ public class HardGameDice extends Dice {
 			else
 				System.out.println("Answer a medium question.");
 		}
+	}
+
+	@Override
+	public int roll() {
+		// TODO Auto-generated method stub
+		int number;
+		Random random = new Random();
+		number = random.nextInt(11) + 1;
+		return number;
 	}
 }
