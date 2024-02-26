@@ -32,9 +32,8 @@ public class Games {
 		this.difficultyLevel = difficultyLevel;
 	}
 	
-	public Games(int currentPlayerIndex, int numberOfPlayers, DiffLevel difficultyLevel) {
+	public Games(int numberOfPlayers, DiffLevel difficultyLevel) {
 		super();
-		this.currentPlayerIndex = currentPlayerIndex;
 		startNewGame(numberOfPlayers,difficultyLevel);
 	}
 

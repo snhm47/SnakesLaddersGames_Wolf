@@ -32,12 +32,13 @@ public class RunningGame {
 		this.playerPlacement = playerPlacement;
 	}
 
-	public RunningGame(Games currentGame, ArrayList<Player> players, HashMap<Player, Integer> playerPlacement) {
+	public RunningGame(Games currentGame) {
 		super();
 		this.currentGame = currentGame;
-		this.players = players;
-		this.playerPlacement = playerPlacement;
+		this.players = new ArrayList<Player>();
+		this.playerPlacement = new HashMap<Player, Integer>();
 	}
+
 
 	public void nextTurn() {}
 
