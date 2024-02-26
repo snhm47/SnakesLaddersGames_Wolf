@@ -14,10 +14,11 @@ public class MediumGameDice extends Dice {
 		if (diceRoll <= 6)
 			System.out.println("Move forward " + diceRoll + " square");
 		else {
-			if (diceRoll % 2 == 0)
-				System.out.println("Answer a medium question");
-			else
-				System.out.println("Move forward without answering a question.");
+			if (diceRoll ==7)
+				System.out.println("Answer a easy question");
+			else if (diceRoll ==8)
+				System.out.println("Answer a medium question.");
+			else System.out.println("Answer a Hard question.");
 		}
 	}
 
@@ -26,7 +27,16 @@ public class MediumGameDice extends Dice {
 		// TODO Auto-generated method stub
 		int number;
 		Random random = new Random();
-		number = random.nextInt(10);
-		return number;
+		number = random.nextInt(13);	
+		if(number==10) {
+		return 7;	
+		}
+		if(number==11) {
+			return 8;	
+		}
+		if(number==12) {
+			return 9;	
+		}
+		return number;			
 	}
 }

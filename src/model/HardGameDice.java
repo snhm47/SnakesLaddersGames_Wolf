@@ -11,12 +11,12 @@ public class HardGameDice extends Dice {
 		int diceRoll = this.roll();
 		System.out.println("Dice roll: " + diceRoll);
 
-		if (diceRoll <= 6)
+		if (diceRoll <= 8)
 			System.out.println("Move forward " + diceRoll + " square");
 		else {
-			if (diceRoll % 4 == 0)
+			if (diceRoll == 11)
 				System.out.println("Answer a hard question.");
-			else if (diceRoll % 2 == 0)
+			else if (diceRoll == 10)
 				System.out.println("Answer an easy question.");
 			else
 				System.out.println("Answer a medium question.");
@@ -28,7 +28,16 @@ public class HardGameDice extends Dice {
 		// TODO Auto-generated method stub
 		int number;
 		Random random = new Random();
-		number = random.nextInt(11);
+		number = random.nextInt(16);
+		if(number==11) {
+		return 9;
+		}
+		if(number==12) {
+			return 10;
+		}
+		if(number>12) {
+			return 11;
+		}
 		return number;
 	}
 }

@@ -12,8 +12,14 @@ public class EasyGameDice extends Dice {
 		System.out.println("Dice roll: " + diceRoll);
 		if (diceRoll <= 4)
 			System.out.println("Move forward " + diceRoll + " square");
-		else 
-			System.out.println("Answer an easy question ");
+		else {
+			if (diceRoll == 7)
+				System.out.println("Answer a hard question.");
+			else if (diceRoll == 5)
+				System.out.println("Answer an easy question.");
+			else
+				System.out.println("Answer a medium question.");
+		}
 		
 	}
 	@Override
