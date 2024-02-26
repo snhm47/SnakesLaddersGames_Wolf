@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import Controller.PlayerMovement;
 import Controller.SysData;
 import Utils.DiffLevel;
+import javafx.scene.paint.Color;
 
 public class MainForTest {
 
@@ -20,10 +21,11 @@ public class MainForTest {
 //		Board b = new Board(DiffLevel.easy);
 
 		Board b = new Board(DiffLevel.hard);
-		Games g = new Games(4, null);
+		Games g = new Games(4, DiffLevel.hard);
 		RunningGame rg = new RunningGame(g);
 		PlayerMovement pm = new PlayerMovement();
-		pm.Move(rg, 0, 0, null);
+		Player p = new Player("salah", Utils.Color.BLUE, 0);
+		pm.Move(rg, 0, 0, p);
  
 		b.initializeBoard();
 		for(int i = 0 ; i<13 ; i++) {
