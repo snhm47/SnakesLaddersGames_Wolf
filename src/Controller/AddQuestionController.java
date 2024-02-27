@@ -24,7 +24,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-public class AddQuestionsController implements Initializable{
+public class AddQuestionController implements Initializable{
 	
 	private Stage stage;
 	private Scene scene;

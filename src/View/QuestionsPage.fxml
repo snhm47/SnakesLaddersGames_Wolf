@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -10,61 +10,45 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
-	minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
-	prefWidth="600.0" xmlns="http://javafx.com/javafx/8"
-	xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="Controller.HomeController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.QuestionPageController">
 	<children>
-		<ImageView fitHeight="400.0" fitWidth="600.0" opacity="0.87"
-			pickOnBounds="true">
+		<ImageView fitHeight="400.0" fitWidth="600.0" opacity="0.87" pickOnBounds="true">
 			<image>
-				<Image url="@/Image/JungleBGBayan.jpg" />
+				<Image url="@../Image/JungleBGBayan.jpg" />
 			</image>
 		</ImageView>
-		<Text fill="RED" layoutX="214.0" layoutY="41.0"
-			strokeType="OUTSIDE" strokeWidth="0.0" text="Questions Page">
+		<Text fill="RED" layoutX="214.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Questions Page">
 			<font>
 				<Font size="25.0" />
 			</font>
 		</Text>
-		<TableView layoutX="69.0" layoutY="138.0" prefHeight="200.0"
-			prefWidth="500.0">
-			<columns>
-				<TableColumn prefWidth="280.79998779296875"
-					text="Question" />
-				<TableColumn minWidth="0.0" prefWidth="128.0"
-					text="difficulty Level" />
-				<TableColumn minWidth="0.0" prefWidth="91.2000732421875"
-					text="edit/delete" />
-			</columns>
-		</TableView>
-		<ImageView fitHeight="33.0" fitWidth="38.0" layoutX="28.0"
-			layoutY="14.0" onMouseClicked="#returnToMainPage" pickOnBounds="true"
-			preserveRatio="true">
+<TableView fx:id="questionTableView" layoutX="69.0" layoutY="138.0" prefHeight="200.0" prefWidth="500.0" />
+		<ImageView fitHeight="33.0" fitWidth="38.0" layoutX="28.0" layoutY="14.0" onMouseClicked="#returnToMainPage" pickOnBounds="true" preserveRatio="true">
 			<image>
-				<Image url="@/Image/homebtnIcon.png" />
+				<Image url="@../Image/homebtnIcon.png" />
 			</image>
 		</ImageView>
-		<Text fill="RED" layoutX="50.0" layoutY="98.0"
-			strokeType="OUTSIDE" strokeWidth="0.0" text="Search">
+		<Text fill="RED" layoutX="50.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search">
 			<font>
 				<Font size="19.0" />
 			</font>
 		</Text>
-		<TextField layoutX="120.0" layoutY="77.0" prefHeight="26.0"
-			prefWidth="199.0" />
-		<Button layoutX="334.0" layoutY="78.0" mnemonicParsing="false"
-			text="Search">
+		<TextField fx:id="searchTextField" layoutX="120.0" layoutY="77.0" prefHeight="26.0" prefWidth="88.0" />
+		<Button layoutX="222.0" layoutY="75.0" mnemonicParsing="false" onAction="#searchQuestions" text="Search">
 			<font>
 				<Font size="14.0" />
 			</font>
 		</Button>
-		<Button layoutX="437.0" layoutY="350.0" mnemonicParsing="false"
-			onAction="#switchToAddQ" text="Add Question">
+		<ImageView fitHeight="33.0" fitWidth="38.0" layoutX="515.0" layoutY="353.0" onMouseClicked="#addQ" pickOnBounds="true" preserveRatio="true">
+			<image>
+				<Image url="@../Image/add.png" />
+			</image>
+		</ImageView>
+		<Text fill="RED" layoutX="354.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sort by:">
 			<font>
-				<Font size="16.0" />
+				<Font size="19.0" />
 			</font>
-		</Button>
+		</Text>
+		<ChoiceBox fx:id="sortChoiceBox" layoutX="427.0" layoutY="79.0" prefHeight="26.0" prefWidth="123.0" />
 	</children>
 </AnchorPane>
