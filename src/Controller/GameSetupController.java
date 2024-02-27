@@ -41,7 +41,10 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Board;
+import model.EasyBoard;
+import model.HardBoard;
 import model.Ladders;
+import model.MeduimBoard;
 import model.Player;
 import model.Snakes;
 
@@ -283,15 +286,15 @@ public class GameSetupController implements Initializable {
         int diffnumber=0;
         if(difficulty==0) {
 
-        	b= new Board(DiffLevel.easy);
+        	b= new EasyBoard();
         	diffnumber=7;
         }
         else if(difficulty==1) {
-        	b= new Board(DiffLevel.medium);
+        	b= new MeduimBoard();
         	diffnumber=10;
         }
         else{
-        	b= new Board(DiffLevel.hard);
+        	b= new HardBoard();
         	diffnumber=13;
         }
 

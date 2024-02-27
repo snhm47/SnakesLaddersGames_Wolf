@@ -1,11 +1,9 @@
 package model;
 
-import java.util.ArrayList;
 
 import Controller.PlayerMovement;
-import Controller.SysData;
 import Utils.DiffLevel;
-import javafx.scene.paint.Color;
+
 
 public class MainForTest {
 
@@ -20,22 +18,22 @@ public class MainForTest {
 
 //		Board b = new Board(DiffLevel.easy);
 
-		Board b = new Board(DiffLevel.hard);
+		Board hb = new HardBoard();
 		Games g = new Games(4, DiffLevel.hard);
 		RunningGame rg = new RunningGame(g);
 		PlayerMovement pm = new PlayerMovement();
 		Player p = new Player("salah", Utils.Color.BLUE, 0);
 		pm.Move(rg, 0, 0, p);
  
-		b.initializeBoard();
+		hb.initializeBoard();
 		for(int i = 0 ; i<13 ; i++) {
 			for(int j = 0 ; j<13 ; j++) {
-				System.out.print("  "+b.getSquares()[i][j].getNumber()+" "+b.getSquares()[i][j].getSquareType());
+				System.out.print("  "+hb.getSquares()[i][j].getNumber()+" "+hb.getSquares()[i][j].getSquareType());
 			}
 			System.out.println();
 		}
-		System.out.println(b.getsnakes());
-		System.out.println(b.getladders());
+		System.out.println(hb.getsnakes());
+		System.out.println(hb.getladders());
 //		for(Square sss : b.getSq().values() ) {
 //			System.out.println(sss);
 //		}
