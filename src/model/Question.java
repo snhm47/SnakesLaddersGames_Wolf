@@ -38,8 +38,14 @@ public class Question {
 	}
 
 	public String getText() {
+		
 		return text.get();
 	}
+	
+	public void setText(String text) {
+	    this.text.set(text);
+	}
+	
 	
 	public String getTextQ() {
 		return text.get();
@@ -95,4 +101,6 @@ public class Question {
 		this.setCorrectAnswer(newCorrectAnswer);
 		this.setDifficulty(newDifficulty);
 	}
+
+
 }

@@ -10,6 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
+
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
 	minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
 	prefWidth="600.0" xmlns="http://javafx.com/javafx/8"
@@ -66,5 +67,12 @@
 		</Text>
 		<ChoiceBox fx:id="sortChoiceBox" layoutX="427.0"
 			layoutY="79.0" prefHeight="26.0" prefWidth="123.0" />
+		<Button fx:id="ebtn" layoutX="370.0" layoutY="356.0"
+			mnemonicParsing="false" onMouseClicked="#switchToEditPage"
+			text="Edit Question">
+			<font>
+				<Font size="13.0" />
+			</font>
+		</Button>
 	</children>
 </AnchorPane>

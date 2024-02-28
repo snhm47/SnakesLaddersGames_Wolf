@@ -35,9 +35,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+
 
 
 public class QuestionPageController{
@@ -46,6 +49,12 @@ public class QuestionPageController{
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
+	
+    @FXML
+    private AnchorPane rootPane;
+
+    @FXML
+    private TextField eqTf;
 
     @FXML
     private ResourceBundle resources;
@@ -69,7 +78,7 @@ public class QuestionPageController{
     private TableColumn<Question, String> QuestionsColumn;
 
     @FXML
-    private TableColumn<Question, String> EditDeleteColumn;
+    private TableColumn<Question, String> DeleteColumn;
 
     @FXML
     private TableColumn<Question, String> DifficultyColumn;
@@ -119,12 +128,12 @@ public class QuestionPageController{
 	    difficultyColumn.setCellValueFactory(new PropertyValueFactory<>("difficulty"));
 	    difficultyColumn.setPrefWidth(200); // Set preferred width for the Difficulty Level column
 
-	    TableColumn<Question, Void> EditDeleteColumn = new TableColumn<>("Edit/Delete");
-	    EditDeleteColumn.setPrefWidth(200);
-	    EditDeleteColumn.setCellFactory(param -> new EditDeleteCell());
+	    TableColumn<Question, Void> DeleteColumn = new TableColumn<>("Delete");
+	    DeleteColumn.setPrefWidth(200);
+	    DeleteColumn.setCellFactory(param -> new EditDeleteCell());
 
 	    // Add columns to table view
-	    questionTableView.getColumns().addAll(questionColumn, difficultyColumn, EditDeleteColumn);
+	    questionTableView.getColumns().addAll(questionColumn, difficultyColumn, DeleteColumn);
 
 	    // Load data from JSON and set it to the table view
 	    allQuestions = sysData.loadDataFromJSON("src/WolfQuestionsDB.json"); // Store all questions
@@ -133,11 +142,9 @@ public class QuestionPageController{
 
 	public class EditDeleteCell extends TableCell<Question, Void> {
 	    private final Button deleteButton;
-	    private final Button editButton;
 
 	    public EditDeleteCell() {
 	        deleteButton = new Button("Delete");
-	        editButton = new Button("Edit");
 
 	        deleteButton.setOnAction(event -> {
 	            Question question = (Question) getTableRow().getItem();
@@ -145,10 +152,6 @@ public class QuestionPageController{
 	                sysData.deleteQuestion(question);
 	                allQuestions.remove(question);
 	            }
-	        });
-
-	        editButton.setOnAction(event -> {
-	            // Handle edit action
 	        });
 	    }
 
@@ -158,14 +161,12 @@ public class QuestionPageController{
 	        if (empty) {
 	            setGraphic(null);
 	        } else {
-	            HBox buttons = new HBox(editButton, deleteButton);
+	            HBox buttons = new HBox(deleteButton);
 	            setGraphic(buttons);
 	        }
 	    }
 	}
 
-	
-	
 
 	@FXML
 	private void searchQuestions() {
@@ -193,51 +194,16 @@ public class QuestionPageController{
 	    searchTextField.setText("");
 	}
 	
-	// not needed for now
-//	@FXML
-//	private void handleSearchButtonAction(ActionEvent event) {
-//	    searchQuestions();
-//	}
-//
-//	@FXML
-//	private void handleSearchTextFieldAction(ActionEvent event) {
-//	    searchQuestions();
-//	}
-
-    @FXML
-    void HomeImage(MouseEvent event) {
-        try {
-
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("../application/Home.fxml"));
-            Scene HomeScene = new Scene(fxmlLoader.load());
-
-            Stage homeStage = new Stage();
-            homeStage.setTitle("Add Question");
-            homeStage.setScene(HomeScene);
-            homeStage.setResizable(false);
-            // initialize();
-            homeStage.show();
-            Stage prevStage = (Stage) homeImage.getScene().getWindow();
-            prevStage.hide();
-
-        } catch (IOException e) {
-            // Handle IOException more robustly with specific messages
-            e.printStackTrace();
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setContentText("An error occurred while loading the FXML file. Please check the file path and content.");
-            alert.showAndWait();
-        }
-    }
-    
-
-    
-    
-    
-
-
-    
+	@FXML
+	public void switchToEditPage(MouseEvent event) throws IOException {
+		root = FXMLLoader.load(getClass().getResource("../View/EditPage.fxml"));
+		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
+	}
+   
+  
     @FXML
     private void sortTableByDifficulty(String selectedOption) {
         ObservableList<Question> items = questionTableView.getItems();
@@ -297,9 +263,5 @@ public class QuestionPageController{
 		stage.show();
 	}
 	
-
-    public void DeleteButton(ActionEvent event) {
-
-    }
 
 }

@@ -69,6 +69,30 @@ public class SysData {
 		        return data;
 		    }
 		    
+		    // this function for reading the question only in order to edit a question in the EditPage.fxml
+		    public ObservableList<String> loadQuestionsFromJSON(String filePath) {
+		        ObservableList<String> questionTexts = FXCollections.observableArrayList();
+		        try {
+		            // Parse JSON file
+		            JSONParser parser = new JSONParser();
+		            Object obj = parser.parse(new FileReader(filePath));
+		            JSONObject jsonObject = (JSONObject) obj;
+		            JSONArray questions = (JSONArray) jsonObject.get("questions");
+
+		            // Extract question texts from JSON
+		            for (Object question : questions) {
+		                JSONObject questionObj = (JSONObject) question;
+		                String questionText = (String) questionObj.get("question");
+		                questionTexts.add(questionText);
+		            }
+		        } catch (Exception e) {
+		            e.printStackTrace();
+		            System.err.println("Error: " + e.getMessage());
+		        }
+		        return questionTexts;
+		    }
+
+		    
 		    public void deleteQuestion(Question question) {
 		        try {
 		            // Load JSON file
@@ -113,5 +137,6 @@ public class SysData {
 	    public static final String DATA_LOADED_SUCCESSFULLY = "Data loaded successfully!";
 	    public static final String DATA_SAVED_SUCCESSFULLY = "Data saved successfully!";
 	    public static final String PROBLEM_LOADING_DATA = "There is a problem loading the data.";
+
 
 }
