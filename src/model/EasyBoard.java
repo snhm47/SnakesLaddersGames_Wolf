@@ -29,7 +29,7 @@ public class EasyBoard extends Board{
 		
 		for(int i= size-1 ; i>=0 ; i--) {
 			 if (i % 2 == 0){
-				 for (int j = size - 1; j >= 0; j--) {
+				 for (int j = 0; j < size; j++) {
 					 getSquares()[i][j] = new Square(SquareType.REGULAR);
 					 getSq().put(getSquares()[i][j].getNumber(),getSquares()[i][j]);
 				 }
