@@ -85,7 +85,7 @@ public class GameSetupController implements Initializable {
 	private Label timerlbl;
 	Stage gameStage;
 	
-	
+	HashMap<Player, Circle> pc = new HashMap<Player, Circle>();
 
 	Alert a = new Alert(AlertType.NONE);
 
@@ -350,27 +350,47 @@ public class GameSetupController implements Initializable {
                 }
 //                box.getChildren().add(num);
                 if(b.getSquares()[row][column].getNumber()==1) {
-                	for(int i=0;i<players.size();i++) {
-                	Circle player = new Circle();
-                	Utils.Color c = players.get(i).getColorPlayer() ;
-                	if (c.equals(Utils.Color.YELLOW)) {
-                		player.setFill(Color.YELLOW);
-                	}
-                	if(c.equals(Utils.Color.RED)) {
-                		player.setFill(Color.RED);
-                	}
-
-                	if(c.equals(Utils.Color.BLUE)) {
-                		player.setFill(Color.BLUE);
-                	}
-                	if(c.equals(Utils.Color.GREEN)) {
-                		player.setFill(Color.GREEN);
-                	}
-                	player.setRadius(7);
-                	box.getChildren().add(player);
+//                	for(int i=0;i<players.size();i++) {
+//	                	Circle player = new Circle();
+//	                	Utils.Color c = players.get(i).getColorPlayer() ;
+//	                	if (c.equals(Utils.Color.YELLOW)) {
+//	                		player.setFill(Color.YELLOW);
+//	                	}
+//	                	if(c.equals(Utils.Color.RED)) {
+//	                		player.setFill(Color.RED);
+//	                	}
+//	
+//	                	if(c.equals(Utils.Color.BLUE)) {
+//	                		player.setFill(Color.BLUE);
+//	                	}
+//	                	if(c.equals(Utils.Color.GREEN)) {
+//	                		player.setFill(Color.GREEN);
+//	                	}
+//	                	player.setRadius(7);
+//	                	box.getChildren().add(player);
+//                	
+//                	}
+                	for (Player p : players) {
+                		Circle player = new Circle();
+	                	Utils.Color c = p.getColorPlayer();
+	                	if (c.equals(Utils.Color.YELLOW)) {
+	                		player.setFill(Color.YELLOW);
+	                	}
+	                	if(c.equals(Utils.Color.RED)) {
+	                		player.setFill(Color.RED);
+	                	}
+	
+	                	if(c.equals(Utils.Color.BLUE)) {
+	                		player.setFill(Color.BLUE);
+	                	}
+	                	if(c.equals(Utils.Color.GREEN)) {
+	                		player.setFill(Color.GREEN);
+	                	}
+	                	player.setRadius(7);
+	                	box.getChildren().add(player);
+	                	pc.put(p, player);
                 	}
                 }
-
                 grid.add(box, column, row, 1, 1);
                 boxes.put(b.getSquares()[row][column].getNumber(), box);
             }

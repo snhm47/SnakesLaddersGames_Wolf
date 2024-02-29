@@ -9,6 +9,15 @@ import Utils.LadderType;
 import Utils.SquareType;
 
 public class EasyBoard extends Board{
+	
+	public static EasyBoard instanceEasyBoard;
+	public static synchronized EasyBoard getInstance() {
+		if (instanceEasyBoard == null)
+			instanceEasyBoard = new EasyBoard();
+
+	    return instanceEasyBoard;
+	}
+	
 
 	public EasyBoard() {
 		super(DiffLevel.easy);

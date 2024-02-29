@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.StartGameController">
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.StartGameController">
 	<children>
 		<HBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 			<children>
@@ -41,7 +41,7 @@
                      </font>
                   </Text>
 						<Rectangle fx:id="diceRec" arcHeight="5.0" arcWidth="5.0" fill="#0084ff" height="200.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
-						<Button mnemonicParsing="false" text="Roll" />
+						<Button fx:id="rollB" onAction="#onroll" mnemonicParsing="false" text="Roll" />
 					</children>
 				</VBox>
 			</children>

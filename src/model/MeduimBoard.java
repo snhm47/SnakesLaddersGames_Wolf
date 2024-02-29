@@ -10,6 +10,14 @@ import Utils.SquareType;
 
 public class MeduimBoard extends Board{
 
+	public static MeduimBoard instancemMeduimBoard;
+	public static synchronized MeduimBoard getInstance() {
+		if (instancemMeduimBoard == null)
+			instancemMeduimBoard = new MeduimBoard();
+
+	    return instancemMeduimBoard;
+	}
+	
 	public MeduimBoard() {
 		super(DiffLevel.medium);
 		// TODO Auto-generated constructor stub

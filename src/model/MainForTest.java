@@ -23,7 +23,7 @@ public class MainForTest {
 		RunningGame rg = new RunningGame(g);
 		PlayerMovement pm = new PlayerMovement();
 		Player p = new Player("salah", Utils.Color.BLUE, 0);
-		pm.Move(rg, 0, 0, p);
+//		pm.Move(rg, 0, 0, p);
  
 		hb.initializeBoard();
 		for(int i = 0 ; i<13 ; i++) {

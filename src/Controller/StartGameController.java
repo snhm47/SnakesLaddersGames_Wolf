@@ -4,10 +4,14 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
 import javafx.animation.KeyFrame;
 import javafx.util.Duration;
+import model.Dice;
+import model.DiceFactory;
+import model.RunningGame;
 
 public class StartGameController {
 	@FXML
@@ -15,6 +19,11 @@ public class StartGameController {
 
     @FXML
     private Text timer;
+    
+    @FXML
+    private Rectangle diceRec;
+    @FXML
+    private Button rollB;
     
     private Timeline timeline;
     private int minutes = 0;
@@ -41,4 +50,13 @@ public class StartGameController {
     private void updateTimer() {
         timer.setText(String.format("%02d:%02d", minutes, seconds));
     }
+    
+    
+    @FXML
+    void onroll(ActionEvent event) {
+    	
+    }
+    
+    
+    
 }

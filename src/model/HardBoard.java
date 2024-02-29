@@ -9,6 +9,14 @@ import Utils.LadderType;
 import Utils.SquareType;
 
 public class HardBoard extends Board{
+	
+	public static HardBoard instanceHardBoard;
+	public static synchronized HardBoard getInstance() {
+		if (instanceHardBoard == null)
+			instanceHardBoard = new HardBoard();
+
+	    return instanceHardBoard;
+	}
 
 	public HardBoard() {
 		super(DiffLevel.hard);
