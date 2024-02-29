@@ -1,7 +1,6 @@
 package model;
 
 
-import Controller.PlayerMovement;
 import Utils.DiffLevel;
 
 
@@ -21,7 +20,6 @@ public class MainForTest {
 		Board hb = new HardBoard();
 		Games g = new Games(4, DiffLevel.hard);
 		RunningGame rg = new RunningGame(g);
-		PlayerMovement pm = new PlayerMovement();
 		Player p = new Player("salah", Utils.Color.BLUE, 0);
 //		pm.Move(rg, 0, 0, p);
  

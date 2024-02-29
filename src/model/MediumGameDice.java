@@ -14,11 +14,12 @@ public class MediumGameDice extends Dice {
 		if (diceRoll <= 6)
 			System.out.println("Move forward " + diceRoll + " square");
 		else {
-			if (diceRoll ==7)
+			if (diceRoll ==7 || diceRoll ==8)
 				System.out.println("Answer a easy question");
-			else if (diceRoll ==8)
+			else if (diceRoll ==9 || diceRoll ==10)
 				System.out.println("Answer a medium question.");
-			else System.out.println("Answer a Hard question.");
+			else if(diceRoll ==11 || diceRoll ==12)
+				System.out.println("Answer a Hard question.");
 		}
 	}
 

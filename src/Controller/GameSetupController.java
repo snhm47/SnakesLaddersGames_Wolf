@@ -42,14 +42,19 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Board;
 import model.EasyBoard;
+import model.Games;
 import model.HardBoard;
 import model.Ladders;
 import model.MeduimBoard;
 import model.Player;
+import model.RunningGame;
 import model.Snakes;
 
 
 public class GameSetupController implements Initializable {
+	
+	public static GridPane grid;
+	public static HashMap<Integer, VBox>boxes;
 
 	private Stage stage;
 	private Scene scene;
@@ -57,6 +62,7 @@ public class GameSetupController implements Initializable {
 	
 	ToggleGroup group = new ToggleGroup();
 
+	
 	
 	@FXML
 	private StackPane spBox;
@@ -85,7 +91,7 @@ public class GameSetupController implements Initializable {
 	private Label timerlbl;
 	Stage gameStage;
 	
-	HashMap<Player, Circle> pc = new HashMap<Player, Circle>();
+//	HashMap<Player, Circle> pc = new HashMap<Player, Circle>();
 
 	Alert a = new Alert(AlertType.NONE);
 
@@ -282,23 +288,30 @@ public class GameSetupController implements Initializable {
 		}
 
         Board b;
-
         int diffnumber=0;
         if(difficulty==0) {
-
+        	Games games = new Games(players.size(), DiffLevel.easy);
+        	
+			RunningGame.setCurrentGame(games);
         	b= new EasyBoard();
         	diffnumber=7;
         }
         else if(difficulty==1) {
+        	Games games = new Games(players.size(), DiffLevel.medium);
+        	
+			RunningGame.setCurrentGame(games);
         	b= new MeduimBoard();
         	diffnumber=10;
         }
         else{
+        	Games games = new Games(players.size(), DiffLevel.hard);
+        	
+			RunningGame.setCurrentGame(games);
         	b= new HardBoard();
         	diffnumber=13;
         }
 
-        GridPane grid = new GridPane();
+        grid = new GridPane();
         for(int cons=0;cons<diffnumber;cons++) {
         	ColumnConstraints column = new ColumnConstraints();
         	column.setMinWidth(10.0);
@@ -317,7 +330,7 @@ public class GameSetupController implements Initializable {
         }
 
 		b.initializeBoard();
-		HashMap<Integer, VBox>boxes = new HashMap<Integer, VBox>();
+		boxes = new HashMap<Integer, VBox>();
         for (int row = 0; row < diffnumber; row++) {
             for (int column = 0; column < diffnumber; column++) {
             	
@@ -370,8 +383,11 @@ public class GameSetupController implements Initializable {
 //	                	box.getChildren().add(player);
 //                	
 //                	}
+                	int tern = 1;
                 	for (Player p : players) {
                 		Circle player = new Circle();
+                		player.setScaleX(1.5);
+                		player.setScaleY(1.5);
 	                	Utils.Color c = p.getColorPlayer();
 	                	if (c.equals(Utils.Color.YELLOW)) {
 	                		player.setFill(Color.YELLOW);
@@ -388,8 +404,12 @@ public class GameSetupController implements Initializable {
 	                	}
 	                	player.setRadius(7);
 	                	box.getChildren().add(player);
-	                	pc.put(p, player);
+	                	RunningGame.getInstance().getPc().put(tern, player);
+	                	RunningGame.getInstance().getPlayers().add(p);
+	                	RunningGame.getInstance().getPlayerPlacement().put(p, 1);
+	                	RunningGame.getInstance().getPp().put(tern++, p);
                 	}
+                	tern =1;
                 }
                 grid.add(box, column, row, 1, 1);
                 boxes.put(b.getSquares()[row][column].getNumber(), box);

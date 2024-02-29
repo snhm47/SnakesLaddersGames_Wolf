@@ -3,10 +3,15 @@ package model;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javafx.scene.shape.Circle;
+
 public class RunningGame {
 	private static Games currentGame;
     private ArrayList<Player> players;
     private HashMap<Player, Integer> playerPlacement;
+    private Boolean endGame ;
+    private HashMap<Integer, Circle> pc ;
+    private HashMap<Integer, Player> pp ;
     
     
     public static RunningGame instanceRunningGame;
@@ -46,8 +51,35 @@ public class RunningGame {
 		RunningGame.currentGame = currentGame;
 		this.players = new ArrayList<Player>();
 		this.playerPlacement = new HashMap<Player, Integer>();
+		this.endGame = false;
+		this.pc = new HashMap<Integer, Circle>();
+		this.pp = new HashMap<Integer, Player>();
 	}
 
+
+	public HashMap<Integer, Player> getPp() {
+		return pp;
+	}
+
+	public void setPp(HashMap<Integer, Player> pp) {
+		this.pp = pp;
+	}
+
+	public HashMap<Integer, Circle> getPc() {
+		return pc;
+	}
+
+	public void setPc(HashMap<Integer, Circle> pc) {
+		this.pc = pc;
+	}
+
+	public Boolean getEndGame() {
+		return endGame;
+	}
+
+	public void setEndGame(Boolean endGame) {
+		this.endGame = endGame;
+	}
 
 	public void nextTurn() {}
 
