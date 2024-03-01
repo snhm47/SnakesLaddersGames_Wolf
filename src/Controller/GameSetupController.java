@@ -29,6 +29,7 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -89,6 +90,13 @@ public class GameSetupController implements Initializable {
 	private VBox vBoxBoard;
 	@FXML
 	private Label timerlbl;
+	
+	@FXML
+    private ChoiceBox<String> chooseColor;
+	
+	private ArrayList<String> colorListCheck;// help to add color to the new player
+	
+	
 	Stage gameStage;
 	
 //	HashMap<Player, Circle> pc = new HashMap<Player, Circle>();
@@ -122,6 +130,14 @@ public class GameSetupController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		colorListCheck = new ArrayList<String>();
+		// add items to ChoiceBox
+		chooseColor.getItems().add("BLUE");
+		chooseColor.getItems().add("GREEN");
+		chooseColor.getItems().add("YELLOW");
+		chooseColor.getItems().add("RED");
+		chooseColor.setDisable(true);
+		
 		rbuttoneasy.setToggleGroup(group);
 		rbuttonMedium.setToggleGroup(group);
 		rbuttonHard.setToggleGroup(group);
@@ -138,7 +154,7 @@ public class GameSetupController implements Initializable {
 			confirmedPlayerCount = (int) Math.round(slider.getValue());
 			addPlayerbtn.setDisable(false); // Enable adding players once confirmed
 			PlayerTf.setDisable(false);
-
+			chooseColor.setDisable(false);
 			// Disable controls related to choosing number of players after confirmation
 			slider.setDisable(true);
 			cnfrmbtn.setDisable(true);
@@ -147,40 +163,49 @@ public class GameSetupController implements Initializable {
 		addPlayerbtn.setOnAction(this::addPlayer);
 	}
 
+	
 	public void addPlayer(ActionEvent event) {
 		Player p;
 		String playerName = PlayerTf.getText().trim(); // Trim whitespace from input
+		String playerColor = chooseColor.getValue();
 
+		if(!chooseColor.getSelectionModel().isEmpty()) {
 		// Check if player name is empty
-		if (!playerName.isEmpty() && playersCount < confirmedPlayerCount) {
+		if (!playerName.isEmpty() && 
+				playersCount < confirmedPlayerCount && 
+				!checkColorChoosed(playerColor)) {
 			// Check if player name is unique
 			boolean isUniqueName = players.stream().noneMatch(player -> player.getNickName().equals(playerName));
 
 			if (isUniqueName) {
 				switch (playersCount) {
 				case 0:
-					p1lbl.setText(playerName);
-					p1lbl.setTextFill(javafx.scene.paint.Color.BLUE);
-					p = new Player(playerName, Utils.Color.BLUE, 0);
+					p1lbl.setText("Player 1: "+playerName);
+					p1lbl.setTextFill(paintColorChoosed(playerColor));
+					p = new Player(playerName, returnColorChoosed(playerColor), 0);
 					players.add(p);
+					colorListCheck.add(playerColor);
 					break;
 				case 1:
-					p2lbl.setText(playerName);
-					p2lbl.setTextFill(javafx.scene.paint.Color.GREEN);
-					p = new Player(playerName, Utils.Color.GREEN, 0);
+					p2lbl.setText("Player 2: "+playerName);
+					p2lbl.setTextFill(paintColorChoosed(playerColor));
+					p = new Player(playerName, returnColorChoosed(playerColor), 0);
 					players.add(p);
+					colorListCheck.add(playerColor);
 					break;
 				case 2:
-					p3lbl.setText(playerName);
-					p3lbl.setTextFill(javafx.scene.paint.Color.YELLOW);
-					p = new Player(playerName, Utils.Color.YELLOW, 0);
+					p3lbl.setText("Player 3: "+playerName);
+					p3lbl.setTextFill(paintColorChoosed(playerColor));
+					p = new Player(playerName, returnColorChoosed(playerColor), 0);
 					players.add(p);
+					colorListCheck.add(playerColor);
 					break;
 				case 3:
-					p4lbl.setText(playerName);
-					p4lbl.setTextFill(javafx.scene.paint.Color.RED);
-					p = new Player(playerName, Utils.Color.RED, 0);
+					p4lbl.setText("Player 4: "+playerName);
+					p4lbl.setTextFill(paintColorChoosed(playerColor));
+					p = new Player(playerName, returnColorChoosed(playerColor), 0);
 					players.add(p);
+					colorListCheck.add(playerColor);
 					break;
 				default:
 					break;
@@ -189,6 +214,7 @@ public class GameSetupController implements Initializable {
 				if (playersCount == confirmedPlayerCount) {
 					addPlayerbtn.setDisable(true); // Disable adding more players after reaching confirmed count
 					PlayerTf.setDisable(true);
+					chooseColor.setDisable(true);
 				}
 				
 	            PlayerTf.setText("");
@@ -198,11 +224,62 @@ public class GameSetupController implements Initializable {
 				alert.setContentText("Each player must have a unique name.");
 				alert.show();
 			}
-		} else {
+		} else if(checkColorChoosed(playerColor)){
+			Alert alert = new Alert(Alert.AlertType.WARNING);
+			alert.setContentText("You cannot select this color, it has already been selected.");
+			alert.show();	
+		}else{
 			Alert alert = new Alert(Alert.AlertType.WARNING);
 			alert.setContentText("Player name cannot be empty or a duplicate.");
 			alert.show();
 		}
+		}else {
+			Alert alert = new Alert(Alert.AlertType.WARNING);
+			alert.setContentText("player Color cannot be empty.");
+			alert.show();
+		}
+	}
+	
+	
+	// Return true if there is another player adding this color
+	private boolean checkColorChoosed(String checkColor) {
+		if(colorListCheck.isEmpty()||colorListCheck.equals(null))
+		return false;
+		for(String s : colorListCheck) {
+			if(s.equals(checkColor)) {
+				return true;
+			}
+		}
+		return false;
+		
+	}
+
+	
+	private Paint paintColorChoosed(String checkColor) {
+		if(checkColor.equals("BLUE"))
+			return javafx.scene.paint.Color.BLUE;
+		if(checkColor.equals("GREEN"))
+			return javafx.scene.paint.Color.GREEN;
+		if(checkColor.equals("YELLOW"))
+			return javafx.scene.paint.Color.YELLOW;
+		if(checkColor.equals("RED"))
+			return javafx.scene.paint.Color.RED;
+		
+		return null;
+		
+	}
+	
+	private Utils.Color returnColorChoosed(String checkColor) {
+		if(checkColor.equals("BLUE"))
+			return Utils.Color.BLUE;
+		if(checkColor.equals("GREEN"))
+			return Utils.Color.GREEN;
+		if(checkColor.equals("YELLOW"))
+			return Utils.Color.YELLOW;
+		if(checkColor.equals("RED"))
+			return Utils.Color.RED;
+		
+		return null;
 	}
 
 	@FXML
@@ -223,6 +300,7 @@ public class GameSetupController implements Initializable {
 		cnfrmbtn.setDisable(false);
 		addPlayerbtn.setDisable(true);
 		PlayerTf.setDisable(true);
+		chooseColor.setDisable(true);
 		PlayerTf.clear(); // Clear player name text field
 
 		rbuttoneasy.setSelected(false);
