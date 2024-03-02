@@ -1,220 +1,91 @@
 package Controller;
 
+import java.net.URL;
+import java.util.ResourceBundle;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Modality;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import model.Question;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-
-import Utils.DiffLevel;
-
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
-
 public class QuestionSquareController {
-	@FXML
-	private AnchorPane questionPane;
 
-	@FXML
-	private Label questionLabel;
+    @FXML
+    private ResourceBundle resources;
 
-	@FXML
-	private RadioButton option1;
+    @FXML
+    private URL location;
 
-	@FXML
-	private RadioButton option2;
+    @FXML
+    private RadioButton rbans1;
 
-	@FXML
-	private RadioButton option3;
+    @FXML
+    private RadioButton rbans2;
 
-	@FXML
-	private RadioButton option4;
+    @FXML
+    private RadioButton rbans3;
 
-	@FXML
-	private ToggleGroup optionsGroup;
+    @FXML
+    private RadioButton rbans4;
+    
+    @FXML
+    private TextField questionText;
 
-	@FXML
-	private Button submitButton;
+    private ToggleGroup rbans;
 
-	private List<Question> questions;
-	private Random random;
-	private int currentPlayerPosition;
+    private SysData sysData;
 
-	@FXML
-	public void initialize() {
-		random = new Random();
-		currentPlayerPosition = 0;
-		loadQuestionsFromJSON("WolfQuestionDB.json");
-		displayRandomQuestion();
-	}
+    @FXML
+    void initialize() {
+    	rbans = new ToggleGroup();
+    	rbans1.setToggleGroup(rbans);
+    	rbans2.setToggleGroup(rbans);
+    	rbans3.setToggleGroup(rbans);
+    	rbans4.setToggleGroup(rbans);
 
-	private void loadQuestionsFromJSON(String filePath) {
-		questions = new ArrayList<>();
-		JSONParser parser = new JSONParser();
-		try (FileReader reader = new FileReader(filePath)) {
-			Object obj = parser.parse(reader);
-			JSONArray questionArray = (JSONArray) obj;
-			for (Object questionObj : questionArray) {
-				JSONObject questionJson = (JSONObject) questionObj;
-				String questionText = (String) questionJson.get("question");
-				List<String> answers = (List<String>) questionJson.get("answers");
-				String correctAnswer = (String) questionJson.get("correct_ans");
-				DiffLevel difficulty = (DiffLevel) questionJson.get("difficulty");
-				questions.add(new Question(questionText, answers, correctAnswer, difficulty));
-			}
-		} catch (IOException | ParseException e) {
-			e.printStackTrace();
-		}
-	}
+        sysData = new SysData("src/WolfQuestionsDB.json");
+        loadQuestions();
+    }
 
-	private void displayRandomQuestion() {
-		if (questions != null && !questions.isEmpty()) {
-			int randomIndex = random.nextInt(questions.size());
-			Question randomQuestion = questions.get(randomIndex);
-			questionLabel.setText(randomQuestion.getText());
-			List<String> answers = new ArrayList<>(randomQuestion.getAnswers());
-			Collections.shuffle(answers);
-			option1.setText(answers.get(0));
-			option2.setText(answers.get(1));
-			option3.setText(answers.get(2));
-			option4.setText(answers.get(3));
-		}
-	}
+    private void loadQuestions() {
+        try {
+            Question question = sysData.getRandomQuestion(sysData.loadDataFromJSON(sysData.getFilePath()));
+            if (question != null) {
+                questionText.setText(question.getText());
+            	rbans1.setText(question.getAnswers().get(0));
+            	rbans2.setText(question.getAnswers().get(1));
+            	rbans3.setText(question.getAnswers().get(2));
+            	rbans4.setText(question.getAnswers().get(3));
 
-	@FXML
-	private void handleSubmit() {
-		RadioButton selectedOption = (RadioButton) optionsGroup.getSelectedToggle();
-		if (selectedOption != null) {
-			String selectedAnswer = selectedOption.getText();
-			if (checkAnswer(selectedAnswer)) {
-				handleCorrectAnswer();
-			} else {
-				handleWrongAnswer();
-			}
-		}
-	}
+                rbans.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
+                    if (rbans.getSelectedToggle() != null) {
+                        int selectedIndex = rbans.getToggles().indexOf(rbans.getSelectedToggle());
+                        if (selectedIndex == Integer.parseInt(question.getCorrectAnswer()) - 1) {
+                            showAlert("Correct Answer!", "You have chosen the correct answer.");
+                        } else {
+                            showAlert("Incorrect Answer!", "You have chosen the incorrect answer.");
+                        }
+                        // Close the window after showing the message
+                        Stage stage = (Stage) rbans1.getScene().getWindow();
+                    }
+                });
+            }else {
+                showAlert("Error", "No question found.");
+            }
+        } catch (Exception e) {
+            showAlert("Error", "Failed to load questions.");
+            e.printStackTrace();
+        }
+    }
 
-	private boolean checkAnswer(String selectedAnswer) {
-		Question currentQuestion = getCurrentQuestion();
-		return selectedAnswer.equals(currentQuestion.getCorrectAnswer());
-	}
-
-	private Question getCurrentQuestion() {
-		String currentQuestionText = questionLabel.getText();
-		return questions.stream().filter(question -> question.getText().equals(currentQuestionText)).findFirst()
-				.orElse(null);
-	}
-
-	private void handleCorrectAnswer() {
-		Question currentQuestion = getCurrentQuestion();
-		DiffLevel difficulty = currentQuestion.getDifficulty();
-		String congratsMessage;
-		switch (difficulty) {
-		case easy:
-			congratsMessage = "Congratulations!";
-			break;
-		case medium:
-			congratsMessage = "Congratulations!";
-			break;
-		case hard:
-			congratsMessage = "Congratulations! You can move 1 square forward.";
-			currentPlayerPosition += 1;
-			break;
-		default:
-			congratsMessage = "Congratulations!";
-			break;
-		}
-		showCongratsPopup(congratsMessage);
-
-		displayRandomQuestion();
-	}
-
-	
-
-	private void handleWrongAnswer() {
-		Question currentQuestion = getCurrentQuestion();
-		DiffLevel difficulty = currentQuestion.getDifficulty();
-
-		// Display appropriate message and adjust player position
-		String wrongMessage;
-		int squaresToMoveBack;
-		switch (difficulty) {
-		case easy:
-			wrongMessage = "Oops! You answered wrong.";
-			squaresToMoveBack = 1;
-			break;
-		case medium:
-			wrongMessage = "Oops! You answered wrong.";
-			squaresToMoveBack = 2;
-			break;
-		case hard:
-			wrongMessage = "Oops! You answered wrong.";
-			squaresToMoveBack = 3;
-			break;
-		default:
-			wrongMessage = "Oops! You answered wrong.";
-			squaresToMoveBack = 1; // Default to moving back 1 square
-			break;
-		}
-		showWrongPopup(wrongMessage);
-
-		currentPlayerPosition -= squaresToMoveBack;
-		displayRandomQuestion();
-	}
-
-	// here according to the level we call the pop up window 
-	// so user can know how steps he move forward or back
-	private void showCongratsPopup(String message) {
-		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/popup.fxml"));
-			Parent root = loader.load();
-
-			// Get the controller
-			CongratsPopupController controller = loader.getController();
-			controller.setMessage(message);
-
-			// Create the stage
-			Stage stage = new Stage();
-			stage.initModality(Modality.APPLICATION_MODAL);
-			stage.setScene(new Scene(root));
-			stage.showAndWait();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	private void showWrongPopup(String message) {
-		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/popup.fxml"));
-			Parent root = loader.load();
-
-			// Get the controller
-			WrongPopupController controller = loader.getController();
-			controller.setMessage(message);
-
-			// Create the stage
-			Stage stage = new Stage();
-			stage.initModality(Modality.APPLICATION_MODAL);
-			stage.setScene(new Scene(root));
-			stage.showAndWait();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
 }

@@ -1,58 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.9" prefHeight="513.0" prefWidth="548.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.QuestionPopupController" style="-fx-background-color: #4CAF50;">
-   <children>
-      <VBox layoutX="175.0" layoutY="100.0" prefHeight="308.0" prefWidth="200.0" spacing="10">
-         <children>
-            <Pane prefHeight="107.0" prefWidth="200.0" style="-fx-background-color: #8BC34A;">
-               <children>
-                  <Text fx:id="questionText" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Question" fill="WHITE" wrappingWidth="499.20000000000016">
-                     <font>
-                        <Font name="Arial" size="22.0" />
-                     </font>
-                  </Text>
-               </children>
-            </Pane>
-            <RadioButton fx:id="firstAnswer" mnemonicParsing="false" prefHeight="86.0" prefWidth="200.0" selected="false" style="-fx-text-fill: white;" text="Answer 1 " wrapText="true">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </RadioButton>
-            <RadioButton fx:id="secondAnswer" mnemonicParsing="false" prefHeight="86.0" prefWidth="200.0" selected="false" style="-fx-text-fill: white;" text="Answer 2" wrapText="true">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </RadioButton>
-            <RadioButton fx:id="thirdAnswer" mnemonicParsing="false" prefHeight="86.0" prefWidth="200.0" selected="false" style="-fx-text-fill: white;" text="Answer 3 " wrapText="true">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </RadioButton>
-            <RadioButton fx:id="forthAnswer" mnemonicParsing="false" prefHeight="86.0" prefWidth="200.0" selected="false" style="-fx-text-fill: white;" text="Answer 4" wrapText="true">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </RadioButton>
-         </children>
-      </VBox>
-      <Button fx:id="checkAnswerBt" layoutX="282.0" layoutY="419.0" mnemonicParsing="false" onAction="#checkAnswer" prefHeight="31.0" prefWidth="146.0" style="-fx-background-color: #689F38; -fx-text-fill: white;" text="Check Answer">
-         <font>
-            <Font name="Arial" size="15.0" />
-         </font>
-      </Button>
-      <Text layoutX="14.0" layoutY="14.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please Answer The Question by selecting one answer:" fill="WHITE" wrappingWidth="547.0">
-         <font>
-            <Font name="Arial" size="16.0" />
-         </font>
-      </Text>
-   </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
+	minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+	prefWidth="600.0" xmlns="http://javafx.com/javafx/21"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="Controller.QuestionSquareController">
+	<children>
+		<Text layoutX="53.0" layoutY="43.0" strokeType="OUTSIDE"
+			strokeWidth="0.0" text="Question">
+			<font>
+				<Font size="23.0" />
+			</font>
+		</Text>
+		<TextField fx:id="questionText" layoutX="53.0"
+			layoutY="57.0" prefHeight="26.0" prefWidth="528.0" />
+		<RadioButton fx:id="rbans1" layoutX="56.0" layoutY="112.0"
+			mnemonicParsing="false" text="RadioButton">
+			<toggleGroup>
+				<ToggleGroup fx:id="rbans" />
+			</toggleGroup>
+		</RadioButton>
+		<RadioButton fx:id="rbans2" layoutX="56.0" layoutY="142.0"
+			mnemonicParsing="false" text="RadioButton" toggleGroup="$rbans" />
+		<RadioButton fx:id="rbans3" layoutX="56.0" layoutY="174.0"
+			mnemonicParsing="false" text="RadioButton" toggleGroup="$rbans" />
+		<RadioButton fx:id="rbans4" layoutX="56.0" layoutY="206.0"
+			mnemonicParsing="false" text="RadioButton" toggleGroup="$rbans" />
+		<Button layoutX="274.0" layoutY="292.0" mnemonicParsing="false"
+			text="Answer" />
+	</children>
 </AnchorPane>
