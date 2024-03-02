@@ -109,6 +109,12 @@ public class GameSetupController implements Initializable {
 	private int playersCount = 0;
 
 	private int confirmedPlayerCount = 2; // Default to 2 players
+	
+	
+    private void setFullscreen() {
+        stage.setResizable(false);
+        stage.setFullScreen(true);
+    }
 
 	// to choose the level of the game
 	@FXML
@@ -959,6 +965,7 @@ public class GameSetupController implements Initializable {
 		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
+		setFullscreen();
 		stage.show();
 	}
 

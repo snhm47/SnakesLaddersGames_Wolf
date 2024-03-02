@@ -8,27 +8,39 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="366.0" prefWidth="583.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.HistoryController">
-    <children>
-        <ImageView fitHeight="400.0" fitWidth="600.0" layoutX="-17.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@../Image/JungleBGBayan.jpg" />
-            </image>
-        </ImageView>
-        <Label layoutX="241.0" layoutY="26.0" text="History" textFill="#5141dd">
-            <font>
-                <Font name="Arial Bold" size="40.0" />
-            </font>
-            <effect>
-                <Bloom />
-            </effect>
-        </Label>
-        <TableView fx:id="tableView" layoutX="31.0" layoutY="96.0" prefHeight="220.0" prefWidth="521.0">
-        </TableView>
-        <ImageView fitHeight="33.0" fitWidth="38.0" layoutX="38.0" layoutY="24.0" onMouseClicked="#returnToMainPage" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@../Image/homebtnIcon.png" />
-            </image>
-        </ImageView>
-    </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
+	minHeight="-Infinity" minWidth="-Infinity" prefHeight="366.0"
+	prefWidth="583.0" xmlns="http://javafx.com/javafx/8"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="Controller.HistoryController">
+	<children>
+		<ImageView fitHeight="1080" fitWidth="1920" opacity="0.87"
+			pickOnBounds="true">
+			<image>
+				<Image url="@/Image/edjungletheme1.jpg" />
+			</image>
+		</ImageView>
+		<Label layoutX="241.0" layoutY="26.0" text="History"
+			textFill="#5141dd" AnchorPane.leftAnchor="860.0"
+			AnchorPane.topAnchor="40">
+			<font>
+				<Font name="Arial Bold" size="40.0" />
+			</font>
+			<effect>
+				<Bloom />
+			</effect>
+		</Label>
+		<TableView fx:id="tableView" layoutX="31.0" layoutY="96.0"
+			prefHeight="220.0" prefWidth="521.0" AnchorPane.leftAnchor="500.0"
+			AnchorPane.rightAnchor="500.0" AnchorPane.topAnchor="250"
+			AnchorPane.bottomAnchor="250">
+		</TableView>
+		<ImageView fitHeight="50.0" fitWidth="50.0" layoutX="52.0"
+			layoutY="40.0" onMouseClicked="#returnToMainPage" pickOnBounds="true"
+			preserveRatio="true">
+			<image>
+				<Image url="@../Image/homebtnIcon.png" />
+			</image>
+		</ImageView>
+	</children>
 </AnchorPane>

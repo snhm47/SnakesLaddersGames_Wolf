@@ -21,6 +21,10 @@ import org.json.simple.parser.JSONParser;
 import java.sql.Date;
 
 public class HistoryController {
+	
+	private Stage stage;
+	private Scene scene;
+	private Parent root;
 
     @FXML
     private TableView<History> tableView;
@@ -73,14 +77,21 @@ public class HistoryController {
             e.printStackTrace();
         }
     }
-
-
-    @FXML
-    public void returnToMainPage(MouseEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("../View/StartMenu.fxml"));
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+    
+	
+    private void setFullscreen() {
+        stage.setResizable(false);
+        stage.setFullScreen(true);
     }
+
+
+	@FXML
+	public void returnToMainPage(MouseEvent event) throws IOException {
+		root = FXMLLoader.load(getClass().getResource("../View/StartMenu.fxml"));
+		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		setFullscreen();
+		stage.show();
+	}
 }

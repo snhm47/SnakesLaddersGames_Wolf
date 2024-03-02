@@ -12,37 +12,54 @@
 	xmlns:fx="http://javafx.com/fxml/1"
 	fx:controller="Controller.HomeController">
 	<children>
-		<ImageView fitHeight="400.0" fitWidth="606.0" layoutX="-3.0"
+
+		<!-- background image -->
+		<ImageView fitHeight="1080" fitWidth="1920" layoutX="-3.0"
 			opacity="0.85" pickOnBounds="true">
 			<image>
-				<Image url="@/Image/startmenubg.jpeg" />
+				<Image url="@/Image/edjungletheme1.jpg" />
 			</image>
 		</ImageView>
-		<ImageView fitHeight="99.0" fitWidth="221.0" layoutX="225.0"
-			layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+
+		<!-- gamelogo image -->
+		<ImageView fitHeight="200" fitWidth="350" layoutX="225.0"
+			layoutY="14.0" pickOnBounds="true" preserveRatio="true"
+			AnchorPane.leftAnchor="800.0">
 			<image>
 				<Image url="@/Image/gameLogo.png" />
 			</image>
 		</ImageView>
-		<ImageView fitHeight="37.0" fitWidth="37.0" layoutX="52.0"
-			layoutY="27.0" onMouseClicked="#switchToHistoryPage"
+
+		<!-- game icons image -->
+		<ImageView fitHeight="50.0" fitWidth="50.0" layoutX="52.0"
+			layoutY="40.0" onMouseClicked="#switchToHistoryPage"
 			pickOnBounds="true" preserveRatio="true">
 			<image>
 				<Image url="@/Image/history.png" />
 			</image>
 		</ImageView>
-		<Button fx:id="startbtn" layoutX="246.0" layoutY="291.0"
-			mnemonicParsing="false" onAction="#switchToGameSetup" text="Launch">
-			<font>
-				<Font size="24.0" />
-			</font>
-		</Button>
-		<ImageView fitHeight="37.0" fitWidth="37.0" layoutX="111.0"
-			layoutY="27.0" onMouseClicked="#switchToQuestionPage"
+		<ImageView fitHeight="50.0" fitWidth="50.0" layoutX="150.0"
+			layoutY="40.0" onMouseClicked="#switchToQuestionPage"
 			pickOnBounds="true" preserveRatio="true">
 			<image>
 				<Image url="@/Image/editQ.png" />
 			</image>
 		</ImageView>
+		<ImageView fitHeight="70.0" fitWidth="70.0" layoutX="1780.0"
+			layoutY="100.0" onMouseClicked="#showGameRules" pickOnBounds="true"
+			preserveRatio="true">
+			<image>
+				<Image url="@/Image/infoIcon2.png" />
+			</image>
+		</ImageView>
+		<Button alignment="BOTTOM_CENTER" contentDisplay="BOTTOM"
+			layoutX="246.0" layoutY="291.0" mnemonicParsing="true"
+			onAction="#switchToGameSetup" style="-fx-background-color: #49ae40;"
+			text="Play" textFill="#f4f41f" AnchorPane.bottomAnchor="150"
+			AnchorPane.leftAnchor="900.0" AnchorPane.rightAnchor="900.0">
+			<font>
+				<Font size="24.0" />
+			</font>
+		</Button>
 	</children>
 </AnchorPane>
