@@ -139,6 +139,20 @@ public class AdminQuestionPageController {
             questionTableView.setItems(sortedList);
         }
     }
+    public class EditDeleteCell extends TableCell<Question, Void> {
+	    private final Button deleteButton;
+
+	    public EditDeleteCell() {
+	        deleteButton = new Button("Delete");
+
+	        deleteButton.setOnAction(event -> {
+	            Question question = (Question) getTableRow().getItem();
+	            if (question != null) {
+	                sysData.deleteQuestion(question);
+	                allQuestions.remove(question);
+	            }
+	        });
+	    }
 
 }
 
