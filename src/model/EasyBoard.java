@@ -54,7 +54,7 @@ public class EasyBoard extends Board{
 		    	do {
 			    	stRandi = random.nextInt(size);
 			    	stRandj = random.nextInt(size);
-		    	}while((stRandi == size && stRandj == 0)|| (rowQues.contains(stRandi))|| (stRandi == 0 && stRandj == size)) ;
+		    	}while((stRandi == size-1 && stRandj == 0)|| (rowQues.contains(stRandi))|| (stRandi == 0 && stRandj == size-1)) ;
 		    	getSquares()[stRandi][stRandj].setSquareType(SquareType.QUESTION);
 		    	rowQues.add(stRandi);
 		    }
