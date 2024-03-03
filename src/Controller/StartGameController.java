@@ -3,14 +3,20 @@ package Controller;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
+
+import java.util.ArrayList;
 
 import Utils.DiffLevel;
 import javafx.animation.KeyFrame;
@@ -18,8 +24,11 @@ import javafx.util.Duration;
 import model.Dice;
 import model.DiceFactory;
 import model.Games;
+import model.Ladders;
 import model.Player;
+import model.PlayerMoveSubject;
 import model.RunningGame;
+import model.Snakes;
 
 public class StartGameController {
 	@FXML
@@ -31,9 +40,15 @@ public class StartGameController {
     @FXML
     private Rectangle diceRec;
     @FXML
+    private Rectangle playerRec;
+    @FXML
     private Button rollB;
     @FXML
     private StackPane spDice;
+    @FXML
+    private StackPane spPlayer;
+    
+    private Label lPlayer;
     
     Image img ;
     ImageView iv;
@@ -48,12 +63,14 @@ public class StartGameController {
 	
 	Games game = RunningGame.getInstance().getCurrentGame();
 	
+	
 	int diceRes;
     
     
     // start the timer
     @FXML
     void onClickStart(ActionEvent event) {
+    	rollB.setDisable(true);
         if (timeline == null) {
             timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
                 seconds++;
@@ -67,6 +84,7 @@ public class StartGameController {
         }
         
         timeline.play();
+        rollB.setDisable(false);
     }
     private void updateTimer() {
         timer.setText(String.format("%02d:%02d", minutes, seconds));
@@ -78,9 +96,12 @@ public class StartGameController {
     	DiffLevel dl = RunningGame.getInstance().getCurrentGame().getDifficultyLevel();
     	Dice dice = df.getDice(dl);
     	diceRes = dice.roll();
-    	
+    	PlayerMoveSubject pms = new PlayerMoveSubject();
+		spDice.getChildren().removeAll(iv);
+		spPlayer.getChildren().removeAll(lPlayer);
+		spPlayer.getChildren().removeAll();
     	if(diceRes == 0 ) {
-    		spDice.getChildren().remove(iv);
+    		img = new Image(getClass().getResourceAsStream("/Image/Dice-0.png"));
     	}else if(diceRes == 1 ) {
     		img = new Image(getClass().getResourceAsStream("/Image/Dice-1.png"));
     		
@@ -119,11 +140,14 @@ public class StartGameController {
     	}else if(tern%mod == 3) {
     		p = RunningGame.getInstance().getPp().get(3);
     		System.out.println(p);
-
     	}
-    		
+    	lPlayer = new Label(p.getNickName());
+    	lPlayer.setTextFill(Color.WHITE);
+    	lPlayer.setPrefSize(50, 50);
+    	lPlayer.setTextAlignment(TextAlignment.CENTER);
     		int from = RunningGame.getInstance().getPlayerPlacement().get(p);
     		if(dl.equals(DiffLevel.easy)) {
+    			spDice.getChildren().removeAll(iv);
     			if(diceRes == 5) {
     				//question easy
     	    		img = new Image(getClass().getResourceAsStream("/Image/Dice-5.png"));
@@ -135,10 +159,16 @@ public class StartGameController {
     				img = new Image(getClass().getResourceAsStream("/Image/Dice-7.png"));
     			}else if(diceRes <=4 ){
     				int to = from + diceRes;
-    				System.out.println("to = "+to);
+    				if(to > 49) {
+    					to =49;
+    				}		
+    				System.out.println("to = "+to);	
+    				pms.onPlayerMovement(p, from, to);
     				move(p, from, to , tern);
     			}
+    			System.out.println("DiceRes : "+diceRes);
     		}else if(dl.equals(DiffLevel.medium)) {
+    			spDice.getChildren().removeAll(iv);
     			if(diceRes == 7 || diceRes == 8) {
     				//question easy
     	    		img = new Image(getClass().getResourceAsStream("/Image/Dice-7.png"));
@@ -150,9 +180,14 @@ public class StartGameController {
     	    		img = new Image(getClass().getResourceAsStream("/Image/Dice-9.png"));
     			}else {
     				int to = from + diceRes;
+    				if(to > 100) {
+    					to =100;
+    				}
+    				pms.onPlayerMovement(p, from, to);
     				move(p, from, to , tern);
     			}
     		}else if(dl.equals(DiffLevel.hard)) {
+    			spDice.getChildren().removeAll(iv);
     			if(diceRes == 7 || diceRes == 8) {
     				//question easy
     	    		img = new Image(getClass().getResourceAsStream("/Image/Dice-7.png"));
@@ -164,15 +199,20 @@ public class StartGameController {
     				//question hard
     			}else {
     				int to = from + diceRes;
+    				if(to > 169) {
+    					to =169;
+    				}
+    				pms.onPlayerMovement(p, from, to);
     				move(p, from, to , tern);
     			}
     		}	
+    		
     		iv = new ImageView(img);
         	iv.setFitWidth(150);
         	iv.setFitHeight(150);
-        	System.out.println(diceRes);
         	spDice.getChildren().add(iv);
-        	
+        	spPlayer.getChildren().add(lPlayer);
+        	CheckEnd();
         	tern++;
     	}
     	
@@ -205,9 +245,6 @@ public class StartGameController {
     	}
     }
     
-    void getPlayerByTern(int tern) {
-    	
-    }
     
     void move(Player player , int from , int to , int tern) {
     	int Tcul = GridPane.getColumnIndex(GameSetupController.boxes.get(to)) ;
@@ -230,10 +267,53 @@ public class StartGameController {
     		p = RunningGame.getInstance().getPp().get(4);
     		c = RunningGame.getInstance().getPc().get(4);
     	}
-    	RunningGame.getInstance().getPlayerPlacement().put(p, to);
+
+    	//check Snakes and ladders
+    	if(CheckSnake(to) != null) {
+    		Tcul = GridPane.getColumnIndex(GameSetupController.boxes.get(CheckSnake(to)));
+        	Trow = GridPane.getRowIndex(GameSetupController.boxes.get(CheckSnake(to)));
+        	RunningGame.getInstance().getPlayerPlacement().put(p, CheckSnake(to));
+        	p.setPlace(CheckSnake(to));
+    	}
+    	if(CheckLadder(to) != null) {
+    		Tcul = GridPane.getColumnIndex(GameSetupController.boxes.get(CheckLadder(to)));
+        	Trow = GridPane.getRowIndex(GameSetupController.boxes.get(CheckLadder(to)));
+        	RunningGame.getInstance().getPlayerPlacement().put(p, CheckLadder(to));
+        	p.setPlace(CheckLadder(to));
+    	}
+    	
+    	
     	if(!(Tcul==Fcul && Frow==Trow)) {
+//    		GameSetupController.grid.getChildren().removeIf(node -> node instanceof Circle );
+//    		GameSetupController.grid.getChildren().removeIf(node -> node.equals(c));
+
         	GameSetupController.grid.add(c, Tcul, Trow);
     	}
+
+    }
+    
+    public Integer CheckSnake(int to ) {
+    	ArrayList<Snakes> snakes = RunningGame.getInstance().getBoard().getsnakes();
+    	for(Snakes s : snakes) {
+    		if(to == s.getStartSnake()) {
+    			int too = s.getEndSnake();
+    			System.out.println("Snakeeeee");
+
+    			return too;
+    		}
+    	}
+    	return null;
+    }
+    public Integer CheckLadder(int to) {
+    	ArrayList<Ladders> ladders = RunningGame.getInstance().getBoard().getladders();
+    	for(Ladders l : ladders) {
+    		if(to == l.getStartLadder()) {
+    			int too = l.getEndLadder();
+    			System.out.println("ladddder");
+    			return too;
+    		}
+    	}
+    	return null;
     }
     
 }

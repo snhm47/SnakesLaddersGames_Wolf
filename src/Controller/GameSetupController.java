@@ -397,6 +397,7 @@ public class GameSetupController implements Initializable {
         	b= new HardBoard();
         	diffnumber=13;
         }
+        
 
         grid = new GridPane();
         for(int cons=0;cons<diffnumber;cons++) {
@@ -423,6 +424,7 @@ public class GameSetupController implements Initializable {
             	
                 VBox box = new VBox();
                 box.setAlignment(Pos.TOP_LEFT);
+                box.setSpacing(20);
                 //box.setEditable(false);
                 
                 if((row + column) % 2 == 1)
@@ -475,6 +477,8 @@ public class GameSetupController implements Initializable {
                 		Circle player = new Circle();
                 		player.setScaleX(1.5);
                 		player.setScaleY(1.5);
+                		player.setTranslateX(player.getTranslateX()+50);
+                		player.setTranslateY(player.getTranslateY()+50);
 	                	Utils.Color c = p.getColorPlayer();
 	                	if (c.equals(Utils.Color.YELLOW)) {
 	                		player.setFill(Color.YELLOW);
@@ -954,7 +958,7 @@ public class GameSetupController implements Initializable {
 
 
 
-
+        	RunningGame.getInstance().setBoard(b);
         	
         	
         }
