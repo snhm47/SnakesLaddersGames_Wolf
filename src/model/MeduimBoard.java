@@ -147,7 +147,7 @@ public class MeduimBoard extends Board{
        			
        			startLadder = getSquares()[startlevel+i+1][startla].getNumber();
        			endLadder = getSquares()[startlevel][startla].getNumber();
-       		}while((startLadder == 1) ||(endLadder == size*size) ||(endl.contains(endLadder)) || (endl.contains(startLadder)) || (startlevel+i+1 > size-1) || (startl.contains(startLadder)) || (startl.contains(endLadder)) || (endl.contains(startSnake))||(starts.contains(endLadder))||(starts.contains(startLadder))||(ends.contains(startLadder)));
+       		}while((startLadder == 1) ||(endLadder == size*size) ||(endl.contains(endLadder)) || (endl.contains(startLadder)) || (startlevel+i+1 > size-1) || (startl.contains(startLadder)) || (startl.contains(endLadder)) || (starts.contains(endLadder))||(starts.contains(startLadder))||(ends.contains(startLadder)));
        			
        		LadderType lt = null ;
        		if(i == 0) {
