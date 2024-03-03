@@ -768,8 +768,8 @@ public class GameSetupController implements Initializable {
                     	ivs.setTranslateX(ivs.getTranslateX()-40);
                     }else if(s.getSnakeType().equals(Utils.Color.BLUE)) {
 //                    	iv.setFitHeight(1500);
-                		ivs.setScaleY(1.2);
-                    	ivs.setTranslateY(ivs.getTranslateY()+220);
+                		ivs.setScaleY(0.7);
+                    	ivs.setTranslateY(ivs.getTranslateY()+180);
                     	ivs.setTranslateX(ivs.getTranslateX()-50);
                     }else if(s.getSnakeType().equals(Utils.Color.RED)) {
 //                    	iv.setFitHeight(10000);

@@ -128,8 +128,10 @@ public class HardBoard extends Board{
        				endSnake = getSquares()[12][startSn].getNumber();
        			}
        			startSnake = getSquares()[startlevel][startSn].getNumber();
-    	   }while((startSnake == size*size) || (startlevel+i+1 > size-1) || (ends.contains(startSnake)) || (starts.contains(startSnake)) || (starts.contains(endSnake)));
+//    	   }while((startSnake == size*size) || (startlevel+i+1 > size-1) || (ends.contains(startSnake)) || (starts.contains(startSnake)) || (starts.contains(endSnake)));
+    	   }while((startSnake == size*size)||(startlevel+1>size-1 && c.equals(Color.YELLOW))||(startlevel+2>size-1 && c.equals(Color.GREEN)) ||(startlevel+3>size-1 && c.equals(Color.BLUE))||(ends.contains(startSnake))||(starts.contains(startSnake))||(starts.contains(endSnake)));
 
+       			
             Snakes s = new Snakes(c, startSnake, endSnake);
             getsnakes().add(s);
             ends.add(endSnake);

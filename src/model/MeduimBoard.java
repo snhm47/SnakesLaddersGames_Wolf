@@ -124,8 +124,11 @@ public class MeduimBoard extends Board{
        				endSnake = getSquares()[9][startSn].getNumber();
        			}
        			startSnake = getSquares()[startlevel][startSn].getNumber();
-    	   }while((startSnake == size*size) ||(startlevel+i+1 > size-1) || (ends.contains(endSnake)) || (ends.contains(startSnake)) || (starts.contains(startSnake)) || (starts.contains(endSnake)));
+//    	   }while((startSnake == size*size) ||(startlevel+i+1 > size-1) || (ends.contains(endSnake)) || (ends.contains(startSnake)) || (starts.contains(startSnake)) || (starts.contains(endSnake)));
+//    	   }while((startSnake == size*size)||(startlevel+i+1>size-1)||(ends.contains(startSnake))||(starts.contains(startSnake))||(starts.contains(endSnake)));
+    	   }while((startSnake == size*size)||(startlevel+1>size-1 && c.equals(Color.YELLOW))||(startlevel+2>size-1 && c.equals(Color.GREEN)) ||(startlevel+3>size-1 && c.equals(Color.BLUE))||(ends.contains(startSnake))||(starts.contains(startSnake))||(starts.contains(endSnake))||(ends.contains(endSnake)));
 
+       			
             Snakes s = new Snakes(c, startSnake, endSnake);
             getsnakes().add(s);
             ends.add(endSnake);
@@ -144,7 +147,7 @@ public class MeduimBoard extends Board{
        			
        			startLadder = getSquares()[startlevel+i+1][startla].getNumber();
        			endLadder = getSquares()[startlevel][startla].getNumber();
-       		}while((startLadder == 1) ||(endLadder == size*size) ||(endl.contains(endLadder)) || (ends.contains(endLadder)) || (startlevel+i+1 > size-1) || (startl.contains(startLadder)) || (startl.contains(endLadder)) || (endl.contains(startLadder)) || (endl.contains(startSnake)));
+       		}while((startLadder == 1) ||(endLadder == size*size) ||(endl.contains(endLadder)) || (endl.contains(startLadder)) || (startlevel+i+1 > size-1) || (startl.contains(startLadder)) || (startl.contains(endLadder)) || (endl.contains(startSnake))||(starts.contains(endLadder))||(starts.contains(startLadder))||(ends.contains(startLadder)));
        			
        		LadderType lt = null ;
        		if(i == 0) {

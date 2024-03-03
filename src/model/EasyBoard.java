@@ -115,14 +115,15 @@ public class EasyBoard extends Board{
 //              System.out.println(squares[startlevel][startSn].getNumber());
 //              System.out.println(squares[startlevel+i+1][startSn].getNumber());
                    startSnake = getSquares()[startlevel][startSn].getNumber();
-        	   }while((startSnake == size*size) ||(startl.contains(endSnake)) || (startlevel+i+1 > size-1) || (ends.contains(endSnake)) || (ends.contains(startSnake)) || (starts.contains(startSnake)) || (starts.contains(endSnake)));
-
+//        	   }while((startSnake == size*size) ||(startl.contains(endSnake)) || (startlevel+i+1 > size-1) || (ends.contains(endSnake)) || (ends.contains(startSnake)) || (starts.contains(startSnake)) || (starts.contains(endSnake)));
+        	   }while((startSnake == size*size)||(startlevel+i+1>size-1)||(ends.contains(startSnake))||(ends.contains(endSnake))||(starts.contains(startSnake))||(starts.contains(endSnake)));
                Snakes s = new Snakes(c, startSnake, endSnake);
                getsnakes().add(s);
                ends.add(endSnake);
                starts.add(startSnake);
  
            }
+           System.out.println(ends +""+ starts);
            for(int i = 0 ; i < 4 ; i++) {
        		do {
        			startla = random.nextInt(size);
@@ -135,8 +136,9 @@ public class EasyBoard extends Board{
        			}
        			startLadder = getSquares()[startlevel+i+1][startla].getNumber();
        			endLadder = getSquares()[startlevel][startla].getNumber();
-       		}while((startLadder == 1) || (endLadder == size*size) ||(endl.contains(endLadder)) || (ends.contains(endLadder)) || (startlevel+i+1 > size-1) || (startl.contains(startLadder)) || (startl.contains(endLadder)) || (endl.contains(startLadder)) || (endl.contains(startSnake)));
-       		
+//       		}while((startLadder == 1) || (endLadder == size*size) ||(endl.contains(endLadder)) || (ends.contains(endLadder)) || (startlevel+i+1 > size-1) || (startl.contains(startLadder)) || (startl.contains(endLadder)) || (endl.contains(startLadder)) || (endl.contains(startSnake)));
+       		}while((startLadder==1)||(endLadder==size*size)||(endl.contains(startLadder))||(endl.contains(endLadder))||(startl.contains(endLadder))||(startl.contains(startLadder))||(starts.contains(endLadder))||(starts.contains(startLadder))||(ends.contains(startLadder)));
+       			
        		System.out.println(startLadder + " " + endLadder);
        		LadderType lt = null ;
        		if(i == 0) {
