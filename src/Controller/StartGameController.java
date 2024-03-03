@@ -162,9 +162,10 @@ public class StartGameController {
     				if(to > 49) {
     					to =49;
     				}		
-    				System.out.println("to = "+to);	
     				pms.onPlayerMovement(p, from, to);
-    				move(p, from, to , tern);
+    				if(from != to) {
+        				move(p, from, to , tern);
+    				}
     			}
     			System.out.println("DiceRes : "+diceRes);
     		}else if(dl.equals(DiffLevel.medium)) {
@@ -184,7 +185,9 @@ public class StartGameController {
     					to =100;
     				}
     				pms.onPlayerMovement(p, from, to);
-    				move(p, from, to , tern);
+    				if(from != to) {
+        				move(p, from, to , tern);
+    				}
     			}
     		}else if(dl.equals(DiffLevel.hard)) {
     			spDice.getChildren().removeAll(iv);
@@ -203,7 +206,9 @@ public class StartGameController {
     					to =169;
     				}
     				pms.onPlayerMovement(p, from, to);
-    				move(p, from, to , tern);
+    				if(from != to) {
+        				move(p, from, to , tern);
+    				}
     			}
     		}	
     		
@@ -247,10 +252,10 @@ public class StartGameController {
     
     
     void move(Player player , int from , int to , int tern) {
-    	int Tcul = GridPane.getColumnIndex(GameSetupController.boxes.get(to)) ;
-    	int Trow = GridPane.getRowIndex(GameSetupController.boxes.get(to));
-    	int Fcul = GridPane.getColumnIndex(GameSetupController.boxes.get(from));
-    	int Frow = GridPane.getRowIndex(GameSetupController.boxes.get(from));
+//    	int Tcul = GridPane.getColumnIndex(GameSetupController.boxes.get(to)) ;
+//    	int Trow = GridPane.getRowIndex(GameSetupController.boxes.get(to));
+//    	int Fcul = GridPane.getColumnIndex(GameSetupController.boxes.get(from));
+//    	int Frow = GridPane.getRowIndex(GameSetupController.boxes.get(from));
     	Player p = null;
     	Circle c = null;
     	int mod = RunningGame.getInstance().getPlayers().size();
@@ -267,29 +272,31 @@ public class StartGameController {
     		p = RunningGame.getInstance().getPp().get(4);
     		c = RunningGame.getInstance().getPc().get(4);
     	}
-
     	//check Snakes and ladders
-    	if(CheckSnake(to) != null) {
-    		Tcul = GridPane.getColumnIndex(GameSetupController.boxes.get(CheckSnake(to)));
-        	Trow = GridPane.getRowIndex(GameSetupController.boxes.get(CheckSnake(to)));
-        	RunningGame.getInstance().getPlayerPlacement().put(p, CheckSnake(to));
-        	p.setPlace(CheckSnake(to));
+    	Integer s = CheckSnake(to);
+    	Integer l = CheckLadder(to);
+    	if(s != null) {
+//    		Tcul = GridPane.getColumnIndex(GameSetupController.boxes.get(s));
+//        	Trow = GridPane.getRowIndex(GameSetupController.boxes.get(s));
+        	to = s;
     	}
-    	if(CheckLadder(to) != null) {
-    		Tcul = GridPane.getColumnIndex(GameSetupController.boxes.get(CheckLadder(to)));
-        	Trow = GridPane.getRowIndex(GameSetupController.boxes.get(CheckLadder(to)));
-        	RunningGame.getInstance().getPlayerPlacement().put(p, CheckLadder(to));
-        	p.setPlace(CheckLadder(to));
+    	if(l != null) {
+//    		Tcul = GridPane.getColumnIndex(GameSetupController.boxes.get(l));
+//        	Trow = GridPane.getRowIndex(GameSetupController.boxes.get(l));
+        	to = l;
     	}
     	
-    	
-    	if(!(Tcul==Fcul && Frow==Trow)) {
-//    		GameSetupController.grid.getChildren().removeIf(node -> node instanceof Circle );
-//    		GameSetupController.grid.getChildren().removeIf(node -> node.equals(c));
+    	GameSetupController.grid.getChildren().removeIf(node -> node instanceof Circle );    		
+//		System.out.println(c + " " + Tcul + " " + Trow);
+		RunningGame.getInstance().getPlayerPlacement().put(p, to);
+		p.setPlace(to);
+		for(Player pl :RunningGame.getInstance().getPci().keySet()) {
+			Circle cir = RunningGame.getInstance().getPci().get(pl);
+			int row = GridPane.getRowIndex(GameSetupController.boxes.get(RunningGame.getInstance().getPlayerPlacement().get(pl)));
+			int cul = GridPane.getColumnIndex(GameSetupController.boxes.get(RunningGame.getInstance().getPlayerPlacement().get(pl)));
 
-        	GameSetupController.grid.add(c, Tcul, Trow);
-    	}
-
+			GameSetupController.grid.add(cir, cul, row);
+		}
     }
     
     public Integer CheckSnake(int to ) {
@@ -298,7 +305,6 @@ public class StartGameController {
     		if(to == s.getStartSnake()) {
     			int too = s.getEndSnake();
     			System.out.println("Snakeeeee");
-
     			return too;
     		}
     	}
@@ -315,5 +321,6 @@ public class StartGameController {
     	}
     	return null;
     }
+    
     
 }

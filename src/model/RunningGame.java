@@ -12,6 +12,7 @@ public class RunningGame {
     private Boolean endGame ;
     private HashMap<Integer, Circle> pc ;
     private HashMap<Integer, Player> pp ;
+    private HashMap<Player, Circle>pci ;
     private Board board;
     
     
@@ -55,8 +56,17 @@ public class RunningGame {
 		this.endGame = false;
 		this.pc = new HashMap<Integer, Circle>();
 		this.pp = new HashMap<Integer, Player>();
+		this.pci = new HashMap<Player, Circle>();
 	}
 
+
+	public HashMap<Player, Circle> getPci() {
+		return pci;
+	}
+
+	public void setPci(HashMap<Player, Circle> pci) {
+		this.pci = pci;
+	}
 
 	public Board getBoard() {
 		return board;
