@@ -3,7 +3,10 @@ package Controller;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
@@ -22,9 +25,11 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import Utils.DiffLevel;
+import Utils.SquareType;
 import javafx.animation.KeyFrame;
 import javafx.util.Duration;
 import model.Dice;
@@ -153,6 +158,7 @@ public class StartGameController {
     	lPlayer.setPrefSize(50, 50);
     	lPlayer.setTextAlignment(TextAlignment.CENTER);
     		int from = RunningGame.getInstance().getPlayerPlacement().get(p);
+    		int to=0;
     		if(dl.equals(DiffLevel.easy)) {
     			spDice.getChildren().removeAll(iv);
     			if(diceRes == 5) {
@@ -165,7 +171,7 @@ public class StartGameController {
     				//question hard
     				img = new Image(getClass().getResourceAsStream("/Image/Dice-7.png"));
     			}else if(diceRes <=4 ){
-    				int to = from + diceRes;
+    				to = from + diceRes;
     				if(to > 49) {
     					to =49;
     				}		
@@ -187,7 +193,7 @@ public class StartGameController {
     				//question hard
     	    		img = new Image(getClass().getResourceAsStream("/Image/Dice-9.png"));
     			}else {
-    				int to = from + diceRes;
+    				to = from + diceRes;
     				if(to > 100) {
     					to =100;
     				}
@@ -208,7 +214,7 @@ public class StartGameController {
     				img = new Image(getClass().getResourceAsStream("/Image/Dice-9.png"));
     				//question hard
     			}else {
-    				int to = from + diceRes;
+    				to = from + diceRes;
     				if(to > 169) {
     					to =169;
     				}
@@ -227,6 +233,36 @@ public class StartGameController {
         	CheckEnd();
         	tern++;
         	
+        	for(Integer num : RunningGame.getInstance().getBoard().getSq().keySet()) {
+        		if(RunningGame.getInstance().getBoard().getSq().get(num).getSquareType().equals(SquareType.QUESTION) && num==to) {
+        			try {
+        		        // Load FXML scene (improve error handling with more specific exceptions)
+        		        FXMLLoader fxmlLoader = new FXMLLoader();
+        		        fxmlLoader.setLocation(getClass().getResource("/View/Questionpopup.fxml"));
+        		        Scene gameboardScene = new Scene(fxmlLoader.load(), 600, 400);
+
+        		        // Create new stage and configure (use descriptive variable names)
+        		        Stage gameStage = new Stage();
+        		        gameStage.setTitle("Game Board");
+        		        gameStage.setScene(gameboardScene);
+        		        gameStage.setMaximized(false);
+        		        gameStage.setResizable(false);
+
+        		        // Show new stage and hide previous (consider more graceful transitions if
+        		        // needed)
+        		        gameStage.show();
+
+        		    } catch (IOException e) {
+        		        // Handle IOException more robustly with specific messages
+        		        e.printStackTrace();
+        		        Alert alert = new Alert(Alert.AlertType.ERROR);
+        		        alert.setTitle("Error");
+        		        alert.setContentText(
+        		                "An error occurred while loading the FXML file. Please check the file path and content.");
+        		        alert.showAndWait();
+        		    }
+        		}
+        	}
         	
         	if(RunningGame.getInstance().getEndGame()) {
         		System.out.println("winning");
@@ -235,6 +271,7 @@ public class StartGameController {
         		HistoryController.saveHistoryToJson(history);
         	}
     	}
+    
     	
     public void showEndGamePopup(String winner) {
         // Create a custom dialog

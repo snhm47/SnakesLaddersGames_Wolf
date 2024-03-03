@@ -8,71 +8,66 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import model.Question;
 
 public class QuestionSquareController {
 
-    @FXML
-    private ResourceBundle resources;
+	@FXML
+	private ResourceBundle resources;
 
-    @FXML
-    private URL location;
+	@FXML
+	private URL location;
 
-    @FXML
-    private RadioButton rbans1;
+	@FXML
+	private RadioButton rbans1;
 
-    @FXML
-    private RadioButton rbans2;
+	@FXML
+	private RadioButton rbans2;
 
-    @FXML
-    private RadioButton rbans3;
+	@FXML
+	private RadioButton rbans3;
 
-    @FXML
-    private RadioButton rbans4;
-    
-    @FXML
-    private TextField questionText;
+	@FXML
+	private RadioButton rbans4;
 
-    private ToggleGroup rbans;
+	@FXML
+	private TextField questionText;
 
-    private SysData sysData;
+	@FXML
+	private Button answerButton;
 
-    @FXML
-    void initialize() {
-    	rbans = new ToggleGroup();
-    	rbans1.setToggleGroup(rbans);
-    	rbans2.setToggleGroup(rbans);
-    	rbans3.setToggleGroup(rbans);
-    	rbans4.setToggleGroup(rbans);
+	private ToggleGroup rbans;
 
-        sysData = new SysData("src/WolfQuestionsDB.json");
-        loadQuestions();
-    }
+	private SysData sysData;
+	
+    private Question question; // Add this field
 
-    private void loadQuestions() {
+
+	@FXML
+	void initialize() {
+		rbans = new ToggleGroup();
+		rbans1.setToggleGroup(rbans);
+		rbans2.setToggleGroup(rbans);
+		rbans3.setToggleGroup(rbans);
+		rbans4.setToggleGroup(rbans);
+
+		sysData = new SysData("src/WolfQuestionsDB.json");
+		loadQuestions();
+		answerButton.setOnAction(event -> checkAnswer());
+	}
+	private void loadQuestions() {
         try {
-            Question question = sysData.getRandomQuestion(sysData.loadDataFromJSON(sysData.getFilePath()));
+            question = sysData.getRandomQuestion(sysData.loadDataFromJSON(sysData.getFilePath()));
             if (question != null) {
                 questionText.setText(question.getText());
-            	rbans1.setText(question.getAnswers().get(0));
-            	rbans2.setText(question.getAnswers().get(1));
-            	rbans3.setText(question.getAnswers().get(2));
-            	rbans4.setText(question.getAnswers().get(3));
-
-                rbans.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
-                    if (rbans.getSelectedToggle() != null) {
-                        int selectedIndex = rbans.getToggles().indexOf(rbans.getSelectedToggle());
-                        if (selectedIndex == Integer.parseInt(question.getCorrectAnswer()) - 1) {
-                            showAlert("Correct Answer!", "You have chosen the correct answer.");
-                        } else {
-                            showAlert("Incorrect Answer!", "You have chosen the incorrect answer.");
-                        }
-                        // Close the window after showing the message
-                        Stage stage = (Stage) rbans1.getScene().getWindow();
-                    }
-                });
-            }else {
+                rbans1.setText(question.getAnswers().get(0));
+                rbans2.setText(question.getAnswers().get(1));
+                rbans3.setText(question.getAnswers().get(2));
+                rbans4.setText(question.getAnswers().get(3));
+                
+            } else {
                 showAlert("Error", "No question found.");
             }
         } catch (Exception e) {
@@ -81,11 +76,33 @@ public class QuestionSquareController {
         }
     }
 
-    private void showAlert(String title, String message) {
-        Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
+    private void checkAnswer() {
+        if (question != null) {
+            int selectedIndex = rbans.getToggles().indexOf(rbans.getSelectedToggle());
+            int correctIndex = Integer.parseInt(question.getCorrectAnswer()) - 1;
+
+            String selectedAnswer = question.getAnswers().get(selectedIndex);
+            String correctAnswer = question.getAnswers().get(correctIndex);
+
+            if (selectedIndex == correctIndex) {
+                showAlert("Correct Answer!", "You have chosen the correct answer: " + selectedAnswer);
+            } else {
+                showAlert("Incorrect Answer!", "The correct answer is: " + correctAnswer + "\nYou chose: " + selectedAnswer);
+            }
+
+            // Close the window after showing the message
+            Stage stage = (Stage) answerButton.getScene().getWindow();
+            stage.close();
+        } else {
+            showAlert("Error", "No question found.");
+        }
     }
+
+	private void showAlert(String title, String message) {
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle(title);
+		alert.setHeaderText(null);
+		alert.setContentText(message);
+		alert.show();
+	}
 }
