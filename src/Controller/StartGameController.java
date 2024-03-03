@@ -48,12 +48,14 @@ public class StartGameController {
 	
 	Games game = RunningGame.getInstance().getCurrentGame();
 	
+	
 	int diceRes;
     
     
     // start the timer
     @FXML
     void onClickStart(ActionEvent event) {
+    	rollB.setDisable(true);
         if (timeline == null) {
             timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
                 seconds++;
@@ -67,6 +69,7 @@ public class StartGameController {
         }
         
         timeline.play();
+        rollB.setDisable(false);
     }
     private void updateTimer() {
         timer.setText(String.format("%02d:%02d", minutes, seconds));
@@ -124,6 +127,7 @@ public class StartGameController {
     		
     		int from = RunningGame.getInstance().getPlayerPlacement().get(p);
     		if(dl.equals(DiffLevel.easy)) {
+    			spDice.getChildren().remove(iv);
     			if(diceRes == 5) {
     				//question easy
     	    		img = new Image(getClass().getResourceAsStream("/Image/Dice-5.png"));
@@ -143,6 +147,7 @@ public class StartGameController {
     				move(p, from, to , tern);
     			}
     		}else if(dl.equals(DiffLevel.medium)) {
+    			spDice.getChildren().remove(iv);
     			if(diceRes == 7 || diceRes == 8) {
     				//question easy
     	    		img = new Image(getClass().getResourceAsStream("/Image/Dice-7.png"));
@@ -160,6 +165,7 @@ public class StartGameController {
     				move(p, from, to , tern);
     			}
     		}else if(dl.equals(DiffLevel.hard)) {
+    			spDice.getChildren().remove(iv);
     			if(diceRes == 7 || diceRes == 8) {
     				//question easy
     	    		img = new Image(getClass().getResourceAsStream("/Image/Dice-7.png"));
@@ -241,7 +247,9 @@ public class StartGameController {
     		p = RunningGame.getInstance().getPp().get(4);
     		c = RunningGame.getInstance().getPc().get(4);
     	}
+    	
     	RunningGame.getInstance().getPlayerPlacement().put(p, to);
+    	p.setPlace(to);
     	if(!(Tcul==Fcul && Frow==Trow)) {
         	GameSetupController.grid.add(c, Tcul, Trow);
     	}
