@@ -12,6 +12,7 @@ public class RunningGame {
     private Boolean endGame ;
     private HashMap<Integer, Circle> pc ;
     private HashMap<Integer, Player> pp ;
+    private Board board;
     
     
     public static RunningGame instanceRunningGame;
@@ -56,6 +57,14 @@ public class RunningGame {
 		this.pp = new HashMap<Integer, Player>();
 	}
 
+
+	public Board getBoard() {
+		return board;
+	}
+
+	public void setBoard(Board board) {
+		this.board = board;
+	}
 
 	public HashMap<Integer, Player> getPp() {
 		return pp;

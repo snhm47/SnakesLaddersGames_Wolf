@@ -27,9 +27,13 @@
 								<Font name="David Bold" size="24.0" />
 							</font>
 						</Label>
-						<Rectangle fx:id="diceRec" arcHeight="5.0" arcWidth="5.0" fill="#0084ff" height="200.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
-						<Label fx:id="currentPlayerLabel" text="Label" textFill="WHITE" />
-						<ListView fx:id="namesList" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #DE3E4D;" />
+						 <StackPane fx:id="spPlayer" prefHeight="150.0" prefWidth="200.0">
+							 <children>
+								<Rectangle fx:id="playerRec" arcHeight="5.0" arcWidth="5.0" fill="#0084ff" height="200.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+						 	</children>
+						 </StackPane>
+							<Label fx:id="currentPlayerLabel" text="Label" textFill="WHITE" />
+							<ListView fx:id="namesList" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #DE3E4D;" />
                   <Button fx:id="start" mnemonicParsing="false" onAction="#onClickStart" text="Start" />
 					</children>
 				</VBox>

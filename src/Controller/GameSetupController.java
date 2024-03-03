@@ -397,6 +397,7 @@ public class GameSetupController implements Initializable {
         	b= new HardBoard();
         	diffnumber=13;
         }
+        
 
         grid = new GridPane();
         for(int cons=0;cons<diffnumber;cons++) {
@@ -423,7 +424,7 @@ public class GameSetupController implements Initializable {
             	
                 VBox box = new VBox();
                 box.setAlignment(Pos.TOP_LEFT);
-                box.setSpacing(10);
+                box.setSpacing(20);
                 //box.setEditable(false);
                 
                 if((row + column) % 2 == 1)
@@ -957,7 +958,7 @@ public class GameSetupController implements Initializable {
 
 
 
-
+        	RunningGame.getInstance().setBoard(b);
         	
         	
         }

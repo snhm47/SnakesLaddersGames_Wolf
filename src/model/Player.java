@@ -93,6 +93,14 @@ public class Player {
 	     }
 	}
 
+	@Override
+	public String toString() {
+		return "Player [nickName=" + nickName + ", colorPlayer=" + colorPlayer + ", winCount=" + winCount + ", Place="
+				+ Place + ", playersObserve=" + playersObserve + "]";
+	}
+
+
+
 	// Notifications
 	public static final String NAME_FOUND_CHANGE_MESSAGE = "The name was found, please change it.";
 	public static final String NAME_SUCCESSFULLY_RECEIVED_MESSAGE = "The name was successfully received.";
