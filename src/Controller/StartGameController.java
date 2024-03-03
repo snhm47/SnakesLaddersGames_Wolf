@@ -5,16 +5,22 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
@@ -24,6 +30,7 @@ import javafx.util.Duration;
 import model.Dice;
 import model.DiceFactory;
 import model.Games;
+import model.History;
 import model.Ladders;
 import model.Player;
 import model.PlayerMoveSubject;
@@ -219,7 +226,60 @@ public class StartGameController {
         	spPlayer.getChildren().add(lPlayer);
         	CheckEnd();
         	tern++;
+        	
+        	
+        	if(RunningGame.getInstance().getEndGame()) {
+        		System.out.println("winning");
+        		showEndGamePopup(p.getNickName());
+        		History history = new History(p.getNickName(), null, mod, mod, String.valueOf(RunningGame.getInstance().getCurrentGame().getDifficultyLevel()));
+        		HistoryController.saveHistoryToJson(history);
+        	}
     	}
+    	
+    public void showEndGamePopup(String winner) {
+        // Create a custom dialog
+        Dialog<String> dialog = new Dialog<>();
+        dialog.initModality(Modality.APPLICATION_MODAL);
+        dialog.setTitle("Game Over");
+
+        // Set the content for the dialog
+        DialogPane dialogPane = dialog.getDialogPane();
+        dialogPane.getButtonTypes().addAll(ButtonType.CLOSE);
+        Stage stage = (Stage) dialogPane.getScene().getWindow();
+        
+        // Custom layout for dialog content
+        HBox content = new HBox();
+        content.setSpacing(10);
+        Label label = new Label(winner + " won the game!");
+        content.getChildren().add(label);
+
+        // Create buttons
+        Button btnReturnMain = new Button("Return to Main Page");
+        btnReturnMain.setOnAction(e -> {
+            // Logic to return to main page
+            stage.close();
+        });
+
+        Button btnRestart = new Button("Restart Game");
+        btnRestart.setOnAction(e -> {
+        	// Logic to restart the game
+        	restartGame();
+        	stage.close();
+        });
+        content.getChildren().addAll(btnReturnMain, btnRestart);
+
+        // Set content to the dialog
+        dialogPane.setContent(content);
+
+        // Show the dialog and wait for it to be closed
+        dialog.showAndWait();
+    }
+    
+    
+    private void restartGame() {
+        // Logic to reset the game state and start over
+    	System.out.println("winnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn!");
+    }
     	
     	
     
