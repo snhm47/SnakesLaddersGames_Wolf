@@ -291,27 +291,30 @@ public class GameSetupController implements Initializable {
 	@FXML
 	private void resetGameSetup() {
 
-		// Clear player labels
-		p1lbl.setText("");
-		p2lbl.setText("");
-		p3lbl.setText("");
-		p4lbl.setText("");
+	    // Clear player labels
+	    p1lbl.setText("");
+	    p2lbl.setText("");
+	    p3lbl.setText("");
+	    p4lbl.setText("");
 
-		// Clear player list
-		players.clear();
-		playersCount = 0;
+	    // Clear player list
+	    players.clear();
+	    playersCount = 0;
 
-		// Reset slider and enable controls
-		slider.setDisable(false);
-		cnfrmbtn.setDisable(false);
-		addPlayerbtn.setDisable(true);
-		PlayerTf.setDisable(true);
-		chooseColor.setDisable(true);
-		PlayerTf.clear(); // Clear player name text field
+	    // Reset slider and enable controls
+	    slider.setDisable(false);
+	    cnfrmbtn.setDisable(false);
+	    addPlayerbtn.setDisable(true);
+	    PlayerTf.setDisable(true);
+	    chooseColor.setDisable(true);
+	    PlayerTf.clear(); // Clear player name text field
 
-		rbuttoneasy.setSelected(false);
-		rbuttonMedium.setSelected(false);
-		rbuttonHard.setSelected(false);
+	    // Clear color list
+	    colorListCheck.clear();
+
+	    rbuttoneasy.setSelected(false);
+	    rbuttonMedium.setSelected(false);
+	    rbuttonHard.setSelected(false);
 	}
 
 	public void onClick(ActionEvent event) {
