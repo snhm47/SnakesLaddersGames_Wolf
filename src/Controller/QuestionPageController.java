@@ -201,7 +201,6 @@ public class QuestionPageController {
 		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
-		setFullscreen();
 		stage.show();
 	}
 
@@ -219,33 +218,6 @@ public class QuestionPageController {
 		}
 	}
 
-//not needed
-	public void AddButton(ActionEvent event) throws IOException {
-		try {
-
-			FXMLLoader fxmlLoader = new FXMLLoader();
-			fxmlLoader.setLocation(getClass().getResource("../application/AddQuestion.fxml"));
-			Scene addQuestionScene = new Scene(fxmlLoader.load());
-
-			gameStage = new Stage();
-			gameStage.setTitle("Add Question");
-			gameStage.setScene(addQuestionScene);
-			gameStage.setResizable(false);
-			stage.setMaximized(true);
-			gameStage.show();
-			Stage prevStage = (Stage) addButton.getScene().getWindow();
-			prevStage.hide();
-
-		} catch (IOException e) {
-			// Handle IOException more robustly with specific messages
-			e.printStackTrace();
-			Alert alert = new Alert(AlertType.ERROR);
-			alert.setTitle("Error");
-			alert.setContentText(
-					"An error occurred while loading the FXML file. Please check the file path and content.");
-			alert.showAndWait();
-		}
-	}
 
 	@FXML
 	public void returnToMainPage(MouseEvent event) throws IOException {
@@ -253,7 +225,6 @@ public class QuestionPageController {
 		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
-		setFullscreen();
 		stage.show();
 	}
 
@@ -264,7 +235,6 @@ public class QuestionPageController {
 		scene = new Scene(root);
 		stage.setScene(scene);
 		stage.setMaximized(true);
-		setFullscreen();
 		stage.show();
 	}
 

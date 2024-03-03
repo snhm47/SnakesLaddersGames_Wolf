@@ -18,7 +18,7 @@ import model.Admin;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
-public class HomeController {
+public class StartMenuController {
 
 	private Stage stage;
 	private Scene scene;
@@ -49,8 +49,10 @@ public class HomeController {
 	}
 
 	@FXML
-	public void switchToAdmin(MouseEvent event) throws IOException {
-		root = FXMLLoader.load(getClass().getResource("/View/adminLogin.fxml"));
+	public void switchToQuestionPage(MouseEvent event) throws IOException {
+		// Load the admin login FXML file
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/QuestionsPage.fxml"));
+		root = loader.load();
 		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
@@ -59,7 +61,7 @@ public class HomeController {
 
 	@FXML
 	public void switchToHistoryPage(MouseEvent event) throws IOException {
-		root = FXMLLoader.load(getClass().getResource("/View/HistoryScreen.fxml"));
+		root = FXMLLoader.load(getClass().getResource("/View/HistoryAfterAdmin.fxml"));
 		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
