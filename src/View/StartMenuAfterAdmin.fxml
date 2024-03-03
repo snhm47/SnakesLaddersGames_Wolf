@@ -10,7 +10,7 @@
 minHeight="1000.0" minWidth="1920.0" prefHeight="1000.0"
 	prefWidth="1920.0" xmlns="http://javafx.com/javafx/8"
 	xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="Controller.HomeController">
+	fx:controller="Controller.StartMenuController">
 	<children>
 
 		<!-- background image -->
@@ -24,7 +24,7 @@ minHeight="1000.0" minWidth="1920.0" prefHeight="1000.0"
 		<!-- gamelogo image -->
 		<ImageView fitHeight="200" fitWidth="350" layoutX="225.0"
 			layoutY="14.0" pickOnBounds="true" preserveRatio="true"
-			AnchorPane.leftAnchor="800.0">
+			AnchorPane.leftAnchor="800.0" AnchorPane.topAnchor="50">
 			<image>
 				<Image url="@/Image/gameLogo.png" />
 			</image>
@@ -39,10 +39,10 @@ minHeight="1000.0" minWidth="1920.0" prefHeight="1000.0"
 			</image>
 		</ImageView>
 		<ImageView fitHeight="50.0" fitWidth="50.0" layoutX="150.0"
-			layoutY="40.0" onMouseClicked="#switchToAdmin"
+			layoutY="40.0" onMouseClicked="#switchToQuestionPage"
 			pickOnBounds="true" preserveRatio="true">
 			<image>
-				<Image url="@/Image/login.png" />
+				<Image url="@/Image/editQ.png" />
 			</image>
 		</ImageView>
 		<ImageView fitHeight="70.0" fitWidth="70.0" layoutX="1780.0"

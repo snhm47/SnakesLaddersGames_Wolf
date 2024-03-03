@@ -12,12 +12,11 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("/View/StartMenu.fxml"));
-			Scene scene = new Scene(root,600,400);
+			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("Snakes and Ladders");
 			primaryStage.setResizable(false);
-            primaryStage.setMaximized(true);
 			primaryStage.show();
 
 			primaryStage.show();
