@@ -78,9 +78,9 @@ public class StartGameController {
     	DiffLevel dl = RunningGame.getInstance().getCurrentGame().getDifficultyLevel();
     	Dice dice = df.getDice(dl);
     	diceRes = dice.roll();
-    	
+		spDice.getChildren().remove(iv);
     	if(diceRes == 0 ) {
-    		spDice.getChildren().remove(iv);
+    		img = new Image(getClass().getResourceAsStream("/Image/Dice-0.png"));
     	}else if(diceRes == 1 ) {
     		img = new Image(getClass().getResourceAsStream("/Image/Dice-1.png"));
     		
@@ -135,7 +135,11 @@ public class StartGameController {
     				img = new Image(getClass().getResourceAsStream("/Image/Dice-7.png"));
     			}else if(diceRes <=4 ){
     				int to = from + diceRes;
+    				if(to > 49) {
+    					to =49;
+    				}
     				System.out.println("to = "+to);
+    				
     				move(p, from, to , tern);
     			}
     		}else if(dl.equals(DiffLevel.medium)) {
@@ -150,6 +154,9 @@ public class StartGameController {
     	    		img = new Image(getClass().getResourceAsStream("/Image/Dice-9.png"));
     			}else {
     				int to = from + diceRes;
+    				if(to > 100) {
+    					to =100;
+    				}
     				move(p, from, to , tern);
     			}
     		}else if(dl.equals(DiffLevel.hard)) {
@@ -164,15 +171,19 @@ public class StartGameController {
     				//question hard
     			}else {
     				int to = from + diceRes;
+    				if(to > 169) {
+    					to =169;
+    				}
     				move(p, from, to , tern);
     			}
     		}	
+    		
     		iv = new ImageView(img);
         	iv.setFitWidth(150);
         	iv.setFitHeight(150);
         	System.out.println(diceRes);
-        	spDice.getChildren().add(iv);
-        	
+        	System.out.println(spDice.getChildren().add(iv));
+        	CheckEnd();
         	tern++;
     	}
     	
