@@ -39,7 +39,7 @@ minHeight="1000.0" minWidth="1920.0" prefHeight="1000.0"
 			layoutY="40.0" onMouseClicked="#returnToMainPage" pickOnBounds="true"
 			preserveRatio="true">
 			<image>
-				<Image url="@../Image/homebtnIcon.png" />
+				<Image url="@/Image/homebtnIcon.png" />
 			</image>
 		</ImageView>
 	</children>

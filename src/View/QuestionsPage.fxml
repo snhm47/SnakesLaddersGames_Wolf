@@ -47,7 +47,7 @@
 			layoutY="40.0" onMouseClicked="#returnToMainPage" pickOnBounds="true"
 			preserveRatio="true">
 			<image>
-				<Image url="@../Image/homebtnIcon.png" />
+				<Image url="@/Image/homebtnIcon.png" />
 			</image>
 		</ImageView>
 
@@ -72,7 +72,7 @@
 			layoutY="353.0" onMouseClicked="#addQ" pickOnBounds="true"
 			preserveRatio="true" AnchorPane.rightAnchor="710.0" AnchorPane.bottomAnchor="100">
 			<image>
-				<Image url="@../Image/add.png" />
+				<Image url="@/Image/add.png" />
 			</image>
 		</ImageView>
 		<Text fill="RED" layoutX="354.0" layoutY="100.0"

@@ -13,7 +13,13 @@ import javafx.stage.Stage;
 import model.Question;
 
 public class QuestionSquareController {
-
+	public static QuestionSquareController _ins;
+	public static synchronized QuestionSquareController getInstance() {
+		if(_ins==null) {
+			return _ins = new QuestionSquareController();
+		}
+		return _ins;
+	}
 	@FXML
 	private ResourceBundle resources;
 
@@ -43,8 +49,18 @@ public class QuestionSquareController {
 	private SysData sysData;
 	
     private Question question; // Add this field
+    
+    public Question quesdiff;
+    
+    public Boolean flag;
 
 
+	public Boolean getFlag() {
+		return flag;
+	}
+	public void setFlag(Boolean flag) {
+		this.flag = flag;
+	}
 	@FXML
 	void initialize() {
 		rbans = new ToggleGroup();
@@ -57,16 +73,23 @@ public class QuestionSquareController {
 		loadQuestions();
 		answerButton.setOnAction(event -> checkAnswer());
 	}
-	private void loadQuestions() {
+	public Question loadQuestions() {
         try {
-            question = sysData.getRandomQuestion(sysData.loadDataFromJSON(sysData.getFilePath()));
+            question = SysData.getInstance().getRandomQuestion(sysData.loadDataFromJSON(sysData.getFilePath()));
             if (question != null) {
                 questionText.setText(question.getText());
                 rbans1.setText(question.getAnswers().get(0));
                 rbans2.setText(question.getAnswers().get(1));
                 rbans3.setText(question.getAnswers().get(2));
                 rbans4.setText(question.getAnswers().get(3));
-                
+//                
+//                for(String s : sysData.getInstance().getDifques().keySet()) {
+//                	if(questionText.getText().equals(s)) {
+//                		sysData.getInstance().getDifques().get(ques2);
+//                	}
+//                }
+                setQuesdiff(question);
+                return getQuesdiff();
             } else {
                 showAlert("Error", "No question found.");
             }
@@ -74,9 +97,10 @@ public class QuestionSquareController {
             showAlert("Error", "Failed to load questions.");
             e.printStackTrace();
         }
+        return getQuesdiff();
     }
 
-    private void checkAnswer() {
+    public Boolean checkAnswer() {
         if (question != null) {
             int selectedIndex = rbans.getToggles().indexOf(rbans.getSelectedToggle());
             int correctIndex = Integer.parseInt(question.getCorrectAnswer()) - 1;
@@ -84,19 +108,41 @@ public class QuestionSquareController {
             String selectedAnswer = question.getAnswers().get(selectedIndex);
             String correctAnswer = question.getAnswers().get(correctIndex);
 
-            if (selectedIndex == correctIndex) {
-                showAlert("Correct Answer!", "You have chosen the correct answer: " + selectedAnswer);
-            } else {
-                showAlert("Incorrect Answer!", "The correct answer is: " + correctAnswer + "\nYou chose: " + selectedAnswer);
-            }
-
             // Close the window after showing the message
             Stage stage = (Stage) answerButton.getScene().getWindow();
             stage.close();
+            
+            if (selectedIndex == correctIndex) {
+                showAlert("Correct Answer!", "You have chosen the correct answer: " + selectedAnswer);
+                setFlag(true);
+                System.out.println(getFlag());
+                return getFlag();
+            } else {
+                showAlert("Incorrect Answer!", "The correct answer is: " + correctAnswer + "\nYou chose: " + selectedAnswer);
+                setFlag(false);
+                System.out.println(getFlag());
+                return getFlag();
+            }
+            
+            
         } else {
             showAlert("Error", "No question found.");
         }
+        return false;
     }
+    
+//    public Integer checkDiff() {
+//    	Question ques = ques2;
+//    	System.out.println(ques);
+//    	if(ques.getDifficulty().equals("1")) {
+//    		System.out.println(ques.getDifficulty());
+//    		return 1;
+//    	}else if(ques.getDifficulty().equals("2")) {
+//    		System.out.println(ques.getDifficulty());
+//    		return 2;
+//    	}
+//    	return 3;
+//    }
 
 	private void showAlert(String title, String message) {
 		Alert alert = new Alert(AlertType.INFORMATION);
@@ -104,5 +150,17 @@ public class QuestionSquareController {
 		alert.setHeaderText(null);
 		alert.setContentText(message);
 		alert.show();
+	}
+	public Question getQuesdiff() {
+		return quesdiff;
+	}
+	public void setQuesdiff(Question quesdiff) {
+		this.quesdiff = quesdiff;
+	}
+	public Question getQuestion() {
+		return question;
+	}
+	public void setQuestion(Question question) {
+		this.question = question;
 	}
 }

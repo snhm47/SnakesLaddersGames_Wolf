@@ -8,6 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Iterator;
 
 import Utils.DiffLevel;
@@ -27,11 +28,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SysData {
-	private ArrayList<Question> questions = new ArrayList<Question>();
-	private String filePath;
+	
+	public static SysData _ins;
 
+	private ArrayList<Question> questions = new ArrayList<Question>();
+	private static String filePath;
+	private HashMap<String, Question>difques = 	new HashMap<String, Question>();
+	private ArrayList<Question>easyq= new ArrayList<Question>();
+	private ArrayList<Question>medq= new ArrayList<Question>();
+	private ArrayList<Question>hardq= new ArrayList<Question>();
+
+
+	public HashMap<String, Question> getDifques() {
+		return difques;
+	}
+
+	public void setDifques(HashMap<String, Question> difques) {
+		this.difques = difques;
+	}
+
+	public static  synchronized SysData getInstance() {
+		if(_ins == null) {
+			return _ins = new SysData(filePath);
+		}
+		return _ins;
+	}
+	
 	public SysData(String filePath) {
-		this.filePath = filePath;
+		SysData.filePath = filePath;
 	}
 
 
@@ -49,15 +73,82 @@ public class SysData {
                 String difficulty = (String) q.get("difficulty");
                 List<String> answers = (List<String>) q.get("answers");
                 String correctAnswer = (String) q.get("correct_ans");
-                data.add(new Question(questionText, answers, correctAnswer, difficulty));
+                Question ques = new Question(questionText, answers, correctAnswer, difficulty);
+//                data.add(new Question(questionText, answers, correctAnswer, difficulty));
+                data.add(ques);
+                difques.put(questionText, ques);
+                if(difficulty.equals("1")) {
+                	easyq.add(ques);
+                }else if(difficulty.equals("2")) {
+                	medq.add(ques);
+                }else {
+                	hardq.add(ques);
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return data;
     }
+	
 
-    public ObservableList<Question> filterQuestionsByDifficulty(String difficulty) {
+//    public ObservableList<Question> loadDataFromJSON(String filePath) {
+//        ObservableList<Question> data = FXCollections.observableArrayList();
+//        try {
+//            JSONParser parser = new JSONParser();
+//            Object obj = parser.parse(new FileReader(filePath));
+//            JSONObject jsonObject = (JSONObject) obj;
+//            JSONArray questionArray = (JSONArray) jsonObject.get("questions");
+//
+//            for (Object questionObj : questionArray) {
+//                JSONObject q = (JSONObject) questionObj;
+//                String questionText = (String) q.get("question");
+//                String difficulty = (String) q.get("difficulty");
+//                List<String> answers = (List<String>) q.get("answers");
+//                String correctAnswer = (String) q.get("correct_ans");
+//                Question ques = new Question(questionText, answers, correctAnswer, difficulty);
+////                data.add(new Question(questionText, answers, correctAnswer, difficulty));
+//                data.add(ques);
+//                if(difficulty.equals("1")) {
+//                	easyq.add(ques);
+//                }else if(difficulty.equals("2")) {
+//                	medq.add(ques);
+//                }else {
+//                	hardq.add(ques);
+//                }
+//                difques.put(questionText, ques);
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return data;
+//    }
+
+    public ArrayList<Question> getEasyq() {
+		return easyq;
+	}
+
+	public void setEasyq(ArrayList<Question> easyq) {
+		this.easyq = easyq;
+	}
+
+	public ArrayList<Question> getMedq() {
+		return medq;
+	}
+
+	public void setMedq(ArrayList<Question> medq) {
+		this.medq = medq;
+	}
+
+	public ArrayList<Question> getHardq() {
+		return hardq;
+	}
+
+	public void setHardq(ArrayList<Question> hardq) {
+		this.hardq = hardq;
+	}
+
+	public ObservableList<Question> filterQuestionsByDifficulty(String difficulty) {
         ObservableList<Question> filteredQuestions = FXCollections.observableArrayList();
         for (Question question : questions) {
             if (question.getDifficulty().equals(difficulty)) {

@@ -69,7 +69,7 @@ public class HomeController {
         stage.show();
     }
 	
-	@FXML
+    @FXML
 	public void showGameRules(MouseEvent event){
 	    String gameRules = "Origin: Snakes and Ladders, originally known as Moksha Patam, is an ancient Indian board game. The game's concept of progression and setbacks symbolizes the journey of life with virtues represented by ladders and vices by snakes.\n\n"
 	            + "- How to Play:\n\n"
@@ -103,7 +103,7 @@ public class HomeController {
 
 	    // Set the TextArea as the content of the alert dialog
 	    alert.getDialogPane().setContent(textArea);
-	    alert.showAndWait();
+	    alert.show();
 	}
 
 

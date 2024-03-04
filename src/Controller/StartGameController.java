@@ -43,6 +43,8 @@ import model.RunningGame;
 import model.Snakes;
 
 public class StartGameController {
+	
+	
 	@FXML
     private Button start;
 
@@ -164,83 +166,13 @@ public class StartGameController {
     			if(diceRes == 5) {
     				//question easy
     	    		img = new Image(getClass().getResourceAsStream("/Image/Dice-5.png"));
-    			}else if(diceRes == 6) {
-    				//question meduim
-    				img = new Image(getClass().getResourceAsStream("/Image/Dice-6.png"));
-    			}else if(diceRes == 7) {
-    				//question hard
-    				img = new Image(getClass().getResourceAsStream("/Image/Dice-7.png"));
-    			}else if(diceRes <=4 ){
-    				to = from + diceRes;
-    				if(to > 49) {
-    					to =49;
-    				}		
-    				pms.onPlayerMovement(p, from, to);
-    				if(from != to) {
-        				move(p, from, to , tern);
-    				}
-    			}
-    			System.out.println("DiceRes : "+diceRes);
-    		}else if(dl.equals(DiffLevel.medium)) {
-    			spDice.getChildren().removeAll(iv);
-    			if(diceRes == 7 || diceRes == 8) {
-    				//question easy
-    	    		img = new Image(getClass().getResourceAsStream("/Image/Dice-7.png"));
-    			}else if(diceRes == 9 || diceRes == 10) {
-    				//question meduim
-    	    		img = new Image(getClass().getResourceAsStream("/Image/Dice-8.png"));
-    			}else if(diceRes == 11 || diceRes == 12) {
-    				//question hard
-    	    		img = new Image(getClass().getResourceAsStream("/Image/Dice-9.png"));
-    			}else {
-    				to = from + diceRes;
-    				if(to > 100) {
-    					to =100;
-    				}
-    				pms.onPlayerMovement(p, from, to);
-    				if(from != to) {
-        				move(p, from, to , tern);
-    				}
-    			}
-    		}else if(dl.equals(DiffLevel.hard)) {
-    			spDice.getChildren().removeAll(iv);
-    			if(diceRes == 7 || diceRes == 8) {
-    				//question easy
-    	    		img = new Image(getClass().getResourceAsStream("/Image/Dice-7.png"));
-    			}else if(diceRes == 9 || diceRes == 10) {
-    				//question meduim
-    	    		img = new Image(getClass().getResourceAsStream("/Image/Dice-8.png"));
-    			}else if(diceRes == 11 || diceRes == 12 || diceRes == 13 || diceRes == 14 || diceRes == 15) {
-    				img = new Image(getClass().getResourceAsStream("/Image/Dice-9.png"));
-    				//question hard
-    			}else {
-    				to = from + diceRes;
-    				if(to > 169) {
-    					to =169;
-    				}
-    				pms.onPlayerMovement(p, from, to);
-    				if(from != to) {
-        				move(p, from, to , tern);
-    				}
-    			}
-    		}	
-    		
-    		iv = new ImageView(img);
-        	iv.setFitWidth(150);
-        	iv.setFitHeight(150);
-        	spDice.getChildren().add(iv);
-        	spPlayer.getChildren().add(lPlayer);
-        	CheckEnd();
-        	tern++;
-        	
-        	for(Integer num : RunningGame.getInstance().getBoard().getSq().keySet()) {
-        		if(RunningGame.getInstance().getBoard().getSq().get(num).getSquareType().equals(SquareType.QUESTION) && num==to) {
         			try {
         		        // Load FXML scene (improve error handling with more specific exceptions)
         		        FXMLLoader fxmlLoader = new FXMLLoader();
         		        fxmlLoader.setLocation(getClass().getResource("/View/Questionpopup.fxml"));
         		        Scene gameboardScene = new Scene(fxmlLoader.load(), 600, 400);
 
+//        		        QuestionSquareController
         		        // Create new stage and configure (use descriptive variable names)
         		        Stage gameStage = new Stage();
         		        gameStage.setTitle("Game Board");
@@ -261,6 +193,380 @@ public class StartGameController {
         		                "An error occurred while loading the FXML file. Please check the file path and content.");
         		        alert.showAndWait();
         		    }
+    			}else if(diceRes == 6) {
+    				//question meduim
+    				img = new Image(getClass().getResourceAsStream("/Image/Dice-6.png"));
+        			try {
+        		        // Load FXML scene (improve error handling with more specific exceptions)
+        		        FXMLLoader fxmlLoader = new FXMLLoader();
+        		        fxmlLoader.setLocation(getClass().getResource("/View/Questionpopup.fxml"));
+        		        Scene gameboardScene = new Scene(fxmlLoader.load(), 600, 400);
+
+//        		        QuestionSquareController
+        		        // Create new stage and configure (use descriptive variable names)
+        		        Stage gameStage = new Stage();
+        		        gameStage.setTitle("Game Board");
+        		        gameStage.setScene(gameboardScene);
+        		        gameStage.setMaximized(false);
+        		        gameStage.setResizable(false);
+
+        		        // Show new stage and hide previous (consider more graceful transitions if
+        		        // needed)
+        		        gameStage.show();
+
+        		    } catch (IOException e) {
+        		        // Handle IOException more robustly with specific messages
+        		        e.printStackTrace();
+        		        Alert alert = new Alert(Alert.AlertType.ERROR);
+        		        alert.setTitle("Error");
+        		        alert.setContentText(
+        		                "An error occurred while loading the FXML file. Please check the file path and content.");
+        		        alert.showAndWait();
+        		    }
+    			}else if(diceRes == 7) {
+    				//question hard
+    				img = new Image(getClass().getResourceAsStream("/Image/Dice-7.png"));
+        			try {
+        		        // Load FXML scene (improve error handling with more specific exceptions)
+        		        FXMLLoader fxmlLoader = new FXMLLoader();
+        		        fxmlLoader.setLocation(getClass().getResource("/View/Questionpopup.fxml"));
+        		        Scene gameboardScene = new Scene(fxmlLoader.load(), 600, 400);
+
+//        		        QuestionSquareController
+        		        // Create new stage and configure (use descriptive variable names)
+        		        Stage gameStage = new Stage();
+        		        gameStage.setTitle("Game Board");
+        		        gameStage.setScene(gameboardScene);
+        		        gameStage.setMaximized(false);
+        		        gameStage.setResizable(false);
+
+        		        // Show new stage and hide previous (consider more graceful transitions if
+        		        // needed)
+        		        gameStage.show();
+
+        		    } catch (IOException e) {
+        		        // Handle IOException more robustly with specific messages
+        		        e.printStackTrace();
+        		        Alert alert = new Alert(Alert.AlertType.ERROR);
+        		        alert.setTitle("Error");
+        		        alert.setContentText(
+        		                "An error occurred while loading the FXML file. Please check the file path and content.");
+        		        alert.showAndWait();
+        		    }
+    			}else if(diceRes <=4 ){
+    				to = from + diceRes;
+    				if(to > 49) {
+    					to =49;
+    				}		
+    				pms.onPlayerMovement(p, from, to);
+    				if(from != to) {
+        				move(p, from, to , tern);
+    				}
+    			}
+    			
+    			System.out.println("DiceRes : "+diceRes);
+    		}else if(dl.equals(DiffLevel.medium)) {
+    			spDice.getChildren().removeAll(iv);
+    			if(diceRes == 7 || diceRes == 8) {
+    				//question easy
+    	    		img = new Image(getClass().getResourceAsStream("/Image/Dice-7.png"));
+        			try {
+        		        // Load FXML scene (improve error handling with more specific exceptions)
+        		        FXMLLoader fxmlLoader = new FXMLLoader();
+        		        fxmlLoader.setLocation(getClass().getResource("/View/Questionpopup.fxml"));
+        		        Scene gameboardScene = new Scene(fxmlLoader.load(), 600, 400);
+
+//        		        QuestionSquareController
+        		        // Create new stage and configure (use descriptive variable names)
+        		        Stage gameStage = new Stage();
+        		        gameStage.setTitle("Game Board");
+        		        gameStage.setScene(gameboardScene);
+        		        gameStage.setMaximized(false);
+        		        gameStage.setResizable(false);
+
+        		        // Show new stage and hide previous (consider more graceful transitions if
+        		        // needed)
+        		        gameStage.show();
+
+        		    } catch (IOException e) {
+        		        // Handle IOException more robustly with specific messages
+        		        e.printStackTrace();
+        		        Alert alert = new Alert(Alert.AlertType.ERROR);
+        		        alert.setTitle("Error");
+        		        alert.setContentText(
+        		                "An error occurred while loading the FXML file. Please check the file path and content.");
+        		        alert.showAndWait();
+        		    }
+    			}else if(diceRes == 9 || diceRes == 10) {
+    				//question meduim
+    	    		img = new Image(getClass().getResourceAsStream("/Image/Dice-8.png"));
+        			try {
+        		        // Load FXML scene (improve error handling with more specific exceptions)
+        		        FXMLLoader fxmlLoader = new FXMLLoader();
+        		        fxmlLoader.setLocation(getClass().getResource("/View/Questionpopup.fxml"));
+        		        Scene gameboardScene = new Scene(fxmlLoader.load(), 600, 400);
+
+//        		        QuestionSquareController
+        		        // Create new stage and configure (use descriptive variable names)
+        		        Stage gameStage = new Stage();
+        		        gameStage.setTitle("Game Board");
+        		        gameStage.setScene(gameboardScene);
+        		        gameStage.setMaximized(false);
+        		        gameStage.setResizable(false);
+
+        		        // Show new stage and hide previous (consider more graceful transitions if
+        		        // needed)
+        		        gameStage.show();
+
+        		    } catch (IOException e) {
+        		        // Handle IOException more robustly with specific messages
+        		        e.printStackTrace();
+        		        Alert alert = new Alert(Alert.AlertType.ERROR);
+        		        alert.setTitle("Error");
+        		        alert.setContentText(
+        		                "An error occurred while loading the FXML file. Please check the file path and content.");
+        		        alert.showAndWait();
+        		    }
+    			}else if(diceRes == 11 || diceRes == 12) {
+    				//question hard
+    	    		img = new Image(getClass().getResourceAsStream("/Image/Dice-9.png"));
+        			try {
+        		        // Load FXML scene (improve error handling with more specific exceptions)
+        		        FXMLLoader fxmlLoader = new FXMLLoader();
+        		        fxmlLoader.setLocation(getClass().getResource("/View/Questionpopup.fxml"));
+        		        Scene gameboardScene = new Scene(fxmlLoader.load(), 600, 400);
+
+//        		        QuestionSquareController
+        		        // Create new stage and configure (use descriptive variable names)
+        		        Stage gameStage = new Stage();
+        		        gameStage.setTitle("Game Board");
+        		        gameStage.setScene(gameboardScene);
+        		        gameStage.setMaximized(false);
+        		        gameStage.setResizable(false);
+
+        		        // Show new stage and hide previous (consider more graceful transitions if
+        		        // needed)
+        		        gameStage.show();
+
+        		    } catch (IOException e) {
+        		        // Handle IOException more robustly with specific messages
+        		        e.printStackTrace();
+        		        Alert alert = new Alert(Alert.AlertType.ERROR);
+        		        alert.setTitle("Error");
+        		        alert.setContentText(
+        		                "An error occurred while loading the FXML file. Please check the file path and content.");
+        		        alert.showAndWait();
+        		    }
+    			}else {
+    				to = from + diceRes;
+    				if(to > 100) {
+    					to =100;
+    				}
+    				pms.onPlayerMovement(p, from, to);
+    				if(from != to) {
+        				move(p, from, to , tern);
+    				}
+    			}
+    		}else if(dl.equals(DiffLevel.hard)) {
+    			spDice.getChildren().removeAll(iv);
+    			if(diceRes == 7 || diceRes == 8) {
+    				//question easy
+    	    		img = new Image(getClass().getResourceAsStream("/Image/Dice-7.png"));
+        			try {
+        		        // Load FXML scene (improve error handling with more specific exceptions)
+        		        FXMLLoader fxmlLoader = new FXMLLoader();
+        		        fxmlLoader.setLocation(getClass().getResource("/View/Questionpopup.fxml"));
+        		        Scene gameboardScene = new Scene(fxmlLoader.load(), 600, 400);
+
+//        		        QuestionSquareController
+        		        // Create new stage and configure (use descriptive variable names)
+        		        Stage gameStage = new Stage();
+        		        gameStage.setTitle("Game Board");
+        		        gameStage.setScene(gameboardScene);
+        		        gameStage.setMaximized(false);
+        		        gameStage.setResizable(false);
+
+        		        // Show new stage and hide previous (consider more graceful transitions if
+        		        // needed)
+        		        gameStage.show();
+
+        		    } catch (IOException e) {
+        		        // Handle IOException more robustly with specific messages
+        		        e.printStackTrace();
+        		        Alert alert = new Alert(Alert.AlertType.ERROR);
+        		        alert.setTitle("Error");
+        		        alert.setContentText(
+        		                "An error occurred while loading the FXML file. Please check the file path and content.");
+        		        alert.showAndWait();
+        		    }
+    			}else if(diceRes == 9 || diceRes == 10) {
+    				//question meduim
+    	    		img = new Image(getClass().getResourceAsStream("/Image/Dice-8.png"));
+        			try {
+        		        // Load FXML scene (improve error handling with more specific exceptions)
+        		        FXMLLoader fxmlLoader = new FXMLLoader();
+        		        fxmlLoader.setLocation(getClass().getResource("/View/Questionpopup.fxml"));
+        		        Scene gameboardScene = new Scene(fxmlLoader.load(), 600, 400);
+
+//        		        QuestionSquareController
+        		        // Create new stage and configure (use descriptive variable names)
+        		        Stage gameStage = new Stage();
+        		        gameStage.setTitle("Game Board");
+        		        gameStage.setScene(gameboardScene);
+        		        gameStage.setMaximized(false);
+        		        gameStage.setResizable(false);
+
+        		        // Show new stage and hide previous (consider more graceful transitions if
+        		        // needed)
+        		        gameStage.show();
+
+        		    } catch (IOException e) {
+        		        // Handle IOException more robustly with specific messages
+        		        e.printStackTrace();
+        		        Alert alert = new Alert(Alert.AlertType.ERROR);
+        		        alert.setTitle("Error");
+        		        alert.setContentText(
+        		                "An error occurred while loading the FXML file. Please check the file path and content.");
+        		        alert.showAndWait();
+        		    }
+    			}else if(diceRes == 11 || diceRes == 12 || diceRes == 13 || diceRes == 14 || diceRes == 15) {
+    				img = new Image(getClass().getResourceAsStream("/Image/Dice-9.png"));
+        			try {
+        		        // Load FXML scene (improve error handling with more specific exceptions)
+        		        FXMLLoader fxmlLoader = new FXMLLoader();
+        		        fxmlLoader.setLocation(getClass().getResource("/View/Questionpopup.fxml"));
+        		        Scene gameboardScene = new Scene(fxmlLoader.load(), 600, 400);
+
+//        		        QuestionSquareController
+        		        // Create new stage and configure (use descriptive variable names)
+        		        Stage gameStage = new Stage();
+        		        gameStage.setTitle("Game Board");
+        		        gameStage.setScene(gameboardScene);
+        		        gameStage.setMaximized(false);
+        		        gameStage.setResizable(false);
+
+        		        // Show new stage and hide previous (consider more graceful transitions if
+        		        // needed)
+        		        gameStage.show();
+
+        		    } catch (IOException e) {
+        		        // Handle IOException more robustly with specific messages
+        		        e.printStackTrace();
+        		        Alert alert = new Alert(Alert.AlertType.ERROR);
+        		        alert.setTitle("Error");
+        		        alert.setContentText(
+        		                "An error occurred while loading the FXML file. Please check the file path and content.");
+        		        alert.showAndWait();
+        		    }
+    				//question hard
+    			}else {
+    				to = from + diceRes;
+    				if(to > 169) {
+    					to =169;
+    				}
+    				pms.onPlayerMovement(p, from, to);
+    				if(from != to) {
+        				move(p, from, to , tern);
+    				}
+    			}
+    		}	
+    		
+    		iv = new ImageView(img);
+        	iv.setFitWidth(150);
+        	iv.setFitHeight(150);
+        	spDice.getChildren().add(iv);
+        	spPlayer.getChildren().add(lPlayer);
+        	CheckEnd();
+        	
+        	
+        	for(Integer num : RunningGame.getInstance().getBoard().getSq().keySet()) {
+        		if(RunningGame.getInstance().getBoard().getSq().get(num).getSquareType().equals(SquareType.QUESTION) && num==to) {
+        			try {
+        		        // Load FXML scene (improve error handling with more specific exceptions)
+        		        FXMLLoader fxmlLoader = new FXMLLoader();
+        		        fxmlLoader.setLocation(getClass().getResource("/View/Questionpopup.fxml"));
+        		        Scene gameboardScene = new Scene(fxmlLoader.load(), 600, 400);
+
+//        		        QuestionSquareController
+        		        // Create new stage and configure (use descriptive variable names)
+        		        Stage gameStage = new Stage();
+        		        gameStage.setTitle("Game Board");
+        		        gameStage.setScene(gameboardScene);
+        		        gameStage.setMaximized(false);
+        		        gameStage.setResizable(false);
+
+        		        // Show new stage and hide previous (consider more graceful transitions if
+        		        // needed)
+        		        gameStage.show();
+
+        		    } catch (IOException e) {
+        		        // Handle IOException more robustly with specific messages
+        		        e.printStackTrace();
+        		        Alert alert = new Alert(Alert.AlertType.ERROR);
+        		        alert.setTitle("Error");
+        		        alert.setContentText(
+        		                "An error occurred while loading the FXML file. Please check the file path and content.");
+        		        alert.showAndWait();
+        		    }
+        			
+//        			QuestionSquareController qs = new QuestionSquareController();
+        			
+//        			System.out.println(QuestionSquareController.getInstance().getFlag());
+        			Boolean boll =  QuestionSquareController.getInstance().checkAnswer();
+        			System.out.println(boll);
+        			if(boll) {
+//        				if(QuestionSquareController.getInstance().getQuesdiff().getDifficulty().equals("3")) {
+//        					move(p, from, from+1, tern);
+//        				
+        				to = from+1;
+        				move(p,from, to, tern);
+//        				System.out.println(QuestionSquareController.getInstance().getQuesdiff().getDifficulty());
+        			}else {
+//        				if(QuestionSquareController.getInstance().getQuesdiff().getDifficulty().equals("1")) {
+//        					System.out.println(QuestionSquareController.getInstance().getQuesdiff().getDifficulty());
+//        					move(p, from, from-1, tern);
+//        				}else if(QuestionSquareController.getInstance().getQuesdiff().getDifficulty().equals("2")) {
+//        					move(p, from, from-2, tern);
+//        					System.out.println(QuestionSquareController.getInstance().getQuesdiff().getDifficulty());
+//        				}else if(QuestionSquareController.getInstance().getQuesdiff().getDifficulty().equals("3")){
+//        					move(p, from, from-3, tern);
+//        					System.out.println(QuestionSquareController.getInstance().getQuesdiff().getDifficulty());
+//        				}
+        				if(from>2) {
+        					to = from-1;
+        					move(p, from, to, tern);
+        				}
+        			}
+        		}else if(RunningGame.getInstance().getBoard().getSq().get(num).getSquareType().equals(SquareType.SURPRISE) && num==to) {
+//        			move(p, from, to, to)
+        			System.out.println("surpriseeeeeeeeeeeeeeeeeeeee");
+    				to = from +10;
+        			if(dl.equals(DiffLevel.easy)) {
+
+        				if(to > 49) {
+        					to =49;
+        				}		
+        				pms.onPlayerMovement(p, from, to);
+        				if(from != to) {
+            				move(p, from, to , tern);
+        				}
+        			}else if(dl.equals(DiffLevel.medium)) {
+        				if(to > 100) {
+        					to =100;
+        				}
+        				pms.onPlayerMovement(p, from, to);
+        				if(from != to) {
+            				move(p, from, to , tern);
+        				}
+        			}else if(dl.equals(DiffLevel.hard)) {
+        				if(to > 169) {
+        					to =169;
+        				}
+        				pms.onPlayerMovement(p, from, to);
+        				if(from != to) {
+            				move(p, from, to , tern);
+        				} 
+        			}
         		}
         	}
         	
@@ -270,6 +576,8 @@ public class StartGameController {
         		History history = new History(p.getNickName(), null, mod, mod, String.valueOf(RunningGame.getInstance().getCurrentGame().getDifficultyLevel()));
         		HistoryController.saveHistoryToJson(history);
         	}
+        	
+        	tern++;
     	}
     
     	
@@ -382,10 +690,11 @@ public class StartGameController {
 //        	Trow = GridPane.getRowIndex(GameSetupController.boxes.get(l));
         	to = l;
     	}
+    	RunningGame.getInstance().getPlayerPlacement().put(p, to);
     	
     	GameSetupController.grid.getChildren().removeIf(node -> node instanceof Circle );    		
 //		System.out.println(c + " " + Tcul + " " + Trow);
-		RunningGame.getInstance().getPlayerPlacement().put(p, to);
+		
 		p.setPlace(to);
 		for(Player pl :RunningGame.getInstance().getPci().keySet()) {
 			Circle cir = RunningGame.getInstance().getPci().get(pl);

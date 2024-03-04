@@ -197,7 +197,7 @@ public class QuestionPageController {
 
 	@FXML
 	public void switchToEditPage(MouseEvent event) throws IOException {
-		root = FXMLLoader.load(getClass().getResource("../View/EditPage.fxml"));
+		root = FXMLLoader.load(getClass().getResource("/View/EditPage.fxml"));
 		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
@@ -219,37 +219,37 @@ public class QuestionPageController {
 		}
 	}
 
-//not needed
-	public void AddButton(ActionEvent event) throws IOException {
-		try {
-
-			FXMLLoader fxmlLoader = new FXMLLoader();
-			fxmlLoader.setLocation(getClass().getResource("../application/AddQuestion.fxml"));
-			Scene addQuestionScene = new Scene(fxmlLoader.load());
-
-			gameStage = new Stage();
-			gameStage.setTitle("Add Question");
-			gameStage.setScene(addQuestionScene);
-			gameStage.setResizable(false);
-			stage.setMaximized(true);
-			gameStage.show();
-			Stage prevStage = (Stage) addButton.getScene().getWindow();
-			prevStage.hide();
-
-		} catch (IOException e) {
-			// Handle IOException more robustly with specific messages
-			e.printStackTrace();
-			Alert alert = new Alert(AlertType.ERROR);
-			alert.setTitle("Error");
-			alert.setContentText(
-					"An error occurred while loading the FXML file. Please check the file path and content.");
-			alert.showAndWait();
-		}
-	}
+////not needed
+//	public void AddButton(ActionEvent event) throws IOException {
+//		try {
+//
+//			FXMLLoader fxmlLoader = new FXMLLoader();
+//			fxmlLoader.setLocation(getClass().getResource("/application/AddQuestion.fxml"));
+//			Scene addQuestionScene = new Scene(fxmlLoader.load());
+//
+//			gameStage = new Stage();
+//			gameStage.setTitle("Add Question");
+//			gameStage.setScene(addQuestionScene);
+//			gameStage.setResizable(false);
+//			stage.setMaximized(true);
+//			gameStage.show();
+//			Stage prevStage = (Stage) addButton.getScene().getWindow();
+//			prevStage.hide();
+//
+//		} catch (IOException e) {
+//			// Handle IOException more robustly with specific messages
+//			e.printStackTrace();
+//			Alert alert = new Alert(AlertType.ERROR);
+//			alert.setTitle("Error");
+//			alert.setContentText(
+//					"An error occurred while loading the FXML file. Please check the file path and content.");
+//			alert.showAndWait();
+//		}
+//	}
 
 	@FXML
 	public void returnToMainPage(MouseEvent event) throws IOException {
-		root = FXMLLoader.load(getClass().getResource("../View/StartMenu.fxml"));
+		root = FXMLLoader.load(getClass().getResource("/View/StartMenu.fxml"));
 		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
@@ -259,7 +259,7 @@ public class QuestionPageController {
 
 	@FXML
 	public void addQ(MouseEvent event) throws IOException {
-		root = FXMLLoader.load(getClass().getResource("../View/AddQuestion.fxml"));
+		root = FXMLLoader.load(getClass().getResource("/View/AddQuestion.fxml"));
 		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);

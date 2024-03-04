@@ -40,16 +40,16 @@ minHeight="1000.0" minWidth="1920.0" prefHeight="1000.0"
 		</ImageView>
 		<ImageView fitHeight="50.0" fitWidth="50.0" layoutX="150.0"
 			layoutY="40.0" 
-			pickOnBounds="true" preserveRatio="true">
+			pickOnBounds="true" preserveRatio="true" onMouseClicked="#switchToQuestionPage">
 			<image>
-				<Image url="@/Image/login.png" />
+				<Image url="@/Image/editQ.png" />
 			</image>
 		</ImageView>
 		<ImageView fitHeight="70.0" fitWidth="70.0" layoutX="1780.0"
 			layoutY="100.0" onMouseClicked="#showGameRules" pickOnBounds="true"
 			preserveRatio="true">
 			<image>
-				<Image url="@/Image/infoIcon2.png" />
+				<Image url="@/Image/infoicon2.png" />
 			</image>
 		</ImageView>
 		<Button alignment="BOTTOM_CENTER" contentDisplay="BOTTOM"
