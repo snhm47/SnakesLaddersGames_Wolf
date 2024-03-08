@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="200" prefWidth="400" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.WinnerDialogController">
+   <children>
+      <AnchorPane prefHeight="200" prefWidth="400" style="-fx-background-color: #006400;">
+         <children>
+            <Label fx:id="winnerLabel" layoutX="40" layoutY="50" text="🎉 Congratulations! 🎉" textFill="#FFFF00">
+               <font>
+                  <Font name="Arial Bold" size="24" />
+               </font>
+            </Label>
+            <Button layoutX="125" layoutY="150" mnemonicParsing="false" onAction="#returnToMainMenu" text="Return to Main Menu" textFill="#FFFF00" style="-fx-background-color: #228B22; -fx-border-color: #FFFF00;" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
