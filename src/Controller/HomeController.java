@@ -33,11 +33,6 @@ public class HomeController {
 	@FXML
 	private TextField infoTf = new TextField();
 	
-    private void setFullscreen() {
-        stage.setResizable(false);
-        stage.setFullScreenExitHint("");
-        stage.setFullScreen(true);
-    }
 
     @FXML
     public void switchToQuestionPage(MouseEvent event) throws IOException {
@@ -45,7 +40,6 @@ public class HomeController {
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
-        setFullscreen(); // Set the stage to fullscreen mode
         stage.show();
     }
 
@@ -55,7 +49,6 @@ public class HomeController {
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
-        setFullscreen(); // Set the stage to fullscreen mode
         stage.show();
     }
 
@@ -65,7 +58,6 @@ public class HomeController {
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
-        setFullscreen(); // Set the stage to fullscreen mode
         stage.show();
     }
 	

@@ -98,11 +98,6 @@ public class QuestionPageController {
 	SysData sysData = new SysData("src/WolfQuestionsDB.json");
 	ObservableList<Question> data = sysData.loadDataFromJSON("src/WolfQuestionsDB.json");
 
-	private void setFullscreen() {
-		stage.setResizable(false);
-		stage.setFullScreenExitHint("");
-		stage.setFullScreen(true);
-	}
 
 	@SuppressWarnings("unchecked")
 	@FXML
@@ -201,7 +196,6 @@ public class QuestionPageController {
 		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
-		setFullscreen();
 		stage.show();
 	}
 
@@ -253,7 +247,6 @@ public class QuestionPageController {
 		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
-		setFullscreen();
 		stage.show();
 	}
 
@@ -264,7 +257,6 @@ public class QuestionPageController {
 		scene = new Scene(root);
 		stage.setScene(scene);
 		stage.setMaximized(true);
-		setFullscreen();
 		stage.show();
 	}
 

@@ -39,11 +39,6 @@ public class AddQuestionController implements Initializable {
 	@FXML
 	private ChoiceBox<String> answersList;
 
-	private void setFullscreen() {
-		stage.setResizable(false);
-		stage.setFullScreenExitHint("");
-		stage.setFullScreen(true);
-	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -63,7 +58,6 @@ public class AddQuestionController implements Initializable {
 		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
-		setFullscreen();
 		stage.show();
 	}
 
@@ -84,7 +78,6 @@ public class AddQuestionController implements Initializable {
 		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
-		setFullscreen();
 		stage.show();
 	}
 

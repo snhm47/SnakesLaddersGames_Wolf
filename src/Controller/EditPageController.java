@@ -46,12 +46,6 @@ public class EditPageController {
     @FXML
     private Text feedbackText;
     
-	
-    private void setFullscreen() {
-        stage.setResizable(false);
-        stage.setFullScreenExitHint("");
-        stage.setFullScreen(true);
-    }
 
     public EditPageController() {
         this.sysData = new SysData("src/WolfQuestionsDB.json");
@@ -133,7 +127,6 @@ public class EditPageController {
 		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
-		setFullscreen();
 		stage.show();
     	
     	

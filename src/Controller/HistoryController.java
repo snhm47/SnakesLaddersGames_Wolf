@@ -110,18 +110,12 @@ public class HistoryController {
         }
     }
 
-    private void setFullscreen() {
-        stage.setResizable(false);
-        stage.setFullScreen(true);
-    }
-
     @FXML
     public void returnToMainPage(MouseEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("/View/StartMenu.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
-        setFullscreen();
         stage.show();
     }
 }

@@ -93,9 +93,8 @@ public class EditQuestionController {
     @FXML
     private void cancelEdit(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/QuestionsPage.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/QuestionsPage.fxml"));
             Parent root = loader.load();
-            QuestionPageController controller = loader.getController();
 
             Scene scene = new Scene(root);
             Stage stage = new Stage(); 
