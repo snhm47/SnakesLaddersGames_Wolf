@@ -95,14 +95,19 @@ public class QuestionPageController {
 	Stage gameStage;
 	private ObservableList<Question> allQuestions;
 
-	SysData sysData = new SysData("src/WolfQuestionsDB.json");
-	ObservableList<Question> data = sysData.loadDataFromJSON("src/WolfQuestionsDB.json");
+	SysData sysData = new SysData("WolfQuestionsDB.json");
+	ObservableList<Question> data = sysData.loadDataFromJSON("WolfQuestionsDB.json");
 
+	private void setFullscreen() {
+		stage.setResizable(false);
+		stage.setFullScreenExitHint("");
+		stage.setFullScreen(true);
+	}
 
 	@SuppressWarnings("unchecked")
 	@FXML
 	private void initialize() {
-		sysData = new SysData("src/WolfQuestionsDB.json");
+		sysData = new SysData("WolfQuestionsDB.json");
 
 		// Add items to the choice box
 		sortChoiceBox.getItems().addAll("diffLvL low to high", "diffLvL high to low");
@@ -133,7 +138,7 @@ public class QuestionPageController {
 		questionTableView.getColumns().addAll(questionColumn, difficultyColumn, DeleteColumn);
 
 		// Load data from JSON and set it to the table view
-		allQuestions = sysData.loadDataFromJSON("src/WolfQuestionsDB.json"); // Store all questions
+		allQuestions = sysData.loadDataFromJSON("WolfQuestionsDB.json"); // Store all questions
 		questionTableView.setItems(allQuestions);
 	}
 
@@ -192,10 +197,11 @@ public class QuestionPageController {
 
 	@FXML
 	public void switchToEditPage(MouseEvent event) throws IOException {
-		root = FXMLLoader.load(getClass().getResource("/View/EditPage.fxml"));
+		root = FXMLLoader.load(getClass().getResource("../View/EditQuestionScreen.fxml"));
 		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
+		setFullscreen();
 		stage.show();
 	}
 
@@ -213,51 +219,93 @@ public class QuestionPageController {
 		}
 	}
 
-////not needed
-//	public void AddButton(ActionEvent event) throws IOException {
-//		try {
-//
-//			FXMLLoader fxmlLoader = new FXMLLoader();
-//			fxmlLoader.setLocation(getClass().getResource("/application/AddQuestion.fxml"));
-//			Scene addQuestionScene = new Scene(fxmlLoader.load());
-//
-//			gameStage = new Stage();
-//			gameStage.setTitle("Add Question");
-//			gameStage.setScene(addQuestionScene);
-//			gameStage.setResizable(false);
-//			stage.setMaximized(true);
-//			gameStage.show();
-//			Stage prevStage = (Stage) addButton.getScene().getWindow();
-//			prevStage.hide();
-//
-//		} catch (IOException e) {
-//			// Handle IOException more robustly with specific messages
-//			e.printStackTrace();
-//			Alert alert = new Alert(AlertType.ERROR);
-//			alert.setTitle("Error");
-//			alert.setContentText(
-//					"An error occurred while loading the FXML file. Please check the file path and content.");
-//			alert.showAndWait();
-//		}
-//	}
+//not needed
+	public void AddButton(ActionEvent event) throws IOException {
+		try {
+
+			FXMLLoader fxmlLoader = new FXMLLoader();
+			fxmlLoader.setLocation(getClass().getResource("../application/AddQuestion.fxml"));
+			Scene addQuestionScene = new Scene(fxmlLoader.load());
+
+			gameStage = new Stage();
+			gameStage.setTitle("Add Question");
+			gameStage.setScene(addQuestionScene);
+			gameStage.setResizable(false);
+			stage.setMaximized(true);
+			gameStage.show();
+			Stage prevStage = (Stage) addButton.getScene().getWindow();
+			prevStage.hide();
+
+		} catch (IOException e) {
+			// Handle IOException more robustly with specific messages
+			e.printStackTrace();
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Error");
+			alert.setContentText(
+					"An error occurred while loading the FXML file. Please check the file path and content.");
+			alert.showAndWait();
+		}
+	}
 
 	@FXML
 	public void returnToMainPage(MouseEvent event) throws IOException {
-		root = FXMLLoader.load(getClass().getResource("/View/StartMenu.fxml"));
+		root = FXMLLoader.load(getClass().getResource("../View/StartMenu.fxml"));
 		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
+		setFullscreen();
 		stage.show();
 	}
 
 	@FXML
 	public void addQ(MouseEvent event) throws IOException {
-		root = FXMLLoader.load(getClass().getResource("/View/AddQuestion.fxml"));
+		root = FXMLLoader.load(getClass().getResource("../View/AddQuestion.fxml"));
 		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
 		stage.setMaximized(true);
+		setFullscreen();
 		stage.show();
+	}
+	@FXML
+	private void editQuestion(MouseEvent event) {
+	    // Get the selected question
+	    Question selectedQuestion = questionTableView.getSelectionModel().getSelectedItem();
+
+	    // Check if a question is selected
+	    if (selectedQuestion != null) {
+	        try {
+	            // Load the EditQuestionScreen.fxml file
+	            FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/EditQuestionScreen.fxml"));
+	            Parent editQuestionParent = loader.load();
+
+	            // Get the controller for the EditQuestionScreen.fxml
+	            EditQuestionController editQuestionController = loader.getController();
+
+	            // Pass the selected question to the EditQuestionController
+	            editQuestionController.setQuestionToEdit(selectedQuestion);
+
+	            // Create a new scene
+	            Scene editQuestionScene = new Scene(editQuestionParent);
+
+	            // Get the stage information
+	            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+	            // Set the scene and show the stage
+	            window.setScene(editQuestionScene);
+	            window.show();
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	    } else {
+	        // Show an alert if no question is selected
+	        Alert alert = new Alert(Alert.AlertType.WARNING);
+	        alert.setTitle("Warning");
+	        alert.setHeaderText(null);
+	        alert.setContentText("Please select a question to edit.");
+	        alert.showAndWait();
+	    }
 	}
 
 }
+

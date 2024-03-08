@@ -12,87 +12,102 @@
 
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
-	minHeight="1000.0" minWidth="1920.0" prefHeight="1000.0"
-	prefWidth="1920.0" xmlns="http://javafx.com/javafx/8"
-	xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="Controller.QuestionPageController">
-	<children>
-		<ImageView fitHeight="1080" fitWidth="1920" opacity="0.87"
-			pickOnBounds="true">
-			<image>
-				<Image url="@/Image/edjungletheme1.jpg" />
-			</image>
-		</ImageView>
-		
-				<ImageView fitHeight="1080" fitWidth="1920" opacity="0.27"
-			pickOnBounds="true">
-			<image>
-				<Image url="@/Image/questionsBG1.jpeg" />
-			</image>
-		</ImageView>
-		<Text fill="RED" layoutX="214.0" layoutY="41.0"
-			strokeType="OUTSIDE" strokeWidth="0.0" text="Questions Page"
-			AnchorPane.leftAnchor="860.0" AnchorPane.topAnchor="40">
-			<font>
-				<Font size="25.0" />
-			</font>
-		</Text>
-		<TableView fx:id="questionTableView" prefHeight="200.0"
-			prefWidth="500.0" AnchorPane.leftAnchor="500.0"
-			AnchorPane.rightAnchor="500.0" AnchorPane.topAnchor="250"
-			AnchorPane.bottomAnchor="250" />
+    minHeight="1000.0" minWidth="1920.0" prefHeight="1000.0"
+    prefWidth="1920.0" xmlns="http://javafx.com/javafx/8"
+    xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="Controller.QuestionPageController">
+    <children>
+        <!-- Jungle-themed background image -->
+        <ImageView fitHeight="1080" fitWidth="1920" opacity="0.87"
+            pickOnBounds="true">
+            <image>
+                <Image url="@/Image/edjungletheme1.jpg" />
+            </image>
+        </ImageView>
 
-		<!-- return to home -->
-		<ImageView fitHeight="50.0" fitWidth="50.0" layoutX="52.0"
-			layoutY="40.0" onMouseClicked="#returnToMainPage" pickOnBounds="true"
-			preserveRatio="true">
-			<image>
-				<Image url="@/Image/homebtnIcon.png" />
-			</image>
-		</ImageView>
+        <!-- Semi-transparent background for better text visibility -->
+        <ImageView fitHeight="1080" fitWidth="1920" opacity="0.27"
+            pickOnBounds="true">
+            <image>
+                <Image url="@/Image/questionsBG1.jpeg" />
+            </image>
+        </ImageView>
 
-		<Text fill="RED" layoutX="50.0" layoutY="98.0"
-			strokeType="OUTSIDE" strokeWidth="0.0" text="Search:"
-			AnchorPane.leftAnchor="600.0" AnchorPane.topAnchor="200">
-			<font>
-				<Font size="19.0" />
-			</font>
-		</Text>
-		<TextField fx:id="searchTextField" layoutX="120.0"
-			layoutY="77.0" prefHeight="26.0" prefWidth="88.0"
-			AnchorPane.leftAnchor="670.0" AnchorPane.topAnchor="200" />
-		<Button layoutX="222.0" layoutY="75.0" mnemonicParsing="false"
-			onAction="#searchQuestions" text="Search"
-			AnchorPane.leftAnchor="770.0" AnchorPane.topAnchor="200">
-			<font>
-				<Font size="14.0" />
-			</font>
-		</Button>
-		<ImageView fitHeight="60" fitWidth="60" layoutX="515.0"
-			layoutY="353.0" onMouseClicked="#addQ" pickOnBounds="true"
-			preserveRatio="true" AnchorPane.rightAnchor="710.0" AnchorPane.bottomAnchor="100">
-			<image>
-				<Image url="@/Image/add.png" />
-			</image>
-		</ImageView>
-		<Text fill="RED" layoutX="354.0" layoutY="100.0"
-			strokeType="OUTSIDE" strokeWidth="0.0" text="Sort by:"
-			AnchorPane.leftAnchor="900.0" AnchorPane.topAnchor="200">
-			<font>
-				<Font size="19.0" />
-			</font>
-		</Text>
-		<ChoiceBox fx:id="sortChoiceBox" layoutX="450.0"
-			layoutY="79.0" prefHeight="26.0" prefWidth="160.0"
-			AnchorPane.leftAnchor="970.0" AnchorPane.topAnchor="200" />
+        <!-- Title text -->
+        <Text fill="RED" layoutX="214.0" layoutY="41.0"
+            strokeType="OUTSIDE" strokeWidth="0.0" text="Questions Page"
+            AnchorPane.leftAnchor="860.0" AnchorPane.topAnchor="40">
+            <font>
+                <Font size="25.0" />
+            </font>
+        </Text>
 
-		<Button fx:id="ebtn" layoutX="370.0" layoutY="356.0"
-			mnemonicParsing="false" onMouseClicked="#switchToEditPage"
-			AnchorPane.rightAnchor="500.0" AnchorPane.bottomAnchor="100"
-			text="Edit Question">
-			<font>
-				<Font size="24.0" />
-			</font>
-		</Button>
-	</children>
+        <!-- Table view for questions -->
+        <TableView fx:id="questionTableView" prefHeight="200.0"
+            prefWidth="500.0" AnchorPane.leftAnchor="500.0"
+            AnchorPane.rightAnchor="500.0" AnchorPane.topAnchor="250"
+            AnchorPane.bottomAnchor="250" />
+
+        <!-- Return to home button -->
+        <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="52.0"
+            layoutY="40.0" onMouseClicked="#returnToMainPage" pickOnBounds="true"
+            preserveRatio="true">
+            <image>
+                <Image url="@../Image/homebtnIcon.png" />
+            </image>
+        </ImageView>
+
+        <!-- Search label -->
+        <Text fill="RED" layoutX="50.0" layoutY="98.0"
+            strokeType="OUTSIDE" strokeWidth="0.0" text="Search:"
+            AnchorPane.leftAnchor="600.0" AnchorPane.topAnchor="200">
+            <font>
+                <Font size="19.0" />
+            </font>
+        </Text>
+        <!-- Search text field -->
+        <TextField fx:id="searchTextField" layoutX="120.0"
+            layoutY="77.0" prefHeight="26.0" prefWidth="88.0"
+            AnchorPane.leftAnchor="670.0" AnchorPane.topAnchor="200" />
+        <!-- Search button -->
+        <Button layoutX="222.0" layoutY="75.0" mnemonicParsing="false"
+            onAction="#searchQuestions" text="Search"
+            AnchorPane.leftAnchor="770.0" AnchorPane.topAnchor="200">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Button>
+        
+        <!-- Add question button -->
+        <ImageView fitHeight="60" fitWidth="60" layoutX="515.0"
+            layoutY="353.0" onMouseClicked="#addQ" pickOnBounds="true"
+            preserveRatio="true" AnchorPane.rightAnchor="710.0" AnchorPane.bottomAnchor="100">
+            <image>
+                <Image url="@../Image/add.png" />
+            </image>
+        </ImageView>
+
+        <!-- Sort by label -->
+        <Text fill="RED" layoutX="354.0" layoutY="100.0"
+            strokeType="OUTSIDE" strokeWidth="0.0" text="Sort by:"
+            AnchorPane.leftAnchor="900.0" AnchorPane.topAnchor="200">
+            <font>
+                <Font size="19.0" />
+            </font>
+        </Text>
+        <!-- Choice box for sorting -->
+        <ChoiceBox fx:id="sortChoiceBox" layoutX="450.0"
+            layoutY="79.0" prefHeight="26.0" prefWidth="160.0"
+            AnchorPane.leftAnchor="970.0" AnchorPane.topAnchor="200" />
+
+        <!-- Edit question button -->
+        <Button fx:id="ebtn" layoutX="370.0" layoutY="356.0"
+            mnemonicParsing="false" onMouseClicked="#editQuestion"
+            AnchorPane.rightAnchor="500.0" AnchorPane.bottomAnchor="100"
+            text="Edit Question">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </Button>
+    </children>
 </AnchorPane>
