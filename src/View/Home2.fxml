@@ -104,6 +104,13 @@
                 <Font name="System Bold" size="14.0" />
             </font>
         </Label>
+        <Text layoutX="450" layoutY="50" strokeType="OUTSIDE"
+            strokeWidth="0.0" text="Choose Avatar Type:">
+            <font>
+                <Font size="19.0" />
+            </font>
+        </Text>
+        <ChoiceBox fx:id="avatarChoiceBox" layoutX="500" layoutY="70" prefWidth="150" />
 
     </children>
 </Pane>
@@ -147,5 +154,7 @@
 				<Image url="@/Image/homebtnIcon.png" />
 			</image>
 		</ImageView>
+						<Button fx:id="muteButton" layoutX="220.0" layoutY="60"
+			onAction="#handleMuteButtonAction" text="Mute" />
 	</children>
 </AnchorPane>

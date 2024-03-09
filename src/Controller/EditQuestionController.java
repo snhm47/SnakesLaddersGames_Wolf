@@ -17,6 +17,9 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+
+import application.Main;
+
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -140,4 +143,9 @@ public class EditQuestionController {
             e.printStackTrace();
         }
     }
+    
+	@FXML
+	private void handleMuteButtonAction(ActionEvent event) {
+		Main.toggleMusic();
+	}
 }

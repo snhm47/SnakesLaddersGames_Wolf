@@ -3,6 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javafx.scene.image.ImageView;
 import javafx.scene.shape.Circle;
 
 public class RunningGame {
@@ -10,9 +11,9 @@ public class RunningGame {
     private ArrayList<Player> players;
     private HashMap<Player, Integer> playerPlacement;
     private Boolean endGame ;
-    private HashMap<Integer, Circle> pc ;
+    private HashMap<Integer, ImageView> pc ;
     private HashMap<Integer, Player> pp ;
-    private HashMap<Player, Circle>pci ;
+    private HashMap<Player, ImageView>pci ;
     private Board board;
     
     
@@ -54,17 +55,17 @@ public class RunningGame {
 		this.players = new ArrayList<Player>();
 		this.playerPlacement = new HashMap<Player, Integer>();
 		this.endGame = false;
-		this.pc = new HashMap<Integer, Circle>();
+		this.pc = new HashMap<Integer, ImageView>();
 		this.pp = new HashMap<Integer, Player>();
-		this.pci = new HashMap<Player, Circle>();
+		this.pci = new HashMap<Player, ImageView>();
 	}
 
 
-	public HashMap<Player, Circle> getPci() {
+	public HashMap<Player, ImageView> getPci() {
 		return pci;
 	}
 
-	public void setPci(HashMap<Player, Circle> pci) {
+	public void setPci(HashMap<Player, ImageView> pci) {
 		this.pci = pci;
 	}
 
@@ -84,11 +85,11 @@ public class RunningGame {
 		this.pp = pp;
 	}
 
-	public HashMap<Integer, Circle> getPc() {
+	public HashMap<Integer, ImageView> getPc() {
 		return pc;
 	}
 
-	public void setPc(HashMap<Integer, Circle> pc) {
+	public void setPc(HashMap<Integer, ImageView> pc) {
 		this.pc = pc;
 	}
 

@@ -4,17 +4,35 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.Button?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="1000.0" minWidth="1920.0" prefHeight="1000.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.HistoryController">
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
+	minHeight="1000.0" minWidth="1920.0" prefHeight="1000.0"
+	prefWidth="1920.0" xmlns="http://javafx.com/javafx/8"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="Controller.HistoryController">
 	<children>
-		<ImageView fx:id="imgBackg" fitHeight="1080" fitWidth="1920" opacity="0.87" pickOnBounds="true" />
-		<TableView fx:id="tableView" layoutX="813.0" layoutY="251.0" prefHeight="498.0" prefWidth="352.0" AnchorPane.bottomAnchor="251.39999999999998" AnchorPane.leftAnchor="813.0" AnchorPane.rightAnchor="755.0" AnchorPane.topAnchor="251.0">
+		<ImageView fx:id="imgBackg" fitHeight="1080" fitWidth="1920"
+			opacity="0.87" pickOnBounds="true" />
+		<TableView fx:id="tableView" layoutX="813.0" layoutY="251.0"
+			prefHeight="498.0" prefWidth="352.0"
+			AnchorPane.bottomAnchor="251.39999999999998"
+			AnchorPane.leftAnchor="813.0" AnchorPane.rightAnchor="755.0"
+			AnchorPane.topAnchor="251.0">
 		</TableView>
-		<ImageView fitHeight="50.0" fitWidth="50.0" layoutX="52.0" layoutY="40.0" onMouseClicked="#returnToMainPage" pickOnBounds="true" preserveRatio="true">
+		<ImageView fitHeight="50.0" fitWidth="50.0" layoutX="52.0"
+			layoutY="40.0" onMouseClicked="#returnToMainPage" pickOnBounds="true"
+			preserveRatio="true">
 			<image>
 				<Image url="@/Image/homebtnIcon.png" />
 			</image>
 		</ImageView>
-      <ImageView fx:id="titleImg" fitHeight="90.0" fitWidth="255.0" layoutX="883.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true" />
+		<ImageView fx:id="titleImg" fitHeight="90.0"
+			fitWidth="255.0" layoutX="883.0" layoutY="65.0" pickOnBounds="true"
+			preserveRatio="true" />
+			<Button layoutX="220" layoutY="60"
+			onAction="#handleMuteButtonAction" text="Mute"/>
+
 	</children>
 </AnchorPane>
