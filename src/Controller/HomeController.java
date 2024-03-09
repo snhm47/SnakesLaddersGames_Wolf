@@ -1,30 +1,68 @@
 package Controller;
 
-
+import javafx.scene.control.ButtonBar;
 import java.io.IOException;
+import java.net.URL;
+import java.util.Optional;
+import java.util.ResourceBundle;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.util.Pair;
+import model.Admin;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 
-public class HomeController {
+public class HomeController implements Initializable {
 	
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
 	
 	@FXML
+    private Button questionBtn;
+	
+	@FXML
+    private Button historyBtn;
+	
+	@FXML
+    private Button playBtn;
+	
+	@FXML
+    private Button logOutBtn;
+	
+	@FXML
+    private ImageView titleImg;
+	
+	@FXML
 	private ImageView hisIcon,QuesIcon;
+	
+	@FXML
+    private ImageView imgbackground;
+	
+	@FXML
+    private AnchorPane pane;
 	
 	//FXMLLoader fxmlLoader = new FXMLLoader();
 	@FXML
@@ -32,19 +70,127 @@ public class HomeController {
 	
 	@FXML
 	private TextField infoTf = new TextField();
+	Admin admin = new Admin("admin", "1234");
+
+	@FXML
+    private ComboBox<String> picMode=new ComboBox<String>();
+	private static Boolean themePic=false;
 	
 
-    @FXML
-    public void switchToQuestionPage(MouseEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/View/QuestionsPage.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+	private boolean isAdminLoggedIn = false;
+	private static String themeName="Enchanted Forest";
+
+	@FXML
+	public void switchToQuestionPage(ActionEvent event) {
+		if (!isAdminLoggedIn) {
+			// If admin is not already logged in, prompt for login
+			showLoginDialog(event);
+		} else {
+			// If admin is already logged in, proceed directly to QuestionsPage
+			loadQuestionsPage(event);
+		}
+	}
+	
+	@FXML
+    public void logOut(ActionEvent event) {
+    	stage = (Stage) pane.getScene().getWindow();
+        stage.close();
     }
 
+	private void showLoginDialog(ActionEvent event) {
+		// Create and display the admin access warning dialog
+		Alert adminAccessAlert = new Alert(Alert.AlertType.CONFIRMATION);
+		adminAccessAlert.setTitle("Admin Access Required");
+		adminAccessAlert.setHeaderText("This page is only for admins.");
+		adminAccessAlert.setContentText("Do you want to login?");
+
+		ButtonType buttonTypeLogin = new ButtonType("Login");
+		ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+		adminAccessAlert.getButtonTypes().setAll(buttonTypeLogin, buttonTypeCancel);
+
+		Optional<ButtonType> adminAccessResult = adminAccessAlert.showAndWait();
+		if (adminAccessResult.isPresent() && adminAccessResult.get() == buttonTypeLogin) {
+			// If the user chooses to login, show the login dialog
+			Dialog<Pair<String, String>> loginDialog = new Dialog<>();
+			loginDialog.setTitle("Admin Login");
+			loginDialog.setHeaderText("Please enter your username and password:");
+
+			// Set the button types (Login and Cancel)
+			loginDialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+
+			// Create the username and password labels and fields
+			GridPane grid = new GridPane();
+			grid.setHgap(10);
+			grid.setVgap(10);
+			grid.setPadding(new javafx.geometry.Insets(20, 150, 10, 10));
+
+			TextField usernameField = new TextField();
+			usernameField.setPromptText("Username");
+			PasswordField passwordField = new PasswordField();
+			passwordField.setPromptText("Password");
+
+			grid.add(new Label("Username:"), 0, 0);
+			grid.add(usernameField, 1, 0);
+			grid.add(new Label("Password:"), 0, 1);
+			grid.add(passwordField, 1, 1);
+
+			loginDialog.getDialogPane().setContent(grid);
+
+			// Convert the result to a username-password-pair when the login button is
+			// clicked
+			loginDialog.setResultConverter(dialogButton -> {
+				if (dialogButton == ButtonType.OK) {
+					return new Pair<>(usernameField.getText(), passwordField.getText());
+				}
+				return null;
+			});
+
+			Optional<Pair<String, String>> loginResult = loginDialog.showAndWait();
+			if (loginResult.isPresent()) {
+				String username = loginResult.get().getKey();
+				String password = loginResult.get().getValue();
+				// Implement your authentication logic here
+				boolean isAuthenticated = authenticate(username, password);
+				if (isAuthenticated) {
+					isAdminLoggedIn = true; // Set admin login status to true
+					loadQuestionsPage(event); // Proceed to load QuestionsPage
+				} else {
+					// Show an error message for failed authentication
+					Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+					errorAlert.setTitle("Authentication Failed");
+					errorAlert.setHeaderText(null);
+					errorAlert.setContentText("Invalid username or password.");
+					errorAlert.showAndWait();
+				}
+			}
+		}
+	}
+
+	// Method to load the QuestionsPage
+	private void loadQuestionsPage(ActionEvent event) {
+		   try {
+		        javafx.scene.Parent root = FXMLLoader.load(getClass().getResource("/View/QuestionsPage.fxml"));
+		        if (root == null) {
+		            throw new IOException("FXML file is null");
+		        }
+		        javafx.stage.Stage stage = (javafx.stage.Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+		        javafx.scene.Scene scene = new javafx.scene.Scene(root);
+		        stage.setScene(scene);
+		        stage.show();
+		    } catch (IOException e) {
+		        e.printStackTrace(); // Handle IOException properly
+		    } catch (NullPointerException e) {
+		        e.printStackTrace(); // Handle NullPointerException
+		    }
+		}
+
+	private boolean authenticate(String username, String password) {
+		Admin admin = new Admin("admin", "1234");
+		return admin.getUserName().equals(username) && admin.getPass().equals(password);
+	}
+
     @FXML
-    public void switchToHistoryPage(MouseEvent event) throws IOException {
+    public void switchToHistoryPage(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("/View/HistoryScreen.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -96,6 +242,137 @@ public class HomeController {
 	    // Set the TextArea as the content of the alert dialog
 	    alert.getDialogPane().setContent(textArea);
 	    alert.show();
+	}
+
+    @FXML
+    void changeDesign(ActionEvent event) {
+
+    }
+    
+    @FXML
+    void changeColor(ActionEvent event) {
+    	if(picMode.getValue().equals("Dark Aurora")) {
+    		darkAuroraMode();
+    		StaticController.getInstance().setPageColor("Dark Aurora");
+    		
+    	}
+    /*	if(picMode.getValue().equals("Twilight Serenity")) {
+    		twilightSerenityMode();
+    		StaticController.getInstance().setPageColor("Twilight Serenity");
+    		
+    	}*/
+    	if(picMode.getValue().equals("Enchanted Forest")) {
+    		enchantedForestMode();
+    		StaticController.getInstance().setPageColor("Enchanted Forest");
+    		
+    	}
+    	if(picMode.getValue().equals("Oceanic Dreams")) {
+    		oceanicDreamsMode();
+    		StaticController.getInstance().setPageColor("Oceanic Dreams");
+    		
+    	}
+    	
+    }
+    
+ /*   private void twilightSerenityMode() {
+    	//Image newImage3 = new Image("Image/edjungletheme1.jpg");
+        //imgbackground.setImage(newImage3);
+    	System.out.println("Twilight Serenity");
+        themePic=true;
+        themeName="Twilight Serenity";
+    }*/
+    
+    private void enchantedForestMode() {
+    	Image newImage3 = new Image("Image/edjungletheme.jpg");
+        imgbackground.setImage(newImage3);
+    //    Image tit = new Image("Image/titForest.png‬");
+     //   titleImg.setImage(tit);
+        Image newImage2 = new Image("Image/titForest.png");
+        titleImg.setImage(newImage2);
+        playBtn.setTextFill(Color.WHITE);
+        playBtn.setStyle("-fx-background-color: green;");
+        logOutBtn.setTextFill(Color.WHITE);
+        logOutBtn.setStyle("-fx-background-color: green;");
+        historyBtn.setTextFill(Color.WHITE);
+        historyBtn.setStyle("-fx-background-color: green;");
+        questionBtn.setTextFill(Color.WHITE);
+        questionBtn.setStyle("-fx-background-color: green;");
+        
+        System.out.println("Enchanted Forest");
+        themePic=true;
+        themeName="Enchanted Forest";
+    }
+    
+    private void oceanicDreamsMode() {
+        Image newImage3 = new Image("Image/ocean.jpg");
+        imgbackground.setImage(newImage3);
+        Image newImage2 = new Image("Image/DarksnakeAndLadders.png");
+        titleImg.setImage(newImage2);
+        playBtn.setTextFill(Color.DARKSLATEGREY);
+        playBtn.setStyle("-fx-background-color: gray;");
+        logOutBtn.setTextFill(Color.DARKSLATEGREY);
+        logOutBtn.setStyle("-fx-background-color: gray;");
+        historyBtn.setTextFill(Color.DARKSLATEGREY);
+        historyBtn.setStyle("-fx-background-color: gray;");
+        questionBtn.setTextFill(Color.DARKSLATEGREY);
+        questionBtn.setStyle("-fx-background-color: gray;");
+        System.out.println("Oceanic Dreams");
+        themePic=true;
+        themeName="Oceanic Dreams";
+    }
+
+    private void darkAuroraMode() {
+    	
+    	Image newImage = new Image("Image/DarkBackg.jpg");
+        imgbackground.setImage(newImage);
+     
+        Image newImage2 = new Image("Image/DarkTitle.png");
+        titleImg.setImage(newImage2);       
+        playBtn.setTextFill(Color.BLACK);
+        playBtn.setStyle("-fx-background-color: #2F4F4F;");
+        logOutBtn.setTextFill(Color.BLACK);
+        logOutBtn.setStyle("-fx-background-color: #2F4F4F;");
+        historyBtn.setTextFill(Color.BLACK);
+        historyBtn.setStyle("-fx-background-color: #2F4F4F;");
+        questionBtn.setTextFill(Color.BLACK);
+        questionBtn.setStyle("-fx-background-color: #2F4F4F;");
+        System.out.println("Dark Aurora");
+        themePic=true;
+        themeName="Dark Aurora";
+    }
+    
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		// TODO Auto-generated method stub
+		picMode.getItems().add("Dark Aurora");
+	//	picMode.getItems().add("Twilight Serenity");
+		picMode.getItems().add("Enchanted Forest");
+		picMode.getItems().add("Oceanic Dreams");
+		if(themePic.equals(false)) {
+		enchantedForestMode();
+		StaticController.getInstance().setPageColor("Enchanted Forest");
+		}else {
+			if(themeName.equals("Dark Aurora")) {
+	    		darkAuroraMode();
+	    		StaticController.getInstance().setPageColor("Dark Aurora");
+	    	}
+	/*    	if(themeName.equals("Twilight Serenity")) {
+	    		twilightSerenityMode();
+	    		StaticController.getInstance().setPageColor("Twilight Serenity");
+	    		
+	    	}*/
+	    	if(themeName.equals("Enchanted Forest")) {
+	    		enchantedForestMode();
+	    		StaticController.getInstance().setPageColor("Enchanted Forest");
+	    		
+	    	}
+	    	if(themeName.equals("Oceanic Dreams")) {
+	    		oceanicDreamsMode();
+	    		StaticController.getInstance().setPageColor("Oceanic Dreams");
+	    		
+	    	}
+		}
+		
 	}
 
 

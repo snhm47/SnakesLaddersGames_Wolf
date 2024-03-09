@@ -1,65 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
-minHeight="1000.0" minWidth="1920.0" prefHeight="1000.0"
-	prefWidth="1920.0" xmlns="http://javafx.com/javafx/8"
-	xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="Controller.HomeController">
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="1000.0" minWidth="1920.0" prefHeight="1000.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.HomeController">
 	<children>
 
 		<!-- background image -->
-		<ImageView fitHeight="1080" fitWidth="1920" layoutX="-3.0"
-			opacity="0.85" pickOnBounds="true">
-			<image>
-				<Image url="@/Image/edjungletheme1.jpg" />
-			</image>
-		</ImageView>
+		<ImageView fx:id="imgbackground" fitHeight="1080" fitWidth="1920" layoutX="-3.0" opacity="0.85" pickOnBounds="true" />
 
 		<!-- gamelogo image -->
-		<ImageView fitHeight="200" fitWidth="350" layoutX="225.0"
-			layoutY="14.0" pickOnBounds="true" preserveRatio="true"
-			AnchorPane.leftAnchor="800.0">
-			<image>
-				<Image url="@/Image/gameLogo.png" />
-			</image>
-		</ImageView>
-
-		<!-- game icons image -->
-		<ImageView fitHeight="50.0" fitWidth="50.0" layoutX="52.0"
-			layoutY="40.0" onMouseClicked="#switchToHistoryPage"
-			pickOnBounds="true" preserveRatio="true">
-			<image>
-				<Image url="@/Image/history.png" />
-			</image>
-		</ImageView>
-		<ImageView fitHeight="50.0" fitWidth="50.0" layoutX="150.0"
-			layoutY="40.0" 
-			pickOnBounds="true" preserveRatio="true" onMouseClicked="#switchToQuestionPage">
-			<image>
-				<Image url="@/Image/editQ.png" />
-			</image>
-		</ImageView>
-		<ImageView fitHeight="70.0" fitWidth="70.0" layoutX="1780.0"
-			layoutY="100.0" onMouseClicked="#showGameRules" pickOnBounds="true"
-			preserveRatio="true">
+		<ImageView fx:id="titleImg" fitHeight="130.0" fitWidth="452.0" layoutX="736.8" layoutY="84.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="737.0" />
+		<ImageView fitHeight="70.0" fitWidth="75.0" layoutX="19.0" layoutY="25.0" onMouseClicked="#showGameRules" pickOnBounds="true" preserveRatio="true">
 			<image>
 				<Image url="@/Image/infoicon2.png" />
 			</image>
 		</ImageView>
-		<Button alignment="BOTTOM_CENTER" contentDisplay="BOTTOM"
-			layoutX="246.0" layoutY="291.0" mnemonicParsing="true"
-			onAction="#switchToGameSetup" style="-fx-background-color: #49ae40;"
-			text="Play" textFill="#f4f41f" AnchorPane.bottomAnchor="150"
-			AnchorPane.leftAnchor="900.0" AnchorPane.rightAnchor="900.0">
+		<Button fx:id="playBtn" alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" layoutX="879.2" layoutY="430.0" mnemonicParsing="true" onAction="#switchToGameSetup" prefHeight="51.0" prefWidth="158.0" style="-fx-background-color: #49ae40;" text="Play" textFill="#f4f41f" AnchorPane.bottomAnchor="519.0" AnchorPane.leftAnchor="879.0" AnchorPane.rightAnchor="883.0">
 			<font>
-				<Font size="24.0" />
+				<Font name="System Bold" size="24.0" />
 			</font>
 		</Button>
+      <ComboBox fx:id="picMode" layoutX="1737.0" layoutY="108.0" onAction="#changeColor" prefWidth="150.0" />
+      <Button fx:id="logOutBtn" alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" layoutX="877.0" layoutY="641.0" mnemonicParsing="true" onAction="#logOut" prefHeight="51.0" prefWidth="158.0" style="-fx-background-color: #49ae40;" text="Log Out" textFill="#f4f41f">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Button>
+      <Button fx:id="historyBtn" alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" layoutX="878.0" layoutY="500.0" mnemonicParsing="true" onAction="#switchToHistoryPage" prefHeight="51.0" prefWidth="158.0" style="-fx-background-color: #49ae40;" text="History" textFill="#f4f41f">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Button>
+      <Button fx:id="questionBtn" alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" layoutX="877.0" layoutY="571.0" mnemonicParsing="true" onAction="#switchToQuestionPage" prefHeight="51.0" prefWidth="158.0" style="-fx-background-color: #49ae40;" text="Question" textFill="#f4f41f">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Button>
 	</children>
 </AnchorPane>

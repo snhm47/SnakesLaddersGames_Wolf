@@ -1,9 +1,12 @@
 package Controller;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.scene.Node;
@@ -26,12 +29,40 @@ public class HistoryController {
     private Stage stage;
     private Scene scene;
     private Parent root;
+    
+    @FXML
+    private ImageView imgBackg;
+    
+    @FXML
+    private ImageView titleImg;
 
     @FXML
     private TableView<History> tableView;
 
     @FXML
     private void initialize() {
+    	titleImg.setFitWidth(200); 
+        titleImg.setFitHeight(150);
+    	if(StaticController.getInstance().getPageColor().equals("Oceanic Dreams")) {
+    		Image newImage3 = new Image("Image/ocean.jpg");
+    		imgBackg.setImage(newImage3);
+    		Image newImage2 = new Image("Image/DarkHistory.png");
+            titleImg.setImage(newImage2);
+    	}
+    	if(StaticController.getInstance().getPageColor().equals("Dark Aurora")) {
+    		Image newImage3 = new Image("Image/DarkBackg.jpg");
+    		imgBackg.setImage(newImage3);
+    		Image newImage2 = new Image("Image/HistoryDarkTitle.png");
+            titleImg.setImage(newImage2);
+    	}
+    	if(StaticController.getInstance().getPageColor().equals("Enchanted Forest")) {
+    		Image newImage3 = new Image("Image/edjungletheme.jpg");
+    		imgBackg.setImage(newImage3);
+    		Image newImage2 = new Image("Image/hestoryForest.png");
+            titleImg.setImage(newImage2);
+    	}
+    //	tableView.setStyle("-fx-background-color: transparent;");
+
         // Define columns
         TableColumn<History, String> winnerColumn = new TableColumn<>("Winner");
         winnerColumn.setCellValueFactory(new PropertyValueFactory<>("winnerName"));
