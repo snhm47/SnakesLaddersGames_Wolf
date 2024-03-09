@@ -6,6 +6,9 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import application.Main;
+import javafx.animation.FadeTransition;
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,57 +31,56 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import javafx.util.Pair;
 import model.Admin;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
-
 public class HomeController implements Initializable {
-	
+
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
-	
+
 	@FXML
-    private Button questionBtn;
-	
+	private Button questionBtn;
+
 	@FXML
-    private Button historyBtn;
-	
+	private Button historyBtn;
+
 	@FXML
-    private Button playBtn;
-	
+	private Button playBtn;
+
 	@FXML
-    private Button logOutBtn;
-	
+	private Button logOutBtn;
+
 	@FXML
-    private ImageView titleImg;
-	
+	private ImageView titleImg;
+
 	@FXML
-	private ImageView hisIcon,QuesIcon;
-	
+	private ImageView hisIcon, QuesIcon;
+
 	@FXML
-    private ImageView imgbackground;
-	
+	private ImageView imgbackground;
+
 	@FXML
-    private AnchorPane pane;
-	
-	//FXMLLoader fxmlLoader = new FXMLLoader();
+	private AnchorPane pane;
+
+	// FXMLLoader fxmlLoader = new FXMLLoader();
 	@FXML
 	private RadioButton rbuttoneasy, rbuttonMedium, rbuttonHard;
-	
+
 	@FXML
 	private TextField infoTf = new TextField();
 	Admin admin = new Admin("admin", "1234");
 
 	@FXML
-    private ComboBox<String> picMode=new ComboBox<String>();
-	private static Boolean themePic=false;
-	
+	private ComboBox<String> picMode = new ComboBox<String>();
+	private static Boolean themePic = false;
 
 	private boolean isAdminLoggedIn = false;
-	private static String themeName="Enchanted Forest";
+	private static String themeName = "Enchanted Forest";
 
 	@FXML
 	public void switchToQuestionPage(ActionEvent event) {
@@ -90,12 +92,12 @@ public class HomeController implements Initializable {
 			loadQuestionsPage(event);
 		}
 	}
-	
+
 	@FXML
-    public void logOut(ActionEvent event) {
-    	stage = (Stage) pane.getScene().getWindow();
-        stage.close();
-    }
+	public void logOut(ActionEvent event) {
+		stage = (Stage) pane.getScene().getWindow();
+		stage.close();
+	}
 
 	private void showLoginDialog(ActionEvent event) {
 		// Create and display the admin access warning dialog
@@ -168,216 +170,273 @@ public class HomeController implements Initializable {
 
 	// Method to load the QuestionsPage
 	private void loadQuestionsPage(ActionEvent event) {
-		   try {
-		        javafx.scene.Parent root = FXMLLoader.load(getClass().getResource("/View/QuestionsPage.fxml"));
-		        if (root == null) {
-		            throw new IOException("FXML file is null");
-		        }
-		        javafx.stage.Stage stage = (javafx.stage.Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-		        javafx.scene.Scene scene = new javafx.scene.Scene(root);
-		        stage.setScene(scene);
-		        stage.show();
-		    } catch (IOException e) {
-		        e.printStackTrace(); // Handle IOException properly
-		    } catch (NullPointerException e) {
-		        e.printStackTrace(); // Handle NullPointerException
-		    }
+		try {
+			javafx.scene.Parent root = FXMLLoader.load(getClass().getResource("/View/QuestionsPage.fxml"));
+			if (root == null) {
+				throw new IOException("FXML file is null");
+			}
+			javafx.stage.Stage stage = (javafx.stage.Stage) ((javafx.scene.Node) event.getSource()).getScene()
+					.getWindow();
+			javafx.scene.Scene scene = new javafx.scene.Scene(root);
+			stage.setScene(scene);
+			stage.show();
+		} catch (IOException e) {
+			e.printStackTrace(); // Handle IOException properly
+		} catch (NullPointerException e) {
+			e.printStackTrace(); // Handle NullPointerException
 		}
+	}
 
 	private boolean authenticate(String username, String password) {
 		Admin admin = new Admin("admin", "1234");
 		return admin.getUserName().equals(username) && admin.getPass().equals(password);
 	}
 
-    @FXML
-    public void switchToHistoryPage(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/View/HistoryScreen.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    @FXML
-    public void switchToGameSetup(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/View/Home2.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-	
-    @FXML
-	public void showGameRules(MouseEvent event){
-	    String gameRules = "Origin: Snakes and Ladders, originally known as Moksha Patam, is an ancient Indian board game. The game's concept of progression and setbacks symbolizes the journey of life with virtues represented by ladders and vices by snakes.\n\n"
-	            + "- How to Play:\n\n"
-	            + "- Objective: Reach the final square of the board before your opponents.\n"
-	            + "- Movement: Roll the dice to determine the number of steps you can take.\n"
-	            + "- 0-6: Move forward accordingly.\n"
-	            + "- Easy/Medium/Difficult Question: Answer a question correctly to proceed. Incorrect answers may hinder your progress.\n"
-	            + "- Snakes: Various types of snakes will set you back:\n"
-	            + "- Yellow: Moves you back one row.\n"
-	            + "- Green: Sets you back two rows.\n"
-	            + "- Blue: Takes you back three rows.\n"
-	            + "- Red: Sends you back to the starting point.\n"
-	            + "- Ladders: Ladders aid your progress:\n"
-	            + "- Easy Game: Ladders of length 1-4.\n"
-	            + "- Medium Game: Ladders of length 1-6.\n"
-	            + "- Hard Game: Ladders of length 1-8.\n"
-	            + "- Difficulty Levels:\n"
-	            + "- Easy:(7x7) board size, Four snakes, one of each type, and ladders of varying lengths. Allows easy, medium, and difficult questions.\n"
-	            + "- Medium:(10x10) board size Six snakes, double chance for questions, and ladders up to length six.\n"
-	            + "- Hard:(13x13) board sieze Eight snakes, increased difficulty question chances, and ladders up to length eight.\n"
-	            + "- Dive into the world of Snakes and Ladders, where luck, strategy, and knowledge intertwine!";
-	    
-	    
-	    TextArea textArea = new TextArea(gameRules);
-	    textArea.setEditable(false);
-	    textArea.setWrapText(true);
-
-	    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-	    alert.setTitle("Game Rules");
-	    alert.setHeaderText(null);
-
-	    // Set the TextArea as the content of the alert dialog
-	    alert.getDialogPane().setContent(textArea);
-	    alert.show();
+	@FXML
+	public void switchToHistoryPage(ActionEvent event) throws IOException {
+		root = FXMLLoader.load(getClass().getResource("/View/HistoryScreen.fxml"));
+		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
 	}
 
-    @FXML
-    void changeDesign(ActionEvent event) {
+	@FXML
+	public void switchToGameSetup(ActionEvent event) throws IOException {
+		root = FXMLLoader.load(getClass().getResource("/View/Home2.fxml"));
+		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
+	}
 
-    }
-    
-    @FXML
-    void changeColor(ActionEvent event) {
-    	if(picMode.getValue().equals("Dark Aurora")) {
-    		darkAuroraMode();
-    		StaticController.getInstance().setPageColor("Dark Aurora");
-    		
-    	}
-    /*	if(picMode.getValue().equals("Twilight Serenity")) {
-    		twilightSerenityMode();
-    		StaticController.getInstance().setPageColor("Twilight Serenity");
-    		
-    	}*/
-    	if(picMode.getValue().equals("Enchanted Forest")) {
-    		enchantedForestMode();
-    		StaticController.getInstance().setPageColor("Enchanted Forest");
-    		
-    	}
-    	if(picMode.getValue().equals("Oceanic Dreams")) {
-    		oceanicDreamsMode();
-    		StaticController.getInstance().setPageColor("Oceanic Dreams");
-    		
-    	}
-    	
-    }
-    
- /*   private void twilightSerenityMode() {
-    	//Image newImage3 = new Image("Image/edjungletheme1.jpg");
-        //imgbackground.setImage(newImage3);
-    	System.out.println("Twilight Serenity");
-        themePic=true;
-        themeName="Twilight Serenity";
-    }*/
-    
-    private void enchantedForestMode() {
-    	Image newImage3 = new Image("Image/edjungletheme.jpg");
-        imgbackground.setImage(newImage3);
-    //    Image tit = new Image("Image/titForest.png‬");
-     //   titleImg.setImage(tit);
-        Image newImage2 = new Image("Image/titForest.png");
-        titleImg.setImage(newImage2);
-        playBtn.setTextFill(Color.WHITE);
-        playBtn.setStyle("-fx-background-color: green;");
-        logOutBtn.setTextFill(Color.WHITE);
-        logOutBtn.setStyle("-fx-background-color: green;");
-        historyBtn.setTextFill(Color.WHITE);
-        historyBtn.setStyle("-fx-background-color: green;");
-        questionBtn.setTextFill(Color.WHITE);
-        questionBtn.setStyle("-fx-background-color: green;");
-        
-        System.out.println("Enchanted Forest");
-        themePic=true;
-        themeName="Enchanted Forest";
-    }
-    
-    private void oceanicDreamsMode() {
-        Image newImage3 = new Image("Image/ocean.jpg");
-        imgbackground.setImage(newImage3);
-        Image newImage2 = new Image("Image/DarksnakeAndLadders.png");
-        titleImg.setImage(newImage2);
-        playBtn.setTextFill(Color.DARKSLATEGREY);
-        playBtn.setStyle("-fx-background-color: gray;");
-        logOutBtn.setTextFill(Color.DARKSLATEGREY);
-        logOutBtn.setStyle("-fx-background-color: gray;");
-        historyBtn.setTextFill(Color.DARKSLATEGREY);
-        historyBtn.setStyle("-fx-background-color: gray;");
-        questionBtn.setTextFill(Color.DARKSLATEGREY);
-        questionBtn.setStyle("-fx-background-color: gray;");
-        System.out.println("Oceanic Dreams");
-        themePic=true;
-        themeName="Oceanic Dreams";
-    }
+	@FXML
+	public void showGameRules(MouseEvent event) {
+		String gameRules = "Origin: Snakes and Ladders, originally known as Moksha Patam, is an ancient Indian board game. The game's concept of progression and setbacks symbolizes the journey of life with virtues represented by ladders and vices by snakes.\n\n"
+				+ "- How to Play:\n\n" + "- Objective: Reach the final square of the board before your opponents.\n"
+				+ "- Movement: Roll the dice to determine the number of steps you can take.\n"
+				+ "- 0-6: Move forward accordingly.\n"
+				+ "- Easy/Medium/Difficult Question: Answer a question correctly to proceed. Incorrect answers may hinder your progress.\n"
+				+ "- Snakes: Various types of snakes will set you back:\n" + "- Yellow: Moves you back one row.\n"
+				+ "- Green: Sets you back two rows.\n" + "- Blue: Takes you back three rows.\n"
+				+ "- Red: Sends you back to the starting point.\n" + "- Ladders: Ladders aid your progress:\n"
+				+ "- Easy Game: Ladders of length 1-4.\n" + "- Medium Game: Ladders of length 1-6.\n"
+				+ "- Hard Game: Ladders of length 1-8.\n" + "- Difficulty Levels:\n"
+				+ "- Easy:(7x7) board size, Four snakes, one of each type, and ladders of varying lengths. Allows easy, medium, and difficult questions.\n"
+				+ "- Medium:(10x10) board size Six snakes, double chance for questions, and ladders up to length six.\n"
+				+ "- Hard:(13x13) board sieze Eight snakes, increased difficulty question chances, and ladders up to length eight.\n"
+				+ "- Dive into the world of Snakes and Ladders, where luck, strategy, and knowledge intertwine!";
 
-    private void darkAuroraMode() {
-    	
-    	Image newImage = new Image("Image/DarkBackg.jpg");
-        imgbackground.setImage(newImage);
-     
-        Image newImage2 = new Image("Image/DarkTitle.png");
-        titleImg.setImage(newImage2);       
-        playBtn.setTextFill(Color.BLACK);
-        playBtn.setStyle("-fx-background-color: #2F4F4F;");
-        logOutBtn.setTextFill(Color.BLACK);
-        logOutBtn.setStyle("-fx-background-color: #2F4F4F;");
-        historyBtn.setTextFill(Color.BLACK);
-        historyBtn.setStyle("-fx-background-color: #2F4F4F;");
-        questionBtn.setTextFill(Color.BLACK);
-        questionBtn.setStyle("-fx-background-color: #2F4F4F;");
-        System.out.println("Dark Aurora");
-        themePic=true;
-        themeName="Dark Aurora";
-    }
-    
+		TextArea textArea = new TextArea(gameRules);
+		textArea.setEditable(false);
+		textArea.setWrapText(true);
+
+		Alert alert = new Alert(Alert.AlertType.INFORMATION);
+		alert.setTitle("Game Rules");
+		alert.setHeaderText(null);
+
+		// Set the TextArea as the content of the alert dialog
+		alert.getDialogPane().setContent(textArea);
+		alert.show();
+	}
+
+	@FXML
+	void changeDesign(ActionEvent event) {
+
+	}
+
+	@FXML
+	void changeColor(ActionEvent event) {
+		if (picMode.getValue().equals("Dark Aurora")) {
+			darkAuroraMode();
+			StaticController.getInstance().setPageColor("Dark Aurora");
+
+		}
+		/*
+		 * if(picMode.getValue().equals("Twilight Serenity")) { twilightSerenityMode();
+		 * StaticController.getInstance().setPageColor("Twilight Serenity");
+		 * 
+		 * }
+		 */
+		if (picMode.getValue().equals("Enchanted Forest")) {
+			enchantedForestMode();
+			StaticController.getInstance().setPageColor("Enchanted Forest");
+
+		}
+		if (picMode.getValue().equals("Oceanic Dreams")) {
+			oceanicDreamsMode();
+			StaticController.getInstance().setPageColor("Oceanic Dreams");
+
+		}
+
+	}
+
+	/*
+	 * private void twilightSerenityMode() { //Image newImage3 = new
+	 * Image("Image/edjungletheme1.jpg"); //imgbackground.setImage(newImage3);
+	 * System.out.println("Twilight Serenity"); themePic=true;
+	 * themeName="Twilight Serenity"; }
+	 */
+
+	private void enchantedForestMode() {
+		Image newImage3 = new Image("Image/edjungletheme.jpg");
+		imgbackground.setImage(newImage3);
+		// Image tit = new Image("Image/titForest.png‬");
+		// titleImg.setImage(tit);
+		Image newImage2 = new Image("Image/titForest.png");
+		titleImg.setImage(newImage2);
+		playBtn.setTextFill(Color.WHITE);
+		playBtn.setStyle("-fx-background-color: green;");
+		logOutBtn.setTextFill(Color.WHITE);
+		logOutBtn.setStyle("-fx-background-color: green;");
+		historyBtn.setTextFill(Color.WHITE);
+		historyBtn.setStyle("-fx-background-color: green;");
+		questionBtn.setTextFill(Color.WHITE);
+		questionBtn.setStyle("-fx-background-color: green;");
+
+		System.out.println("Enchanted Forest");
+		themePic = true;
+		themeName = "Enchanted Forest";
+	}
+
+	private void oceanicDreamsMode() {
+		Image newImage3 = new Image("Image/ocean.jpg");
+		imgbackground.setImage(newImage3);
+		Image newImage2 = new Image("Image/DarksnakeAndLadders.png");
+		titleImg.setImage(newImage2);
+		playBtn.setTextFill(Color.DARKSLATEGREY);
+		playBtn.setStyle("-fx-background-color: gray;");
+		logOutBtn.setTextFill(Color.DARKSLATEGREY);
+		logOutBtn.setStyle("-fx-background-color: gray;");
+		historyBtn.setTextFill(Color.DARKSLATEGREY);
+		historyBtn.setStyle("-fx-background-color: gray;");
+		questionBtn.setTextFill(Color.DARKSLATEGREY);
+		questionBtn.setStyle("-fx-background-color: gray;");
+		System.out.println("Oceanic Dreams");
+		themePic = true;
+		themeName = "Oceanic Dreams";
+	}
+
+	private void darkAuroraMode() {
+
+		Image newImage = new Image("Image/DarkBackg.jpg");
+		imgbackground.setImage(newImage);
+
+		Image newImage2 = new Image("Image/DarkTitle.png");
+		titleImg.setImage(newImage2);
+		playBtn.setTextFill(Color.BLACK);
+		playBtn.setStyle("-fx-background-color: #2F4F4F;");
+		logOutBtn.setTextFill(Color.BLACK);
+		logOutBtn.setStyle("-fx-background-color: #2F4F4F;");
+		historyBtn.setTextFill(Color.BLACK);
+		historyBtn.setStyle("-fx-background-color: #2F4F4F;");
+		questionBtn.setTextFill(Color.BLACK);
+		questionBtn.setStyle("-fx-background-color: #2F4F4F;");
+		System.out.println("Dark Aurora");
+		themePic = true;
+		themeName = "Dark Aurora";
+	}
+
+	@FXML
+	private ImageView imgmove1, imgmove2;
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		picMode.getItems().add("Dark Aurora");
-	//	picMode.getItems().add("Twilight Serenity");
+		// picMode.getItems().add("Twilight Serenity");
 		picMode.getItems().add("Enchanted Forest");
 		picMode.getItems().add("Oceanic Dreams");
-		if(themePic.equals(false)) {
-		enchantedForestMode();
-		StaticController.getInstance().setPageColor("Enchanted Forest");
-		}else {
-			if(themeName.equals("Dark Aurora")) {
-	    		darkAuroraMode();
-	    		StaticController.getInstance().setPageColor("Dark Aurora");
-	    	}
-	/*    	if(themeName.equals("Twilight Serenity")) {
-	    		twilightSerenityMode();
-	    		StaticController.getInstance().setPageColor("Twilight Serenity");
-	    		
-	    	}*/
-	    	if(themeName.equals("Enchanted Forest")) {
-	    		enchantedForestMode();
-	    		StaticController.getInstance().setPageColor("Enchanted Forest");
-	    		
-	    	}
-	    	if(themeName.equals("Oceanic Dreams")) {
-	    		oceanicDreamsMode();
-	    		StaticController.getInstance().setPageColor("Oceanic Dreams");
-	    		
-	    	}
+		if (themePic.equals(false)) {
+			enchantedForestMode();
+			StaticController.getInstance().setPageColor("Enchanted Forest");
+		} else {
+			if (themeName.equals("Dark Aurora")) {
+				darkAuroraMode();
+				StaticController.getInstance().setPageColor("Dark Aurora");
+			}
+			/*
+			 * if(themeName.equals("Twilight Serenity")) { twilightSerenityMode();
+			 * StaticController.getInstance().setPageColor("Twilight Serenity");
+			 * 
+			 * }
+			 */
+			if (themeName.equals("Enchanted Forest")) {
+				enchantedForestMode();
+				StaticController.getInstance().setPageColor("Enchanted Forest");
+
+			}
+			if (themeName.equals("Oceanic Dreams")) {
+				oceanicDreamsMode();
+				StaticController.getInstance().setPageColor("Oceanic Dreams");
+
+			}
 		}
-		
+
+		imgmove2.setVisible(false); // Ensure imgmove2 is initially invisible
+
+		// Translate imgmove1 upward
+		TranslateTransition t1 = createTranslateTransition(imgmove1, 90, -500, 2500, false);
+		// Fade out imgmove1 after translation
+		FadeTransition fadeOut1 = createFadeTransition(imgmove1, 1, 0, 500);
+		// Fade in imgmove1 for cycle restart, not immediately used
+		FadeTransition fadeIn1 = createFadeTransition(imgmove1, 0, 1, 500);
+
+		// Translate imgmove2 upward
+		TranslateTransition t2 = createTranslateTransition(imgmove2, 900, 0, 2500, false);
+		// Fade out imgmove2 after translation
+		FadeTransition fadeOut2 = createFadeTransition(imgmove2, 1, 0, 500);
+		// Fade in imgmove2, not immediately used
+		FadeTransition fadeIn2 = createFadeTransition(imgmove2, 0, 1, 500);
+
+		// Sequence for imgmove1
+		t1.setOnFinished(event -> fadeOut1.play());
+		fadeOut1.setOnFinished(event -> {
+			imgmove1.setVisible(false); // Make sure imgmove1 is invisible after fade
+			imgmove2.setVisible(true); // Make imgmove2 visible right before its animation
+			t2.play();
+		});
+
+		// Sequence for imgmove2
+		t2.setOnFinished(event -> fadeOut2.play());
+		fadeOut2.setOnFinished(event -> {
+			imgmove2.setVisible(false); // Ensure imgmove2 stays invisible after its fade, preventing re-appearance
+			resetImageView(imgmove1); // Reset imgmove1 for next cycle
+			resetImageView(imgmove2); // Reset imgmove2 but keep it invisible
+			imgmove1.setVisible(true); // Only make imgmove1 visible before its animation
+			t1.play(); // Restart the cycle with imgmove1's animation
+		});
+
+		// Start the animation cycle with imgmove1
+		t1.play();
+
 	}
 
+	private TranslateTransition createTranslateTransition(ImageView imageView, double byX, double toY, int duration,
+			boolean autoReverse) {
+		TranslateTransition transition = new TranslateTransition(Duration.millis(duration), imageView);
+		transition.setByX(byX);
+		transition.setToY(toY);
+		transition.setAutoReverse(autoReverse);
+		return transition;
+	}
 
+	private FadeTransition createFadeTransition(ImageView imageView, double fromValue, double toValue, int duration) {
+		FadeTransition transition = new FadeTransition(Duration.millis(duration), imageView);
+		transition.setFromValue(fromValue);
+		transition.setToValue(toValue);
+		return transition;
+	}
 
-	
-	
-	
+	private void resetImageView(ImageView imageView) {
+		imageView.setTranslateX(0);
+		imageView.setTranslateY(0);
+		imageView.setOpacity(1); // Reset opacity to make sure the imageView is visible when it reappears
+	}
+
+	@FXML
+	private void handleMuteButtonAction(ActionEvent event) {
+		Main.toggleMusic();
+	}
+
 }

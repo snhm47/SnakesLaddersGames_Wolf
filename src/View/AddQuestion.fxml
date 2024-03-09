@@ -26,6 +26,9 @@
 				<Image url="@/Image/edjungletheme1.jpg" />
 			</image>
 		</ImageView>
+		
+						<Button fx:id="muteButton" layoutX="220.0" layoutY="60"
+			onAction="#handleMuteButtonAction" text="Mute" />
 		<ImageView fitHeight="50" fitWidth="50" layoutX="38.0"
 			layoutY="24.0" onMouseClicked="#returnToMainPage" pickOnBounds="true"
 			preserveRatio="true">

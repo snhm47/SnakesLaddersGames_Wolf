@@ -11,6 +11,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+import application.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -256,5 +257,10 @@ public class AddQuestionController implements Initializable {
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
 		stage.show();
+	}
+	
+	@FXML
+	private void handleMuteButtonAction(ActionEvent event) {
+		Main.toggleMusic();
 	}
 }

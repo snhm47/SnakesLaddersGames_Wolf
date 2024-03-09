@@ -10,59 +10,89 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="1000.0" minWidth="1920.0" prefHeight="1000.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.QuestionPageController">
-    <children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
+	minHeight="1000.0" minWidth="1920.0" prefHeight="1000.0"
+	prefWidth="1920.0" xmlns="http://javafx.com/javafx/8"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="Controller.QuestionPageController">
+	<children>
 
-        <!-- Semi-transparent background for better text visibility -->
-        <ImageView fx:id="imgBackg" fitHeight="1080" fitWidth="1920" pickOnBounds="true" />
+		<!-- Semi-transparent background for better text visibility -->
+		<ImageView fx:id="imgBackg" fitHeight="1080" fitWidth="1920"
+			pickOnBounds="true" />
 
-        <!-- Table view for questions -->
-        <TableView fx:id="questionTableView" prefHeight="200.0" prefWidth="500.0" AnchorPane.bottomAnchor="250" AnchorPane.leftAnchor="500.0" AnchorPane.rightAnchor="500.0" AnchorPane.topAnchor="250" />
+		<!-- Table view for questions -->
+		<TableView fx:id="questionTableView" prefHeight="200.0"
+			prefWidth="500.0" AnchorPane.bottomAnchor="250"
+			AnchorPane.leftAnchor="500.0" AnchorPane.rightAnchor="500.0"
+			AnchorPane.topAnchor="250" />
 
-        <!-- Return to home button -->
-        <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="52.0" layoutY="40.0" onMouseClicked="#returnToMainPage" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@../Image/homebtnIcon.png" />
-            </image>
-        </ImageView>
+		<!-- Return to home button -->
+		<ImageView fitHeight="50.0" fitWidth="50.0" layoutX="52.0"
+			layoutY="40.0" onMouseClicked="#returnToMainPage" pickOnBounds="true"
+			preserveRatio="true">
+			<image>
+				<Image url="@../Image/homebtnIcon.png" />
+			</image>
+		</ImageView>
 
-        <!-- Search label -->
-        <Text fill="#868686" layoutX="50.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Search:" AnchorPane.leftAnchor="600.0" AnchorPane.topAnchor="200">
-            <font>
-                <Font name="System Bold" size="19.0" />
-            </font>
-        </Text>
-        <!-- Search text field -->
-        <TextField fx:id="searchTextField" layoutX="120.0" layoutY="77.0" prefHeight="26.0" prefWidth="88.0" AnchorPane.leftAnchor="670.0" AnchorPane.topAnchor="200" />
-        <!-- Search button -->
-        <Button layoutX="222.0" layoutY="75.0" mnemonicParsing="false" onAction="#searchQuestions" text="Search" AnchorPane.leftAnchor="770.0" AnchorPane.topAnchor="200">
-            <font>
-                <Font size="14.0" />
-            </font>
-        </Button>
-        
-        <!-- Add question button -->
-        <ImageView fitHeight="60" fitWidth="60" layoutX="515.0" layoutY="353.0" onMouseClicked="#addQ" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="100" AnchorPane.rightAnchor="710.0">
-            <image>
-                <Image url="@../Image/add.png" />
-            </image>
-        </ImageView>
+		<!-- Search label -->
+		<Text fill="#868686" layoutX="50.0" layoutY="98.0"
+			strokeType="OUTSIDE" strokeWidth="0.0" text="Search:"
+			AnchorPane.leftAnchor="600.0" AnchorPane.topAnchor="200">
+			<font>
+				<Font name="System Bold" size="19.0" />
+			</font>
+		</Text>
+		<!-- Search text field -->
+		<TextField fx:id="searchTextField" layoutX="120.0"
+			layoutY="77.0" prefHeight="26.0" prefWidth="88.0"
+			AnchorPane.leftAnchor="670.0" AnchorPane.topAnchor="200" />
+		<!-- Search button -->
+		<Button layoutX="222.0" layoutY="75.0" mnemonicParsing="false"
+			onAction="#searchQuestions" text="Search"
+			AnchorPane.leftAnchor="770.0" AnchorPane.topAnchor="200">
+			<font>
+				<Font size="14.0" />
+			</font>
+		</Button>
 
-        <!-- Sort by label -->
-        <Text fill="#8e8e8e" layoutX="894.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sort by:" AnchorPane.leftAnchor="894.0" AnchorPane.topAnchor="200.4970703125">
-            <font>
-                <Font name="System Bold" size="19.0" />
-            </font>
-        </Text>
-        <!-- Choice box for sorting -->
-        <ChoiceBox fx:id="sortChoiceBox" layoutX="976.0" layoutY="201.0" prefHeight="26.0" prefWidth="160.0" AnchorPane.leftAnchor="976.0" AnchorPane.topAnchor="201.0" />
+		<!-- Add question button -->
+		<ImageView fitHeight="60" fitWidth="60" layoutX="515.0"
+			layoutY="353.0" onMouseClicked="#addQ" pickOnBounds="true"
+			preserveRatio="true" AnchorPane.bottomAnchor="100"
+			AnchorPane.rightAnchor="710.0">
+			<image>
+				<Image url="@../Image/add.png" />
+			</image>
+		</ImageView>
 
-        <!-- Edit question button -->
-        <Button fx:id="ebtn" layoutX="370.0" layoutY="356.0" mnemonicParsing="false" onMouseClicked="#editQuestion" text="Edit Question" AnchorPane.bottomAnchor="100" AnchorPane.rightAnchor="500.0">
-            <font>
-                <Font size="24.0" />
-            </font>
-        </Button>
-      <ImageView fx:id="titleImg" fitHeight="96.0" fitWidth="302.0" layoutX="886.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true" />
-    </children>
+		<!-- Sort by label -->
+		<Text fill="#8e8e8e" layoutX="894.0" layoutY="221.0"
+			strokeType="OUTSIDE" strokeWidth="0.0" text="Sort by:"
+			AnchorPane.leftAnchor="894.0" AnchorPane.topAnchor="200.4970703125">
+			<font>
+				<Font name="System Bold" size="19.0" />
+			</font>
+		</Text>
+		<!-- Choice box for sorting -->
+		<ChoiceBox fx:id="sortChoiceBox" layoutX="976.0"
+			layoutY="201.0" prefHeight="26.0" prefWidth="160.0"
+			AnchorPane.leftAnchor="976.0" AnchorPane.topAnchor="201.0" />
+
+		<!-- Edit question button -->
+		<Button fx:id="ebtn" layoutX="370.0" layoutY="356.0"
+			mnemonicParsing="false" onMouseClicked="#editQuestion"
+			text="Edit Question" AnchorPane.bottomAnchor="100"
+			AnchorPane.rightAnchor="500.0">
+			<font>
+				<Font size="24.0" />
+			</font>
+		</Button>
+		<Button fx:id="muteButton" layoutX="220.0" layoutY="60"
+			onAction="#handleMuteButtonAction" text="Mute" />
+		<ImageView fx:id="titleImg" fitHeight="96.0"
+			fitWidth="302.0" layoutX="886.0" layoutY="52.0" pickOnBounds="true"
+			preserveRatio="true" />
+	</children>
 </AnchorPane>

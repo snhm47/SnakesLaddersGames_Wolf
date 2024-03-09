@@ -13,6 +13,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+import application.Main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -102,12 +103,12 @@ public class QuestionPageController {
 
 	SysData sysData = new SysData("WolfQuestionsDB.json");
 	ObservableList<Question> data = sysData.loadDataFromJSON("WolfQuestionsDB.json");
-
-	private void setFullscreen() {
-		stage.setResizable(false);
-		stage.setFullScreenExitHint("");
-		stage.setFullScreen(true);
+	
+	@FXML
+	private void handleMuteButtonAction(javafx.event.ActionEvent event) {
+		Main.toggleMusic();
 	}
+
 
 	@SuppressWarnings("unchecked")
 	@FXML
@@ -230,7 +231,6 @@ public class QuestionPageController {
 		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
-		setFullscreen();
 		stage.show();
 	}
 
@@ -282,7 +282,6 @@ public class QuestionPageController {
 		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
-		setFullscreen();
 		stage.show();
 	}
 
@@ -293,7 +292,6 @@ public class QuestionPageController {
 		scene = new Scene(root);
 		stage.setScene(scene);
 		stage.setMaximized(true);
-		setFullscreen();
 		stage.show();
 	}
 	@FXML
@@ -335,6 +333,7 @@ public class QuestionPageController {
 	        alert.showAndWait();
 	    }
 	}
+	
 
 }
 
