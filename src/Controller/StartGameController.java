@@ -4,7 +4,6 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -39,18 +38,16 @@ import model.History;
 import model.Ladders;
 import model.Player;
 import model.PlayerMoveSubject;
+import model.Question;
 import model.RunningGame;
 import model.Snakes;
 
 public class StartGameController {
 	
-	
 	@FXML
     private Button start;
-
     @FXML
     private Text timer;
-    
     @FXML
     private Rectangle diceRec;
     @FXML
@@ -64,24 +61,54 @@ public class StartGameController {
     
     private Label lPlayer;
     
+    //images vars
     Image img ;
     ImageView iv;
-    
+
+    // timer vars
     private Timeline timeline;
     private int minutes = 0;
     private int seconds = 0;
     
-    private int tern =0;
-    
+    //game vars
+    public static int turn = -1;
+    public static Player p ;
+    public static DiffLevel dl;
 	DiceFactory df = new DiceFactory();
-	
 	Games game = RunningGame.getInstance().getCurrentGame();
+	public static int diceRes;
+	public static Boolean quesSquare=false;
 	
 	
-	int diceRes;
+    //singleton
+	public static StartGameController _ins;
+	public static synchronized StartGameController getInstance() {
+		if(_ins == null) {
+			return new StartGameController();
+		}
+		return _ins;
+	}
+	
+	//getters and setters
+    public static int getTern() {
+		return turn;
+	}
+
+	public static void setTern(int tern) {
+		StartGameController.turn = tern;
+	}
+
+	public static Player getP() {
+		return p;
+	}
+
+	public static void setP(Player p) {
+		StartGameController.p = p;
+	}
+
     
     
-    // start the timer
+    // start the timer 
     @FXML
     void onClickStart(ActionEvent event) {
     	rollB.setDisable(true);
@@ -100,20 +127,28 @@ public class StartGameController {
         timeline.play();
         rollB.setDisable(false);
     }
+    
+    //the timer function that update the timer all the time
     private void updateTimer() {
         timer.setText(String.format("%02d:%02d", minutes, seconds));
     }
     
-    
+    //on click on the roll button 
     @FXML
     void onroll(ActionEvent event) {
-    	DiffLevel dl = RunningGame.getInstance().getCurrentGame().getDifficultyLevel();
+    	//start new roll (new turn)
+    	turn++;
+    	dl = RunningGame.getInstance().getCurrentGame().getDifficultyLevel();
     	Dice dice = df.getDice(dl);
     	diceRes = dice.roll();
     	PlayerMoveSubject pms = new PlayerMoveSubject();
 		spDice.getChildren().removeAll(iv);
 		spPlayer.getChildren().removeAll(lPlayer);
 		spPlayer.getChildren().removeAll();
+		
+		System.out.println("new roll");
+		
+		//handle the dice images in the board window
     	if(diceRes == 0 ) {
     		img = new Image(getClass().getResourceAsStream("/Image/Dice-0.png"));
     	}else if(diceRes == 1 ) {
@@ -138,36 +173,46 @@ public class StartGameController {
     		img = new Image(getClass().getResourceAsStream("/Image/Dice-7.png"));
     		
     	}
+    	
+    	//this block return the current player turn
     	int mod = RunningGame.getInstance().getPlayers().size();
-    	Player p = null;
-    	if(tern%mod == 0) {
+    	if(turn%mod == 0) {
     		p = RunningGame.getInstance().getPp().get(1);
+    		setP(p);
     		System.out.println(p);
-    	}else if(tern%mod == 1) {
+    	}else if(turn%mod == 1) {
     		p = RunningGame.getInstance().getPp().get(2);
+    		setP(p);
     		System.out.println(p);
-
-    	}else if(tern%mod == 2) {
+    	}else if(turn%mod == 2) {
     		p = RunningGame.getInstance().getPp().get(3);
+    		setP(p);
     		System.out.println(p);
-
-    	}else if(tern%mod == 3) {
+    	}else if(turn%mod == 3) {
     		p = RunningGame.getInstance().getPp().get(3);
+    		setP(p);
     		System.out.println(p);
     	}
+    	
+    	//the label of the current player 
     	lPlayer = new Label(p.getNickName());
     	lPlayer.setTextFill(Color.WHITE);
     	lPlayer.setPrefSize(50, 50);
     	lPlayer.setTextAlignment(TextAlignment.CENTER);
-    		int from = RunningGame.getInstance().getPlayerPlacement().get(p);
-    		int to=0;
-    		if(dl.equals(DiffLevel.easy)) {
-    			spDice.getChildren().removeAll(iv);
-    			if(diceRes == 5) {
-    				//question easy
-    	    		img = new Image(getClass().getResourceAsStream("/Image/Dice-5.png"));
-        			try {
-        		        // Load FXML scene (improve error handling with more specific exceptions)
+    	
+    	//get the player cureent place 
+    	int from = RunningGame.getInstance().getPlayerPlacement().get(p);
+    	int to=0;
+    		
+    		
+    	// if the diffLevel is easy ...
+    	if(dl.equals(DiffLevel.easy)) {
+    		spDice.getChildren().removeAll(iv);
+    		if(diceRes == 5) {
+    			//question easy
+    	    	img = new Image(getClass().getResourceAsStream("/Image/Dice-5.png"));
+        		try {
+        		       	// Load FXML scene (improve error handling with more specific exceptions)
         		        FXMLLoader fxmlLoader = new FXMLLoader();
         		        fxmlLoader.setLocation(getClass().getResource("/View/Questionpopup.fxml"));
         		        Scene gameboardScene = new Scene(fxmlLoader.load(), 600, 400);
@@ -175,16 +220,19 @@ public class StartGameController {
 //        		        QuestionSquareController
         		        // Create new stage and configure (use descriptive variable names)
         		        Stage gameStage = new Stage();
-        		        gameStage.setTitle("Game Board");
+        		        gameStage.setTitle("Easy question");
         		        gameStage.setScene(gameboardScene);
         		        gameStage.setMaximized(false);
         		        gameStage.setResizable(false);
+   
+        	    		Question ques = QuestionSquareController.getQuestion();
+        	    		System.out.println("easyQuestion " +ques);
 
-        		        // Show new stage and hide previous (consider more graceful transitions if
+						// Show new stage and hide previous (consider more graceful transitions if
         		        // needed)
-        		        gameStage.show();
-
-        		    } catch (IOException e) {
+						gameStage.show();
+						
+        		 } catch (IOException e) {
         		        // Handle IOException more robustly with specific messages
         		        e.printStackTrace();
         		        Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -192,9 +240,9 @@ public class StartGameController {
         		        alert.setContentText(
         		                "An error occurred while loading the FXML file. Please check the file path and content.");
         		        alert.showAndWait();
-        		    }
-    			}else if(diceRes == 6) {
-    				//question meduim
+        		 }
+    		}else if(diceRes == 6) {
+    				//question medium
     				img = new Image(getClass().getResourceAsStream("/Image/Dice-6.png"));
         			try {
         		        // Load FXML scene (improve error handling with more specific exceptions)
@@ -202,17 +250,20 @@ public class StartGameController {
         		        fxmlLoader.setLocation(getClass().getResource("/View/Questionpopup.fxml"));
         		        Scene gameboardScene = new Scene(fxmlLoader.load(), 600, 400);
 
-//        		        QuestionSquareController
         		        // Create new stage and configure (use descriptive variable names)
         		        Stage gameStage = new Stage();
-        		        gameStage.setTitle("Game Board");
+        		        gameStage.setTitle("Medium question");
         		        gameStage.setScene(gameboardScene);
         		        gameStage.setMaximized(false);
         		        gameStage.setResizable(false);
 
-        		        // Show new stage and hide previous (consider more graceful transitions if
+        	    		Question ques = QuestionSquareController.getQuestion();
+        	    		System.out.println("mediumQuestion" +ques);
+      		        
+
+						// Show new stage and hide previous (consider more graceful transitions if
         		        // needed)
-        		        gameStage.show();
+						gameStage.show();
 
         		    } catch (IOException e) {
         		        // Handle IOException more robustly with specific messages
@@ -223,7 +274,7 @@ public class StartGameController {
         		                "An error occurred while loading the FXML file. Please check the file path and content.");
         		        alert.showAndWait();
         		    }
-    			}else if(diceRes == 7) {
+    		}else if(diceRes == 7) {
     				//question hard
     				img = new Image(getClass().getResourceAsStream("/Image/Dice-7.png"));
         			try {
@@ -235,14 +286,18 @@ public class StartGameController {
 //        		        QuestionSquareController
         		        // Create new stage and configure (use descriptive variable names)
         		        Stage gameStage = new Stage();
-        		        gameStage.setTitle("Game Board");
+        		        gameStage.setTitle("Hard question");
         		        gameStage.setScene(gameboardScene);
         		        gameStage.setMaximized(false);
         		        gameStage.setResizable(false);
+        		        
 
-        		        // Show new stage and hide previous (consider more graceful transitions if
+        	    		Question ques = QuestionSquareController.getQuestion();
+        	    		
+        	    		System.out.println("HardQuestion" +ques);
+						// Show new stage and hide previous (consider more graceful transitions if
         		        // needed)
-        		        gameStage.show();
+						gameStage.show();						
 
         		    } catch (IOException e) {
         		        // Handle IOException more robustly with specific messages
@@ -253,24 +308,25 @@ public class StartGameController {
         		                "An error occurred while loading the FXML file. Please check the file path and content.");
         		        alert.showAndWait();
         		    }
-    			}else if(diceRes <=4 ){
+    		}else if(diceRes <=4 ){
+    				//if the dice result in the range 0-4 move the current player 
     				to = from + diceRes;
     				if(to > 49) {
     					to =49;
     				}		
     				pms.onPlayerMovement(p, from, to);
     				if(from != to) {
-        				move(p, from, to , tern);
+        				move(p, from, to , turn);
     				}
     			}
     			
-    			System.out.println("DiceRes : "+diceRes);
-    		}else if(dl.equals(DiffLevel.medium)) {
-    			spDice.getChildren().removeAll(iv);
-    			if(diceRes == 7 || diceRes == 8) {
+    			// if the diffLevel is Medium...
+    	}else if(dl.equals(DiffLevel.medium)) {
+    		spDice.getChildren().removeAll(iv);
+    		if(diceRes == 7 || diceRes == 8) {
     				//question easy
-    	    		img = new Image(getClass().getResourceAsStream("/Image/Dice-7.png"));
-        			try {
+    	    	img = new Image(getClass().getResourceAsStream("/Image/Dice-7.png"));
+        		try {
         		        // Load FXML scene (improve error handling with more specific exceptions)
         		        FXMLLoader fxmlLoader = new FXMLLoader();
         		        fxmlLoader.setLocation(getClass().getResource("/View/Questionpopup.fxml"));
@@ -279,11 +335,79 @@ public class StartGameController {
 //        		        QuestionSquareController
         		        // Create new stage and configure (use descriptive variable names)
         		        Stage gameStage = new Stage();
-        		        gameStage.setTitle("Game Board");
+        		        gameStage.setTitle("Easy question");
         		        gameStage.setScene(gameboardScene);
         		        gameStage.setMaximized(false);
         		        gameStage.setResizable(false);
 
+        		        Question ques = QuestionSquareController.getQuestion();
+        	    		System.out.println("EasyQuestion" +ques);
+        		        // Show new stage and hide previous (consider more graceful transitions if
+        		        // needed)
+        		        gameStage.show();
+
+        		} catch (IOException e) {
+        		        // Handle IOException more robustly with specific messages
+        		        e.printStackTrace();
+        		        Alert alert = new Alert(Alert.AlertType.ERROR);
+        		        alert.setTitle("Error");
+        		        alert.setContentText(
+        		                "An error occurred while loading the FXML file. Please check the file path and content.");
+        		        alert.showAndWait();
+        		 }
+    		}else if(diceRes == 9 || diceRes == 10) {
+    			//question meduim
+    	    	img = new Image(getClass().getResourceAsStream("/Image/Dice-8.png"));
+        		try {
+        		        // Load FXML scene (improve error handling with more specific exceptions)
+        		        FXMLLoader fxmlLoader = new FXMLLoader();
+        		        fxmlLoader.setLocation(getClass().getResource("/View/Questionpopup.fxml"));
+        		        Scene gameboardScene = new Scene(fxmlLoader.load(), 600, 400);
+
+//        		        QuestionSquareController
+        		        // Create new stage and configure (use descriptive variable names)
+        		        Stage gameStage = new Stage();
+        		        gameStage.setTitle("Medium question");
+        		        gameStage.setScene(gameboardScene);
+        		        gameStage.setMaximized(false);
+        		        gameStage.setResizable(false);
+        		        
+        		        Question ques = QuestionSquareController.getQuestion();   	    		
+        	    		System.out.println("MediumQuestion" +ques);
+        	    		
+        		        // Show new stage and hide previous (consider more graceful transitions if
+        		        // needed)
+        		        gameStage.show();
+
+        		   } catch (IOException e) {
+        		        // Handle IOException more robustly with specific messages
+        		        e.printStackTrace();
+        		        Alert alert = new Alert(Alert.AlertType.ERROR);
+        		        alert.setTitle("Error");
+        		        alert.setContentText(
+        		                "An error occurred while loading the FXML file. Please check the file path and content.");
+        		        alert.showAndWait();
+        		   }
+    		}else if(diceRes == 11 || diceRes == 12) {
+    			//question hard
+    	    	img = new Image(getClass().getResourceAsStream("/Image/Dice-9.png"));
+        		try {
+        		        // Load FXML scene (improve error handling with more specific exceptions)
+        		        FXMLLoader fxmlLoader = new FXMLLoader();
+        		        fxmlLoader.setLocation(getClass().getResource("/View/Questionpopup.fxml"));
+        		        Scene gameboardScene = new Scene(fxmlLoader.load(), 600, 400);
+
+//        		        QuestionSquareController
+        		        // Create new stage and configure (use descriptive variable names)
+        		        Stage gameStage = new Stage();
+        		        gameStage.setTitle("Hard question");
+        		        gameStage.setScene(gameboardScene);
+        		        gameStage.setMaximized(false);
+        		        gameStage.setResizable(false);
+
+        		        Question ques = QuestionSquareController.getQuestion();   	    		
+        	    		System.out.println("HardQuestion" +ques);
+        	    		
         		        // Show new stage and hide previous (consider more graceful transitions if
         		        // needed)
         		        gameStage.show();
@@ -293,86 +417,25 @@ public class StartGameController {
         		        e.printStackTrace();
         		        Alert alert = new Alert(Alert.AlertType.ERROR);
         		        alert.setTitle("Error");
-        		        alert.setContentText(
-        		                "An error occurred while loading the FXML file. Please check the file path and content.");
+        		        alert.setContentText("An error occurred while loading the FXML file. Please check the file path and content.");
         		        alert.showAndWait();
         		    }
-    			}else if(diceRes == 9 || diceRes == 10) {
-    				//question meduim
-    	    		img = new Image(getClass().getResourceAsStream("/Image/Dice-8.png"));
-        			try {
-        		        // Load FXML scene (improve error handling with more specific exceptions)
-        		        FXMLLoader fxmlLoader = new FXMLLoader();
-        		        fxmlLoader.setLocation(getClass().getResource("/View/Questionpopup.fxml"));
-        		        Scene gameboardScene = new Scene(fxmlLoader.load(), 600, 400);
-
-//        		        QuestionSquareController
-        		        // Create new stage and configure (use descriptive variable names)
-        		        Stage gameStage = new Stage();
-        		        gameStage.setTitle("Game Board");
-        		        gameStage.setScene(gameboardScene);
-        		        gameStage.setMaximized(false);
-        		        gameStage.setResizable(false);
-
-        		        // Show new stage and hide previous (consider more graceful transitions if
-        		        // needed)
-        		        gameStage.show();
-
-        		    } catch (IOException e) {
-        		        // Handle IOException more robustly with specific messages
-        		        e.printStackTrace();
-        		        Alert alert = new Alert(Alert.AlertType.ERROR);
-        		        alert.setTitle("Error");
-        		        alert.setContentText(
-        		                "An error occurred while loading the FXML file. Please check the file path and content.");
-        		        alert.showAndWait();
-        		    }
-    			}else if(diceRes == 11 || diceRes == 12) {
-    				//question hard
-    	    		img = new Image(getClass().getResourceAsStream("/Image/Dice-9.png"));
-        			try {
-        		        // Load FXML scene (improve error handling with more specific exceptions)
-        		        FXMLLoader fxmlLoader = new FXMLLoader();
-        		        fxmlLoader.setLocation(getClass().getResource("/View/Questionpopup.fxml"));
-        		        Scene gameboardScene = new Scene(fxmlLoader.load(), 600, 400);
-
-//        		        QuestionSquareController
-        		        // Create new stage and configure (use descriptive variable names)
-        		        Stage gameStage = new Stage();
-        		        gameStage.setTitle("Game Board");
-        		        gameStage.setScene(gameboardScene);
-        		        gameStage.setMaximized(false);
-        		        gameStage.setResizable(false);
-
-        		        // Show new stage and hide previous (consider more graceful transitions if
-        		        // needed)
-        		        gameStage.show();
-
-        		    } catch (IOException e) {
-        		        // Handle IOException more robustly with specific messages
-        		        e.printStackTrace();
-        		        Alert alert = new Alert(Alert.AlertType.ERROR);
-        		        alert.setTitle("Error");
-        		        alert.setContentText(
-        		                "An error occurred while loading the FXML file. Please check the file path and content.");
-        		        alert.showAndWait();
-        		    }
-    			}else {
-    				to = from + diceRes;
-    				if(to > 100) {
-    					to =100;
-    				}
-    				pms.onPlayerMovement(p, from, to);
-    				if(from != to) {
-        				move(p, from, to , tern);
-    				}
+    		}else {
+    			to = from + diceRes;
+    			if(to > 100) {
+    				to =100;
     			}
-    		}else if(dl.equals(DiffLevel.hard)) {
-    			spDice.getChildren().removeAll(iv);
-    			if(diceRes == 7 || diceRes == 8) {
-    				//question easy
-    	    		img = new Image(getClass().getResourceAsStream("/Image/Dice-7.png"));
-        			try {
+    			pms.onPlayerMovement(p, from, to);
+    			if(from != to) {
+        			move(p, from, to , turn);
+    			}
+    		}
+    	}else if(dl.equals(DiffLevel.hard)) {
+    		spDice.getChildren().removeAll(iv);
+    		if(diceRes == 7 || diceRes == 8) {
+    			//question easy
+    	    	img = new Image(getClass().getResourceAsStream("/Image/Dice-7.png"));
+        		try {
         		        // Load FXML scene (improve error handling with more specific exceptions)
         		        FXMLLoader fxmlLoader = new FXMLLoader();
         		        fxmlLoader.setLocation(getClass().getResource("/View/Questionpopup.fxml"));
@@ -381,11 +444,13 @@ public class StartGameController {
 //        		        QuestionSquareController
         		        // Create new stage and configure (use descriptive variable names)
         		        Stage gameStage = new Stage();
-        		        gameStage.setTitle("Game Board");
+        		        gameStage.setTitle("Easy question");
         		        gameStage.setScene(gameboardScene);
         		        gameStage.setMaximized(false);
         		        gameStage.setResizable(false);
 
+        		        Question ques = QuestionSquareController.getQuestion();   	    		
+        	    		System.out.println("EasyQuestion" +ques);
         		        // Show new stage and hide previous (consider more graceful transitions if
         		        // needed)
         		        gameStage.show();
@@ -399,10 +464,10 @@ public class StartGameController {
         		                "An error occurred while loading the FXML file. Please check the file path and content.");
         		        alert.showAndWait();
         		    }
-    			}else if(diceRes == 9 || diceRes == 10) {
-    				//question meduim
-    	    		img = new Image(getClass().getResourceAsStream("/Image/Dice-8.png"));
-        			try {
+    		}else if(diceRes == 9 || diceRes == 10) {
+    			//question meduim
+    	    	img = new Image(getClass().getResourceAsStream("/Image/Dice-8.png"));
+        		try {
         		        // Load FXML scene (improve error handling with more specific exceptions)
         		        FXMLLoader fxmlLoader = new FXMLLoader();
         		        fxmlLoader.setLocation(getClass().getResource("/View/Questionpopup.fxml"));
@@ -411,16 +476,18 @@ public class StartGameController {
 //        		        QuestionSquareController
         		        // Create new stage and configure (use descriptive variable names)
         		        Stage gameStage = new Stage();
-        		        gameStage.setTitle("Game Board");
+        		        gameStage.setTitle("Medium question");
         		        gameStage.setScene(gameboardScene);
         		        gameStage.setMaximized(false);
         		        gameStage.setResizable(false);
 
+        		        Question ques = QuestionSquareController.getQuestion();   	    		
+        	    		System.out.println("MediumQuestion" +ques);
         		        // Show new stage and hide previous (consider more graceful transitions if
         		        // needed)
         		        gameStage.show();
 
-        		    } catch (IOException e) {
+        		} catch (IOException e) {
         		        // Handle IOException more robustly with specific messages
         		        e.printStackTrace();
         		        Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -429,9 +496,9 @@ public class StartGameController {
         		                "An error occurred while loading the FXML file. Please check the file path and content.");
         		        alert.showAndWait();
         		    }
-    			}else if(diceRes == 11 || diceRes == 12 || diceRes == 13 || diceRes == 14 || diceRes == 15) {
-    				img = new Image(getClass().getResourceAsStream("/Image/Dice-9.png"));
-        			try {
+    		}else if(diceRes == 11 || diceRes == 12 || diceRes == 13 || diceRes == 14 || diceRes == 15) {
+    			img = new Image(getClass().getResourceAsStream("/Image/Dice-9.png"));
+        		try {
         		        // Load FXML scene (improve error handling with more specific exceptions)
         		        FXMLLoader fxmlLoader = new FXMLLoader();
         		        fxmlLoader.setLocation(getClass().getResource("/View/Questionpopup.fxml"));
@@ -440,11 +507,13 @@ public class StartGameController {
 //        		        QuestionSquareController
         		        // Create new stage and configure (use descriptive variable names)
         		        Stage gameStage = new Stage();
-        		        gameStage.setTitle("Game Board");
+        		        gameStage.setTitle("Hard question");
         		        gameStage.setScene(gameboardScene);
         		        gameStage.setMaximized(false);
         		        gameStage.setResizable(false);
 
+        		        Question ques = QuestionSquareController.getQuestion();   	    		
+        	    		System.out.println("HardQuestion" +ques);
         		        // Show new stage and hide previous (consider more graceful transitions if
         		        // needed)
         		        gameStage.show();
@@ -459,17 +528,17 @@ public class StartGameController {
         		        alert.showAndWait();
         		    }
     				//question hard
-    			}else {
-    				to = from + diceRes;
-    				if(to > 169) {
-    					to =169;
-    				}
-    				pms.onPlayerMovement(p, from, to);
-    				if(from != to) {
-        				move(p, from, to , tern);
-    				}
+    		}else {
+    			to = from + diceRes;
+    			if(to > 169) {
+    				to =169;
     			}
-    		}	
+    			pms.onPlayerMovement(p, from, to);
+    			if(from != to) {
+        			move(p, from, to , turn);
+    			}
+    		}
+    	}	
     		
     		iv = new ImageView(img);
         	iv.setFitWidth(150);
@@ -478,23 +547,25 @@ public class StartGameController {
         	spPlayer.getChildren().add(lPlayer);
         	CheckEnd();
         	
-        	
-        	for(Integer num : RunningGame.getInstance().getBoard().getSq().keySet()) {
-        		if(RunningGame.getInstance().getBoard().getSq().get(num).getSquareType().equals(SquareType.QUESTION) && num==to) {
+        	//handle the question square
+        	for(Player player : RunningGame.getInstance().getPlayerPlacement().keySet()) {
+        		int num = RunningGame.getInstance().getPlayerPlacement().get(player);
+        		if(RunningGame.getInstance().getBoard().getSq().get(num).getSquareType().equals(SquareType.QUESTION)) {
         			try {
         		        // Load FXML scene (improve error handling with more specific exceptions)
         		        FXMLLoader fxmlLoader = new FXMLLoader();
         		        fxmlLoader.setLocation(getClass().getResource("/View/Questionpopup.fxml"));
         		        Scene gameboardScene = new Scene(fxmlLoader.load(), 600, 400);
 
-//        		        QuestionSquareController
         		        // Create new stage and configure (use descriptive variable names)
         		        Stage gameStage = new Stage();
-        		        gameStage.setTitle("Game Board");
+        		        gameStage.setTitle("Question Square");
         		        gameStage.setScene(gameboardScene);
         		        gameStage.setMaximized(false);
         		        gameStage.setResizable(false);
 
+        		        Question ques = QuestionSquareController.getQuestion();   	    		
+        	    		System.out.println("SquareQuestion" +ques);
         		        // Show new stage and hide previous (consider more graceful transitions if
         		        // needed)
         		        gameStage.show();
@@ -508,35 +579,7 @@ public class StartGameController {
         		                "An error occurred while loading the FXML file. Please check the file path and content.");
         		        alert.showAndWait();
         		    }
-        			
-//        			QuestionSquareController qs = new QuestionSquareController();
-        			
-//        			System.out.println(QuestionSquareController.getInstance().getFlag());
-        			Boolean boll =  QuestionSquareController.getInstance().checkAnswer();
-        			System.out.println(boll);
-        			if(boll) {
-//        				if(QuestionSquareController.getInstance().getQuesdiff().getDifficulty().equals("3")) {
-//        					move(p, from, from+1, tern);
-//        				
-        				to = from+1;
-        				move(p,from, to, tern);
-//        				System.out.println(QuestionSquareController.getInstance().getQuesdiff().getDifficulty());
-        			}else {
-//        				if(QuestionSquareController.getInstance().getQuesdiff().getDifficulty().equals("1")) {
-//        					System.out.println(QuestionSquareController.getInstance().getQuesdiff().getDifficulty());
-//        					move(p, from, from-1, tern);
-//        				}else if(QuestionSquareController.getInstance().getQuesdiff().getDifficulty().equals("2")) {
-//        					move(p, from, from-2, tern);
-//        					System.out.println(QuestionSquareController.getInstance().getQuesdiff().getDifficulty());
-//        				}else if(QuestionSquareController.getInstance().getQuesdiff().getDifficulty().equals("3")){
-//        					move(p, from, from-3, tern);
-//        					System.out.println(QuestionSquareController.getInstance().getQuesdiff().getDifficulty());
-//        				}
-        				if(from>2) {
-        					to = from-1;
-        					move(p, from, to, tern);
-        				}
-        			}
+        			//handle surprise square 
         		}else if(RunningGame.getInstance().getBoard().getSq().get(num).getSquareType().equals(SquareType.SURPRISE) && num==to) {
 //        			move(p, from, to, to)
         			System.out.println("surpriseeeeeeeeeeeeeeeeeeeee");
@@ -548,7 +591,7 @@ public class StartGameController {
         				}		
         				pms.onPlayerMovement(p, from, to);
         				if(from != to) {
-            				move(p, from, to , tern);
+            				move(p, from, to , turn);
         				}
         			}else if(dl.equals(DiffLevel.medium)) {
         				if(to > 100) {
@@ -556,7 +599,7 @@ public class StartGameController {
         				}
         				pms.onPlayerMovement(p, from, to);
         				if(from != to) {
-            				move(p, from, to , tern);
+            				move(p, from, to , turn);
         				}
         			}else if(dl.equals(DiffLevel.hard)) {
         				if(to > 169) {
@@ -564,12 +607,13 @@ public class StartGameController {
         				}
         				pms.onPlayerMovement(p, from, to);
         				if(from != to) {
-            				move(p, from, to , tern);
+            				move(p, from, to , turn);
         				} 
         			}
         		}
         	}
         	
+        	//check the end game 
         	if(RunningGame.getInstance().getEndGame()) {
         		System.out.println("winning");
         		showEndGamePopup(p.getNickName());
@@ -577,11 +621,10 @@ public class StartGameController {
         		HistoryController.saveHistoryToJson(history);
         	}
         	
-        	tern++;
     	}
     
-    	
-    public void showEndGamePopup(String winner) {
+    //method that display the winning
+	public void showEndGamePopup(String winner) {
         // Create a custom dialog
         Dialog<String> dialog = new Dialog<>();
         dialog.initModality(Modality.APPLICATION_MODAL);
@@ -620,7 +663,7 @@ public class StartGameController {
         dialog.showAndWait();
     }
     
-    
+    //restart game button on the alert
     private void restartGame() {
         // Logic to reset the game state and start over
     	System.out.println("winnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn!");
@@ -656,55 +699,51 @@ public class StartGameController {
     }
     
     
+    //method that moving the player on the board
     void move(Player player , int from , int to , int tern) {
-//    	int Tcul = GridPane.getColumnIndex(GameSetupController.boxes.get(to)) ;
-//    	int Trow = GridPane.getRowIndex(GameSetupController.boxes.get(to));
-//    	int Fcul = GridPane.getColumnIndex(GameSetupController.boxes.get(from));
-//    	int Frow = GridPane.getRowIndex(GameSetupController.boxes.get(from));
-    	Player p = null;
-    	Circle c = null;
     	int mod = RunningGame.getInstance().getPlayers().size();
     	if(tern%mod == 0) {
     		p = RunningGame.getInstance().getPp().get(1);
-    		c = RunningGame.getInstance().getPc().get(1);
     	}else if(tern%mod == 1) {
     		p = RunningGame.getInstance().getPp().get(2);
-    		c = RunningGame.getInstance().getPc().get(2);
     	}else if(tern%mod == 2) {
     		p = RunningGame.getInstance().getPp().get(3);
-    		c = RunningGame.getInstance().getPc().get(3);
     	}else if(tern%mod == 3) {
     		p = RunningGame.getInstance().getPp().get(4);
-    		c = RunningGame.getInstance().getPc().get(4);
-    	}
+    	}	
+    	
     	//check Snakes and ladders
+    	if(to<1) {
+    		to = 1;
+    	}
     	Integer s = CheckSnake(to);
     	Integer l = CheckLadder(to);
     	if(s != null) {
-//    		Tcul = GridPane.getColumnIndex(GameSetupController.boxes.get(s));
-//        	Trow = GridPane.getRowIndex(GameSetupController.boxes.get(s));
         	to = s;
+        	p.setPlace(to);
+        	RunningGame.getInstance().getPlayerPlacement().put(p, to);
     	}
     	if(l != null) {
-//    		Tcul = GridPane.getColumnIndex(GameSetupController.boxes.get(l));
-//        	Trow = GridPane.getRowIndex(GameSetupController.boxes.get(l));
         	to = l;
+        	p.setPlace(to);
+        	RunningGame.getInstance().getPlayerPlacement().put(p, to);
     	}
-    	RunningGame.getInstance().getPlayerPlacement().put(p, to);
-    	
-    	GameSetupController.grid.getChildren().removeIf(node -> node instanceof Circle );    		
-//		System.out.println(c + " " + Tcul + " " + Trow);
-		
-		p.setPlace(to);
-		for(Player pl :RunningGame.getInstance().getPci().keySet()) {
-			Circle cir = RunningGame.getInstance().getPci().get(pl);
-			int row = GridPane.getRowIndex(GameSetupController.boxes.get(RunningGame.getInstance().getPlayerPlacement().get(pl)));
-			int cul = GridPane.getColumnIndex(GameSetupController.boxes.get(RunningGame.getInstance().getPlayerPlacement().get(pl)));
-
-			GameSetupController.grid.add(cir, cul, row);
-		}
+        RunningGame.getInstance().getPlayerPlacement().put(p, to);
+        //remove all the player from the grid
+        GameSetupController.grid.getChildren().removeIf(node -> node instanceof Circle );    		
+        
+    	p.setPlace(to);
+    	System.out.println(p.getNickName()+" move "+from+" to " + to);
+    	//add all the player again
+    	for(Player pl :RunningGame.getInstance().getPci().keySet()) {
+    		Circle cir = RunningGame.getInstance().getPci().get(pl);
+    		int row = GridPane.getRowIndex(GameSetupController.boxes.get(RunningGame.getInstance().getPlayerPlacement().get(pl)));
+    		int cul = GridPane.getColumnIndex(GameSetupController.boxes.get(RunningGame.getInstance().getPlayerPlacement().get(pl)));
+    		GameSetupController.grid.add(cir, cul, row);
+    	}
     }
     
+    //check if there is snake on the square
     public Integer CheckSnake(int to ) {
     	ArrayList<Snakes> snakes = RunningGame.getInstance().getBoard().getsnakes();
     	for(Snakes s : snakes) {
@@ -716,6 +755,8 @@ public class StartGameController {
     	}
     	return null;
     }
+    
+    //check if there is ladder on the square
     public Integer CheckLadder(int to) {
     	ArrayList<Ladders> ladders = RunningGame.getInstance().getBoard().getladders();
     	for(Ladders l : ladders) {
