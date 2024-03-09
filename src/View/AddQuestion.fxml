@@ -64,7 +64,7 @@ minHeight="1000.0" minWidth="1920.0" prefHeight="1000.0"
 					</font>
 				</Label>
 				<Button layoutX="506.0" layoutY="330.0"
-					mnemonicParsing="false" onAction="#resetAddQs" text="Cancle" />
+					mnemonicParsing="false" onAction="#resetAddQs" text="Reset" />
 				<Button layoutX="446.0" layoutY="330.0"
 					mnemonicParsing="false" onAction="#addQ" text="Add" />
 				<Label graphicTextGap="11.0" layoutX="52.0" layoutY="135.0"

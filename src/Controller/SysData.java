@@ -190,7 +190,7 @@ public class SysData {
 		try {
 			// Load JSON file
 			JSONParser parser = new JSONParser();
-			Object obj = parser.parse(new FileReader("src/WolfQuestionsDB.json"));
+			Object obj = parser.parse(new FileReader("WolfQuestionsDB.json"));
 			JSONObject jsonObject = (JSONObject) obj;
 			JSONArray questions = (JSONArray) jsonObject.get("questions");
 
@@ -205,7 +205,7 @@ public class SysData {
 			}
 
 			// Update JSON file
-			try (FileWriter file = new FileWriter("src/WolfQuestionsDB.json")) {
+			try (FileWriter file = new FileWriter("WolfQuestionsDB.json")) {
 				jsonObject.put("questions", questions);
 				file.write(jsonObject.toJSONString());
 				file.flush();

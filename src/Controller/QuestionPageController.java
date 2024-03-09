@@ -33,6 +33,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -80,8 +81,6 @@ public class QuestionPageController {
 	@FXML
 	private TableColumn<Question, String> DifficultyColumn;
 
-	@FXML
-	private ImageView homeImage;
 
 	@FXML
 	private Label QuestionsPageLabel;
@@ -91,6 +90,12 @@ public class QuestionPageController {
 
 	@FXML
 	private ChoiceBox<String> sortChoiceBox;
+	
+	@FXML
+    private ImageView imgBackg;
+	
+	@FXML
+    private ImageView titleImg;
 
 	Stage gameStage;
 	private ObservableList<Question> allQuestions;
@@ -107,6 +112,30 @@ public class QuestionPageController {
 	@SuppressWarnings("unchecked")
 	@FXML
 	private void initialize() {
+		titleImg.setFitWidth(200); 
+        titleImg.setFitHeight(150);
+		if(StaticController.getInstance().getPageColor().equals("Dark Aurora")) {
+    		Image newImage3 = new Image("Image/DarkQuestionn.png");
+    		titleImg.setImage(newImage3);
+    		Image newImage33 = new Image("Image/DarkBackg.jpg");
+    		imgBackg.setImage(newImage33);
+    		
+    		
+    	}
+		if(StaticController.getInstance().getPageColor().equals("Oceanic Dreams")) {
+			Image newImage3 = new Image("Image/ocean.jpg");
+    		imgBackg.setImage(newImage3);
+    	//	Image newImage2 = new Image("Image/DarkQuestionOcean.png‬‬");
+          //  titleImg.setImage(newImage2);
+		}
+		if(StaticController.getInstance().getPageColor().equals("Enchanted Forest")) {
+			Image newImage3 = new Image("Image/edjungletheme.jpg");
+    		imgBackg.setImage(newImage3);
+    		Image im3 = new Image("Image/QuesForest.png");
+    		titleImg.setImage(im3);
+		}
+		
+		
 		sysData = new SysData("WolfQuestionsDB.json");
 
 		// Add items to the choice box
