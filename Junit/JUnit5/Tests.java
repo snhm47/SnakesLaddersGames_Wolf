@@ -10,8 +10,10 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import Controller.HistoryController;
 import Controller.SysData;
 import Utils.Color;
+import model.EasyGameDice;
 import model.Player;
 import model.Question;
 
@@ -63,6 +65,20 @@ class Tests {
 				Boolean expectedResult = true;
 				assertEquals(expectedResult, actualResult);
 		}
+		
+		//Test 5 check if the dice method is done successfully
+		@Test 
+		public void testCheckDice() { 
+			EasyGameDice ed= new EasyGameDice();
+			Boolean actualResult;
+			if(ed.roll()>0&&ed.roll()<7) {
+				actualResult=true;
+			}else {
+				actualResult=false;
+			}			
+			Boolean expectedResult = true;
+			assertEquals(expectedResult, actualResult); 
+	    }
 		
 		
 		
