@@ -54,7 +54,7 @@ import model.Snakes;
 public class StartGameController implements Initializable {
 
 	@FXML
-	private Button start;
+	private Button pause;
 	@FXML
 	private Text timer;
 	@FXML
@@ -90,6 +90,9 @@ public class StartGameController implements Initializable {
 
 	// singleton
 	public static StartGameController _ins;
+	
+	// help in Pause method 
+		private String currentSituation;
 
 	public static synchronized StartGameController getInstance() {
 		if (_ins == null) {
@@ -773,6 +776,7 @@ public class StartGameController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		currentSituation="play";
 		setupAndStartTimer();
 		initializeFirstPlayerIcon();
 		initializeFirstPlayerName();
@@ -834,5 +838,29 @@ public class StartGameController implements Initializable {
 	private void handleMuteButtonAction(ActionEvent event) {
 		GameSetupController.toggleMusic();
 	}
+	
+	// pause the game
+	@FXML
+    void pauseorplay(ActionEvent event) {
+		if(currentSituation.equals("play")) {
+			currentSituation="pause";
+			pause.setText("play");
+			rollB.setDisable(true);
+			timeline.pause();
+			Alert alert = new Alert(Alert.AlertType.INFORMATION);
+		    alert.setTitle("Paused");
+		    alert.setHeaderText(null);
+		    alert.setContentText("The game is paused. Click Play to resume.");
+		    alert.showAndWait();
+			System.out.println(currentSituation);
+		}else {
+			currentSituation="play";
+			pause.setText("pause");
+			timeline.play();
+			System.out.println(currentSituation);
+			rollB.setDisable(false);
+		}
+    }
+	
 
 }
