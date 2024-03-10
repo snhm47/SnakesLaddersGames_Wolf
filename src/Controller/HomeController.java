@@ -19,6 +19,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
@@ -29,6 +30,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -57,6 +60,9 @@ public class HomeController implements Initializable {
 
 	@FXML
 	private Button logOutBtn;
+	
+	@FXML
+	private ChoiceBox<String> musicChoiceBox;
 
 	@FXML
 	private ImageView titleImg;
@@ -73,6 +79,13 @@ public class HomeController implements Initializable {
 	// FXMLLoader fxmlLoader = new FXMLLoader();
 	@FXML
 	private RadioButton rbuttoneasy, rbuttonMedium, rbuttonHard;
+	
+	@FXML
+	private ImageView imgmove1, imgmove2,imgLadd, imgBrunch;
+	
+	 private TranslateTransition t1, t2;
+	    private FadeTransition fadeOut1, fadeOut2, fadeIn1, fadeIn2;
+
 
 	@FXML
 	private TextField infoTf = new TextField();
@@ -240,6 +253,8 @@ public class HomeController implements Initializable {
 
 		// Set the TextArea as the content of the alert dialog
 		alert.getDialogPane().setContent(textArea);
+		alert.setX(19);
+		alert.setY(130);
 		alert.show();
 	}
 
@@ -251,6 +266,11 @@ public class HomeController implements Initializable {
 	@FXML
 	void changeColor(ActionEvent event) {
 		if (picMode.getValue().equals("Dark Aurora")) {
+            imgmove1.setVisible(false);
+            imgmove2.setVisible(false);
+            imgLadd.setVisible(false);
+            imgBrunch.setVisible(false);
+			stopAnimations();
 			darkAuroraMode();
 			StaticController.getInstance().setPageColor("Dark Aurora");
 
@@ -262,11 +282,21 @@ public class HomeController implements Initializable {
 		 * }
 		 */
 		if (picMode.getValue().equals("Enchanted Forest")) {
+            imgmove1.setVisible(true);
+            imgmove2.setVisible(true);
+            imgLadd.setVisible(true);
+            imgBrunch.setVisible(true);
+            startAnimations();
 			enchantedForestMode();
 			StaticController.getInstance().setPageColor("Enchanted Forest");
 
 		}
 		if (picMode.getValue().equals("Oceanic Dreams")) {
+            imgmove1.setVisible(false);
+            imgmove2.setVisible(false);
+            imgLadd.setVisible(false);
+			imgBrunch.setVisible(false);
+			stopAnimations();
 			oceanicDreamsMode();
 			StaticController.getInstance().setPageColor("Oceanic Dreams");
 
@@ -345,11 +375,13 @@ public class HomeController implements Initializable {
 		themeName = "Dark Aurora";
 	}
 
-	@FXML
-	private ImageView imgmove1, imgmove2;
-
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		
+		 musicChoiceBox.getItems().addAll("Angry Birds", "Avatar OST", "OG Metro"); // Add your music track names here
+		 musicChoiceBox.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
+			    switchMusicTrack((String) newVal); // Cast newVal to String
+			});
 		// TODO Auto-generated method stub
 		picMode.getItems().add("Dark Aurora");
 		// picMode.getItems().add("Twilight Serenity");
@@ -384,18 +416,18 @@ public class HomeController implements Initializable {
 		imgmove2.setVisible(false); // Ensure imgmove2 is initially invisible
 
 		// Translate imgmove1 upward
-		TranslateTransition t1 = createTranslateTransition(imgmove1, 90, -500, 2500, false);
+		 t1 = createTranslateTransition(imgmove1, 90, -500, 2500, false);
 		// Fade out imgmove1 after translation
-		FadeTransition fadeOut1 = createFadeTransition(imgmove1, 1, 0, 500);
+		 fadeOut1 = createFadeTransition(imgmove1, 1, 0, 500);
 		// Fade in imgmove1 for cycle restart, not immediately used
-		FadeTransition fadeIn1 = createFadeTransition(imgmove1, 0, 1, 500);
+		 fadeIn1 = createFadeTransition(imgmove1, 0, 1, 500);
 
 		// Translate imgmove2 upward
-		TranslateTransition t2 = createTranslateTransition(imgmove2, 900, 0, 2500, false);
+		 t2 = createTranslateTransition(imgmove2, 900, 0, 2500, false);
 		// Fade out imgmove2 after translation
-		FadeTransition fadeOut2 = createFadeTransition(imgmove2, 1, 0, 500);
+		 fadeOut2 = createFadeTransition(imgmove2, 1, 0, 500);
 		// Fade in imgmove2, not immediately used
-		FadeTransition fadeIn2 = createFadeTransition(imgmove2, 0, 1, 500);
+		 fadeIn2 = createFadeTransition(imgmove2, 0, 1, 500);
 
 		// Sequence for imgmove1
 		t1.setOnFinished(event -> fadeOut1.play());
@@ -446,5 +478,54 @@ public class HomeController implements Initializable {
 	private void handleMuteButtonAction(ActionEvent event) {
 		Main.toggleMusic();
 	}
+	
+	private void startAnimations() {
+        // Reset positions if necessary and start or restart animations
+        resetImageView(imgmove1);
+        resetImageView(imgmove2);
+        t1.play();
+        t2.play();
+    }
+	
+	private void switchMusicTrack(String trackName) {
+	    String musicFile = ""; // Initialize empty string for music file URL
+	    switch (trackName) {
+	        case "Angry Birds":
+	            musicFile = getClass().getResource("/Music/AngryBirdsTheme.mp3").toExternalForm();
+	            break;
+	        case "Avatar OST":
+	            musicFile = getClass().getResource("/Music/avatarOst.mp3").toExternalForm();
+	            break;
+	        case "OG Metro":
+	            musicFile = getClass().getResource("/Music/ogmetro1.mp3").toExternalForm();
+	            break;
+	        // Add more cases as necessary for additional tracks
+	    }
+
+	    if (!musicFile.isEmpty()) {
+	        if (Main.mediaPlayer != null) {
+	            Main.mediaPlayer.stop(); // Stop currently playing music if any
+	        }
+	        Media media = new Media(musicFile);
+	        Main.mediaPlayer = new MediaPlayer(media);
+	        Main.mediaPlayer.setAutoPlay(true);
+	        Main.mediaPlayer.setVolume(0.4); // Set volume (adjust as necessary)
+	        Main.mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+	    }
+	}
+
+    private void stopAnimations() {
+        // Stop all animations
+        t1.stop();
+        fadeOut1.stop();
+        fadeIn1.stop();
+        
+        t2.stop();
+        fadeOut2.stop();
+        fadeIn2.stop();
+        // If using fadeIn1, fadeIn2 in cycles, stop those too
+        // fadeIn1.stop();
+        // fadeIn2.stop();
+    }
 
 }

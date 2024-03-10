@@ -22,6 +22,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
@@ -634,6 +636,12 @@ public class StartGameController implements Initializable {
 		Dialog<String> dialog = new Dialog<>();
 		dialog.initModality(Modality.APPLICATION_MODAL);
 		dialog.setTitle("Game Over");
+         MediaPlayer mediaPlayer;
+        String musicFile = getClass().getResource("/Music/clappingwin.mp3").toExternalForm();
+        Media media = new Media(musicFile);
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setAutoPlay(true);
+        mediaPlayer.setVolume(0.6); // Set volume to 30%	    
 
 		// Set the content for the dialog
 		DialogPane dialogPane = dialog.getDialogPane();
@@ -652,6 +660,7 @@ public class StartGameController implements Initializable {
 			// Stop the theme song
 			GameSetupController.stopThemeSong();
 			// Start the main menu music, if applicable
+			mediaPlayer.stop();
 			Main.startMusic();
 			// Close the current stage
 			stage.close();

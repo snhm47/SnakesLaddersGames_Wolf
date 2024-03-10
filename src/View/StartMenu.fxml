@@ -6,66 +6,116 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="1000.0" minWidth="1920.0" prefHeight="1000.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.HomeController">
+
+<AnchorPane fx:id="pane" maxHeight="-Infinity"
+	maxWidth="-Infinity" minHeight="1000.0" minWidth="1920.0"
+	prefHeight="1000.0" prefWidth="1920.0"
+	xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="Controller.HomeController">
 	<children>
+	
 
 		<!-- background image -->
-		<ImageView fx:id="imgbackground" fitHeight="1080" fitWidth="1920" layoutX="-3.0" opacity="0.85" pickOnBounds="true" />
-
+		<ImageView fx:id="imgbackground" fitHeight="1080"
+			fitWidth="1920" layoutX="-3.0" opacity="0.85" pickOnBounds="true" />
+		<Text layoutX="1600" layoutY="172.0" strokeType="OUTSIDE"
+			strokeWidth="0.0" text="Choose Music:" fill="red" style="-fx-font-weight: bold;">
+			<font>
+				<Font size="19.0" />
+			</font>
+		</Text>
+		<ChoiceBox fx:id="musicChoiceBox" layoutX="1737.0"
+			layoutY="150.0" prefWidth="150.0" />
 		<!-- gamelogo image -->
-		<ImageView fx:id="titleImg" fitHeight="130.0" fitWidth="452.0" layoutX="736.8" layoutY="84.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="737.0" />
-		<ImageView fitHeight="70.0" fitWidth="75.0" layoutX="19.0" layoutY="25.0" onMouseClicked="#showGameRules" pickOnBounds="true" preserveRatio="true">
+		<ImageView fx:id="titleImg" fitHeight="130.0"
+			fitWidth="452.0" layoutX="736.8" layoutY="84.0" pickOnBounds="true"
+			preserveRatio="true" AnchorPane.leftAnchor="737.0" />
+		<ImageView fitHeight="70.0" fitWidth="75.0" layoutX="19.0"
+			layoutY="25.0" onMouseClicked="#showGameRules" pickOnBounds="true"
+			preserveRatio="true">
 			<image>
 				<Image url="@/Image/infoicon2.png" />
 			</image>
 		</ImageView>
-		<Button fx:id="playBtn" alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" layoutX="879.2" layoutY="430.0" mnemonicParsing="true" onAction="#switchToGameSetup" prefHeight="51.0" prefWidth="158.0" style="-fx-background-color: #49ae40;" text="Play" textFill="#f4f41f" AnchorPane.bottomAnchor="519.0" AnchorPane.leftAnchor="879.0" AnchorPane.rightAnchor="883.0">
+		<Button fx:id="playBtn" alignment="BOTTOM_CENTER"
+			contentDisplay="BOTTOM" layoutX="879.2" layoutY="430.0"
+			mnemonicParsing="true" onAction="#switchToGameSetup"
+			prefHeight="51.0" prefWidth="158.0"
+			style="-fx-background-color: #49ae40;" text="Play" textFill="#f4f41f"
+			AnchorPane.bottomAnchor="519.0" AnchorPane.leftAnchor="879.0"
+			AnchorPane.rightAnchor="883.0">
 			<font>
 				<Font name="System Bold" size="24.0" />
 			</font>
 		</Button>
-      <ComboBox fx:id="picMode" layoutX="1737.0" layoutY="108.0" onAction="#changeColor" prefWidth="150.0" />
-      <Button fx:id="logOutBtn" alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" layoutX="877.0" layoutY="641.0" mnemonicParsing="true" onAction="#logOut" prefHeight="51.0" prefWidth="158.0" style="-fx-background-color: #49ae40;" text="Log Out" textFill="#f4f41f">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Button>
-      <Button fx:id="historyBtn" alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" layoutX="878.0" layoutY="500.0" mnemonicParsing="true" onAction="#switchToHistoryPage" prefHeight="51.0" prefWidth="158.0" style="-fx-background-color: #49ae40;" text="History" textFill="#f4f41f">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Button>
-      <Button fx:id="questionBtn" alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" layoutX="877.0" layoutY="571.0" mnemonicParsing="true" onAction="#switchToQuestionPage" prefHeight="51.0" prefWidth="158.0" style="-fx-background-color: #49ae40;" text="Question" textFill="#f4f41f">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Button>
-      
-      		<ImageView fitHeight="550" fitWidth="250" layoutX="200.0" layoutY="350.0" opacity="1" pickOnBounds="true">
+		
+		<Text layoutX="1580" layoutY="130" strokeType="OUTSIDE"
+			strokeWidth="0.0" text="Choose Scenery:" fill="red" style="-fx-font-weight: bold;">
+			<font>
+				<Font size="19.0" />
+			</font>
+		</Text>		
+		<ComboBox fx:id="picMode" layoutX="1737.0" layoutY="108.0"
+			onAction="#changeColor" prefWidth="150.0" />
+		<Button fx:id="logOutBtn" alignment="BOTTOM_CENTER"
+			contentDisplay="BOTTOM" layoutX="877.0" layoutY="641.0"
+			mnemonicParsing="true" onAction="#logOut" prefHeight="51.0"
+			prefWidth="158.0" style="-fx-background-color: #49ae40;"
+			text="Exit" textFill="#f4f41f">
+			<font>
+				<Font name="System Bold" size="24.0" />
+			</font>
+		</Button>
+		<Button fx:id="historyBtn" alignment="BOTTOM_CENTER"
+			contentDisplay="BOTTOM" layoutX="878.0" layoutY="500.0"
+			mnemonicParsing="true" onAction="#switchToHistoryPage"
+			prefHeight="51.0" prefWidth="158.0"
+			style="-fx-background-color: #49ae40;" text="History"
+			textFill="#f4f41f">
+			<font>
+				<Font name="System Bold" size="24.0" />
+			</font>
+		</Button>
+		<Button fx:id="questionBtn" alignment="BOTTOM_CENTER"
+			contentDisplay="BOTTOM" layoutX="877.0" layoutY="571.0"
+			mnemonicParsing="true" onAction="#switchToQuestionPage"
+			prefHeight="51.0" prefWidth="158.0"
+			style="-fx-background-color: #49ae40;" text="Question"
+			textFill="#f4f41f">
+			<font>
+				<Font name="System Bold" size="24.0" />
+			</font>
+		</Button>
+
+		<ImageView fx:id="imgLadd"  fitHeight="550" fitWidth="250" layoutX="200.0"
+			layoutY="350.0" opacity="1" pickOnBounds="true">
 			<image>
 				<Image url="@/Image/movingladder.png" />
 			</image>
 		</ImageView>
 
-		<ImageView fitHeight="100" fitWidth="900" layoutX="380.0" layoutY="330.0" opacity="1" pickOnBounds="true">
+		<ImageView fx:id="imgBrunch" fitHeight="100" fitWidth="900" layoutX="380.0"
+			layoutY="330.0" opacity="1" pickOnBounds="true">
 			<image>
 				<Image url="@/Image/treebrunch.png" />
 			</image>
 		</ImageView>
-		
-				<Button fx:id="muteButton" layoutX="118.0" layoutY="47.0" onAction="#handleMuteButtonAction" prefHeight="26.0" prefWidth="56.0" text="Mute">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font></Button>
 
-		<ImageView fx:id="imgmove1" fitHeight="180" fitWidth="180" layoutX="200.0" layoutY="730.0" opacity="1" pickOnBounds="true">
+		<Button fx:id="muteButton" layoutX="220.0" layoutY="60"
+			onAction="#handleMuteButtonAction" text="Mute" />
+
+		<ImageView fx:id="imgmove1" fitHeight="180" fitWidth="180"
+			layoutX="200.0" layoutY="730.0" opacity="1" pickOnBounds="true">
 			<image>
 				<Image url="@/Image/snakemove1.png" />
 			</image>
 		</ImageView>
 		<!-- the seconde snake that moves forward -->
-		<ImageView fx:id="imgmove2" fitHeight="180" fitWidth="180" layoutX="300.0" layoutY="240.0" opacity="1" pickOnBounds="true">
+		<ImageView fx:id="imgmove2" fitHeight="180" fitWidth="180"
+			layoutX="300.0" layoutY="240.0" opacity="1" pickOnBounds="true">
 			<image>
 				<Image url="@/Image/snakemove1.png" />
 			</image>

@@ -11,7 +11,7 @@ import javafx.fxml.FXMLLoader;
 
 public class Main extends Application {
 	
-	 static MediaPlayer mediaPlayer;
+	public static MediaPlayer mediaPlayer;
 	    
 	    private static boolean isMusicMuted = false;
 
@@ -45,14 +45,14 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-            AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource("/View/StartMenu.fxml"));
-            Scene scene = new Scene(root);
-            String musicFile = getClass().getResource("/Music/AngryBirdsTheme.mp3").toExternalForm();
-            Media media = new Media(musicFile);
-            mediaPlayer = new MediaPlayer(media);
-            mediaPlayer.setAutoPlay(true);
-            mediaPlayer.setVolume(0.3); // Set volume to 30%
-            mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+			 AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource("/View/StartMenu.fxml"));
+	            Scene scene = new Scene(root);
+	            String musicFile = getClass().getResource("/Music/ogmetro1.mp3").toExternalForm();
+	            Media media = new Media(musicFile);
+	            mediaPlayer = new MediaPlayer(media);
+	            mediaPlayer.setAutoPlay(true);
+	            mediaPlayer.setVolume(0.6); // Set volume to 30%
+	            mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
             scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("Snakes and Ladders");
