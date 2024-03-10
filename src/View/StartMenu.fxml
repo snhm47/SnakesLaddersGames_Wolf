@@ -42,32 +42,30 @@
          </font>
       </Button>
       
-      		<ImageView fitHeight="550" fitWidth="250" layoutX="200.0"
-			layoutY="350.0" opacity="1" pickOnBounds="true">
+      		<ImageView fitHeight="550" fitWidth="250" layoutX="200.0" layoutY="350.0" opacity="1" pickOnBounds="true">
 			<image>
 				<Image url="@/Image/movingladder.png" />
 			</image>
 		</ImageView>
 
-		<ImageView fitHeight="100" fitWidth="900" layoutX="380.0"
-			layoutY="330.0" opacity="1" pickOnBounds="true">
+		<ImageView fitHeight="100" fitWidth="900" layoutX="380.0" layoutY="330.0" opacity="1" pickOnBounds="true">
 			<image>
 				<Image url="@/Image/treebrunch.png" />
 			</image>
 		</ImageView>
 		
-				<Button fx:id="muteButton" layoutX="220.0" layoutY="60"
-			onAction="#handleMuteButtonAction" text="Mute" />
+				<Button fx:id="muteButton" layoutX="118.0" layoutY="47.0" onAction="#handleMuteButtonAction" prefHeight="26.0" prefWidth="56.0" text="Mute">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
 
-		<ImageView fx:id="imgmove1" fitHeight="180" fitWidth="180"
-			layoutX="200.0" layoutY="730.0" opacity="1" pickOnBounds="true">
+		<ImageView fx:id="imgmove1" fitHeight="180" fitWidth="180" layoutX="200.0" layoutY="730.0" opacity="1" pickOnBounds="true">
 			<image>
 				<Image url="@/Image/snakemove1.png" />
 			</image>
 		</ImageView>
 		<!-- the seconde snake that moves forward -->
-		<ImageView fx:id="imgmove2" fitHeight="180" fitWidth="180"
-			layoutX="300.0" layoutY="240.0" opacity="1" pickOnBounds="true">
+		<ImageView fx:id="imgmove2" fitHeight="180" fitWidth="180" layoutX="300.0" layoutY="240.0" opacity="1" pickOnBounds="true">
 			<image>
 				<Image url="@/Image/snakemove1.png" />
 			</image>

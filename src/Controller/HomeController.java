@@ -44,6 +44,9 @@ public class HomeController implements Initializable {
 	private Parent root;
 
 	@FXML
+    private Button muteButton;
+	
+	@FXML
 	private Button questionBtn;
 
 	@FXML
@@ -293,7 +296,8 @@ public class HomeController implements Initializable {
 		historyBtn.setStyle("-fx-background-color: green;");
 		questionBtn.setTextFill(Color.WHITE);
 		questionBtn.setStyle("-fx-background-color: green;");
-
+		muteButton.setTextFill(Color.WHITE);
+		muteButton.setStyle("-fx-background-color: green;");
 		System.out.println("Enchanted Forest");
 		themePic = true;
 		themeName = "Enchanted Forest";
@@ -312,6 +316,8 @@ public class HomeController implements Initializable {
 		historyBtn.setStyle("-fx-background-color: gray;");
 		questionBtn.setTextFill(Color.DARKSLATEGREY);
 		questionBtn.setStyle("-fx-background-color: gray;");
+		muteButton.setTextFill(Color.DARKSLATEGREY);
+		muteButton.setStyle("-fx-background-color: gray;");
 		System.out.println("Oceanic Dreams");
 		themePic = true;
 		themeName = "Oceanic Dreams";
@@ -332,6 +338,8 @@ public class HomeController implements Initializable {
 		historyBtn.setStyle("-fx-background-color: #2F4F4F;");
 		questionBtn.setTextFill(Color.BLACK);
 		questionBtn.setStyle("-fx-background-color: #2F4F4F;");
+		muteButton.setTextFill(Color.BLACK);
+		muteButton.setStyle("-fx-background-color: #2F4F4F;");
 		System.out.println("Dark Aurora");
 		themePic = true;
 		themeName = "Dark Aurora";
