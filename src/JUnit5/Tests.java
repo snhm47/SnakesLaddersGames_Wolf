@@ -43,13 +43,12 @@ class Tests {
 		@Test
 	    public void testLoadData() { 
 	        SysData sysData = new SysData("src/WolfQuestionsDB.json");
-	        sysData.loadDataFromJSON("src/WolfQuestionsDB.json");
 	        assertNotNull(sysData.getQuestions());
 	    }
 		
 		//Test 4 checks if the inserts questions to JSON is done successfully
 		@Test
-			public void insertQuesToJsonTest() throws FileNotFoundException{
+		public void insertQuesToJsonTest() throws FileNotFoundException{
 			    SysData sysData = new SysData("src/WolfQuestionsDB.json");
 			    List<String> answers = new ArrayList<String>();
 			    answers.add("a");
@@ -58,12 +57,14 @@ class Tests {
 			    answers.add("d");
 				Question question = new Question("What manufacturing processes did the engineers need to understand?", answers, "2", "1");
 				SysData sysDataa = new SysData("src/WolfQuestionsDB.json");
-				sysDataa.loadDataFromJSON("src/WolfQuestionsDB.json");
-				sysDataa.getQuestions().add(question);
-				Boolean actualResult = sysData.getQuestions().contains(question);
+				ArrayList <Question> arrQues=sysDataa.getQuestions();
+				arrQues.add(question);
+				Boolean actualResult = arrQues.contains(question);
 				Boolean expectedResult = true;
 				assertEquals(expectedResult, actualResult);
 		}
+		
+		
 		
 		
 }

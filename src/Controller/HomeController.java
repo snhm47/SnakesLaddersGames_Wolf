@@ -33,6 +33,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.util.Pair;
@@ -46,6 +47,13 @@ public class HomeController implements Initializable {
 	private Scene scene;
 	private Parent root;
 
+	@FXML
+	private Text text1;
+
+	@FXML
+	private Text text2;
+
+	    
 	@FXML
     private Button muteButton;
 	
@@ -331,6 +339,8 @@ public class HomeController implements Initializable {
 		System.out.println("Enchanted Forest");
 		themePic = true;
 		themeName = "Enchanted Forest";
+		text1.setFill(Color.BLACK);
+		text2.setFill(Color.BLACK);
 	}
 
 	private void oceanicDreamsMode() {
@@ -351,6 +361,8 @@ public class HomeController implements Initializable {
 		System.out.println("Oceanic Dreams");
 		themePic = true;
 		themeName = "Oceanic Dreams";
+		text1.setFill(Color.WHITE);
+		text2.setFill(Color.WHITE);
 	}
 
 	private void darkAuroraMode() {
@@ -373,6 +385,8 @@ public class HomeController implements Initializable {
 		System.out.println("Dark Aurora");
 		themePic = true;
 		themeName = "Dark Aurora";
+		text1.setFill(Color.WHITE);
+		text2.setFill(Color.WHITE);
 	}
 
 	@Override
