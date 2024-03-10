@@ -17,9 +17,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-
 import application.Main;
-
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -31,41 +29,40 @@ public class EditQuestionController {
 
     @FXML
     private TextArea modifiedQuestionTextArea;
+    
     @FXML
     private ImageView imgBackg;
     
     @FXML
     private ImageView titleImg;
-     
 
     private Question questionToEdit;
 
     public void initialize() {
-    	titleImg.setFitWidth(200); 
+        titleImg.setFitWidth(200);
         titleImg.setFitHeight(150);
-    	if(StaticController.getInstance().getPageColor().equals("Oceanic Dreams")) {
-    		Image newImage3 = new Image("Image/ocean.jpg");
-    		imgBackg.setImage(newImage3);
-    		Image newImage2 = new Image("Image/ocean_EditQuestion.png");
+        if (StaticController.getInstance().getPageColor().equals("Oceanic Dreams")) {
+            Image newImage3 = new Image("Image/ocean.jpg");
+            imgBackg.setImage(newImage3);
+            Image newImage2 = new Image("Image/ocean_EditQuestion.png");
             titleImg.setImage(newImage2);
             selectedQuestionLabel.setTextFill(Color.web("#d6bb98"));
-            }
-    	if(StaticController.getInstance().getPageColor().equals("Dark Aurora")) {
-    		Image newImage3 = new Image("Image/DarkBackg.jpg");
-    		imgBackg.setImage(newImage3);
-    		Image newImage2 = new Image("Image/dark_editQuestion.png");
+        }
+        if (StaticController.getInstance().getPageColor().equals("Dark Aurora")) {
+            Image newImage3 = new Image("Image/DarkBackg.jpg");
+            imgBackg.setImage(newImage3);
+            Image newImage2 = new Image("Image/dark_editQuestion.png");
             titleImg.setImage(newImage2);
             selectedQuestionLabel.setTextFill(Color.web("#FFFFFF"));
-
-    	}
-    	if(StaticController.getInstance().getPageColor().equals("Enchanted Forest")) {
-    		Image newImage3 = new Image("Image/edjungletheme.jpg");
-    		imgBackg.setImage(newImage3);
-    		Image newImage2 = new Image("Image/Forest_EditQuestion.png");
+        }
+        if (StaticController.getInstance().getPageColor().equals("Enchanted Forest")) {
+            Image newImage3 = new Image("Image/edjungletheme.jpg");
+            imgBackg.setImage(newImage3);
+            Image newImage2 = new Image("Image/Forest_EditQuestion.png");
             titleImg.setImage(newImage2);
             selectedQuestionLabel.setTextFill(Color.web("#000000"));
-
-    }}
+        }
+    }
 
     public void setQuestionToEdit(Question question) {
         this.questionToEdit = question;
@@ -82,9 +79,12 @@ public class EditQuestionController {
         }
 
         if (!editedQuestion.isEmpty()) {
-            questionToEdit.setText(editedQuestion);
             updateQuestionInJSON();
-            closeStage(event); 
+            questionToEdit.setText(editedQuestion);
+            showAlert("Question Updated Successfully!");
+            returnToQuestionsPage(event);
+        } else {
+            showAlert("Please enter a valid question.");
         }
     }
 
@@ -103,9 +103,10 @@ public class EditQuestionController {
 
                 for (int i = 0; i < jsonArray.size(); i++) {
                     JSONObject jsonQuestion = (JSONObject) jsonArray.get(i);
-                        jsonQuestion.put("question", questionToEdit.getText());
-                        break; 
-                    
+                    if (jsonQuestion.get("question").equals(questionToEdit.getText())) {
+                        jsonQuestion.put("question", modifiedQuestionTextArea.getText());
+                        break;
+                    }
                 }
 
                 try (FileWriter fileWriter = new FileWriter("WolfQuestionsDB.json")) {
@@ -113,28 +114,29 @@ public class EditQuestionController {
                     fileWriter.flush();
                 }
             }
-       
         } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
     }
 
-
-    @FXML
-    private void closeStage(ActionEvent event) {
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.close();
-    }
-
     @FXML
     private void cancelEdit(ActionEvent event) {
+        showAlert("Edit Canceled.");
+        returnToQuestionsPage(event);
+    }
+
+    private void showAlert(String message) {
+        // Implement code to show an alert with the provided message
+    }
+
+    private void returnToQuestionsPage(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../View/QuestionsPage.fxml"));
             Parent root = loader.load();
             QuestionPageController controller = loader.getController();
 
             Scene scene = new Scene(root);
-            Stage stage = new Stage(); 
+            Stage stage = new Stage();
             stage.setScene(scene);
             stage.show();
 
@@ -143,9 +145,15 @@ public class EditQuestionController {
             e.printStackTrace();
         }
     }
-    
-	@FXML
-	private void handleMuteButtonAction(ActionEvent event) {
-		Main.toggleMusic();
-	}
+
+    @FXML
+    private void closeStage(ActionEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();
+    }
+
+    @FXML
+    private void handleMuteButtonAction(ActionEvent event) {
+        Main.toggleMusic();
+    }
 }
